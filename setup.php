@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>GRP700 Fleet:: Sistemas Insepet</title>
+	<title>GRP700 Fleet:: Setup</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -31,10 +31,10 @@
 			
 			<article>
 				<header>
-					<h1>GRP700-Fleet</h1>
-					<p>Simple and effective Fleet control sistem. GRP700-Fleet allows
-                                           to control car fuel deliveries, customer fuel consumption, customer account
-                                           controls and dispenser basic configuration and control.</p>
+					<h1>Options</h1>
+                                
+                                        <p><a id="button-blue" href="receipt.php"/>Receipt setup</a><br></p>                                        
+                                        <p><a id="button-blue" href="product.php"/>Fuel Types</a><br></p>
 				</header>								
 			</article>
 			

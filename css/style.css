@@ -14,7 +14,7 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
 ::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
 ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
 
-a { color: #00e; }
+a { color: #00e; text-decoration: none;}
 a:visited { color: #551a8b; }
 a:hover { color: #06e; }
 a:focus { outline: thin dotted; }
@@ -181,6 +181,7 @@ nav a:hover{
 	
 	nav li:first-child a{ margin-left:0;  }
 	nav li:last-child  a{ margin-right:0; }
+  
 	
 /* ========================
     INTERMEDIATE: IE Fixes
@@ -233,6 +234,7 @@ nav a:hover{
 		float:right;
 		width:28%;
 	}
+        
 }
 
 @media only screen and (min-width: 1140px) {
@@ -262,4 +264,86 @@ nav a:hover{
   @page { margin: 0.5cm; }
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
+}
+
+#button-blue{
+	font-family: monospace, monospace; _font-family: 'courier new', monospace; font-size: 1em;
+	width: 80%;
+        float: left;
+	border: #fbfbfb solid 4px;
+	cursor:pointer;
+	background-color: #084e95;
+	color:white;
+	font-size:24px;	
+        padding: 10px;	
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;   
+        text-align: center;
+}
+
+
+#field{
+	font-family: monospace, monospace; _font-family: 'courier new', monospace; font-size: 1em;
+	width: 80%;
+        float: left;
+	border: #fbfbfb solid 4px;	
+	background-color: #dcdcde;
+	color:darkblue;
+	font-size:16px;	
+        padding: 10px;	
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;   
+        text-align: center;
+}
+.special{
+    color: green;
+    text-decoration: underline;
+    text-transform: capitalize;
+}
+
+.tabla{
+	width:100%;
+	}
+td, th, .tabla{
+	border-width:2px;
+	border-color:#000000;
+	border-style:solid;
+	}
+@media screen and (max-width:720px){
+	table, thead, tr, th, tbody, td{
+		display:block;
+	}
+	
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	td { 
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	td:before { 
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+        td:nth-of-type(1):before { content: "Sale Number"; }
+	td:nth-of-type(2):before { content: "Date"; }
+	td:nth-of-type(3):before { content: "Customer ID"; }
+	td:nth-of-type(4):before { content: "Transaction Type"; }
+        td:nth-of-type(5):before { content: "Side"; }
+        td:nth-of-type(6):before { content: "Hose"; }
+        td:nth-of-type(7):before { content: "Product"; }
+        td:nth-of-type(8):before { content: "Quantity"; }
+        td:nth-of-type(9):before { content: "Amount"; }
+        td:nth-of-type(10):before { content: "Plate"; }
 }

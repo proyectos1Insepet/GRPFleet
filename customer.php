@@ -20,8 +20,8 @@
 			<nav>
 				<ul>
                                     <li><a href="customer.php">Customer</a></li>
-					<li><a href="#">Sales</a></li>
-					<li><a href="#">Setup</a></li>
+					<li><a href="sales.php">Sales</a></li>
+                                        <li><a href="setup.php">Setup</a></li>
 				</ul>
 			</nav>
 		</header>            
@@ -31,14 +31,35 @@
 			
 			<article>
 				<header>
-					<h1>Customer Setup</h1>
-					<p></p>
+					<h1>Customer Setup :: New Client</h1>
+                                        <form action="restrict.php" method="post">
+                                            <p><input name="linea1" type="text"  placeholder="Client Name" id="field"  /></p>                                            
+                                            <p><input name="id_tax" type="text" placeholder="VAT" id="field" /></p>
+                                            <p><input name="dir" type="text" placeholder="Address" id="field" /></p>
+                                            <p><input name="tel" type="text" placeholder="Phone" id="field"/></p>                                            
+                                            <p><input name="ciudad" type="text" placeholder="City" id="field"/></p>                                    
+                                            <p><input name="state" type="text" placeholder="State" id="field"/></p>
+                                            <p><input name="saldo" type="text" placeholder="Balance" id="field"/></p>
+                                            <p class="special"><?php
+                                                $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                                or die('Can not connect: ' . \pg_last_error());
+                                                $query = "SELECT  * FROM transaccion";
+                                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
+                                                echo "<select name='select1' id='field'>";
+                                                while($fila=  pg_fetch_array($result)){
+                                                    echo "<option value=".$fila['tipo_transaccion'].">".$fila['des_transaccion']."</option>";
+                                                }
+                                                echo "</select>";
+                                                ?></p>
+                                            <p><input input type="submit" name="enviar" value="Submit"  id="button-blue"  /></p>
+                                        </form>
 				</header>								
 			</article>
 			
 			<aside>
 				<h3>Account configuration</h3>
 				<p>In this section you can configure a new account and the associated vehicle information</p>
+                                <p></p>
 			</aside>
 			
 		</div> <!-- #main -->
