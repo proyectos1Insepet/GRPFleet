@@ -32,7 +32,7 @@
 			<article>
 				<header>
 					<h1>Customer Setup :: New Client</h1>
-                                        <form action="restrict.php" method="post">
+                                        <form action="vehicle.php" method="post">
                                             <p><input name="linea1" type="text"  placeholder="Client Name" id="field"  /></p>                                            
                                             <p><input name="id_tax" type="text" placeholder="VAT" id="field" /></p>
                                             <p><input name="dir" type="text" placeholder="Address" id="field" /></p>
@@ -47,7 +47,7 @@
                                                 $result = pg_query($query) or die('Query error: ' . \pg_last_error());
                                                 echo "<select name='select1' id='field'>";
                                                 while($fila=  pg_fetch_array($result)){
-                                                    echo "<option value=".$fila['tipo_transaccion'].">".$fila['des_transaccion']."</option>";
+                                                    echo "<option value=".$fila['tipo'].">".$fila['descripcion']."</option>";
                                                 }
                                                 echo "</select>";
                                                 ?></p>
