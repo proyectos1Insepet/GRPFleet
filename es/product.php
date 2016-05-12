@@ -5,17 +5,18 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>GRP700 Fleet:: Sales Type</title>
+	<title>GRP700 Fleet:: Setup</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="stylesheet" href="css/style.css">
-	<script src="js/libs/modernizr-2.0.6.min.js"></script>        
+	<script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
     <body>
         <div id="header-container">
 		<header class="wrapper clearfix">
-                    
+                    <h3><a href="index.php"><img src="images/es.png"width="30px" height="30px" style="float: left" ></a></h3>
+                    <h3><a href="index.php"><img src="images/ing.png"width="30px" height="30px" ></a></h3>
                     <h1 id="title"><a href="index.php"><img src="images/logo-insepet.png" ></a></h1>
 			<nav>
 				<ul>
@@ -31,10 +32,10 @@
 			
 			<article>
 				<header>
-                                    <h1>Sales Type</h1>
-					<form action="type.php" method="post">                                                                                                                                        
-                                            <p><input name="linea1" type="text"  placeholder="Sale Mode" id="field"  /></p>
-                                            <p><input input type="submit" name="enviar" value="Submit"  id="button-blue"  /></p>
+					<h1>Fuel Name :: Product Setup</h1>
+					<form action="product.php" method="post">                                                                                                                                        
+                                            <p><input name="producto1" type="text"  placeholder="Product Name" id="field"  /></p>                                            
+                                            <p><input input type="submit" name="enviar" value="Submit"  class="button-blue"  /></p>
                                         </form>
 				</header>								
 			</article>
@@ -44,18 +45,22 @@
 				<p>You can create different accounts and use an ibutton identification system
                                    or your preferred ID system. Reduce your administrative efford and increase your
                                    profit.</p>
-                                <p><?php 
+                                <p class="special"><?php 
                                 if (filter_input(INPUT_POST,'enviar')) {   
                                     $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
-                                    or die('Can not connect to DB: ' . \pg_last_error());
-                                    $linea1 = filter_input(INPUT_POST,'linea1');                                     
-                                    $query = "INSERT INTO transaccion (des_transaccion) VALUES('$linea1')";
+                                    or die('Can not connect: ' . \pg_last_error());
+                                    $producto1 = filter_input(INPUT_POST,'producto1');
+                                    $query1 = "SELECT  MAX(id_producto) FROM producto";
+                                    $result1 = pg_query($query1) or die('La consulta fallo: ' . \pg_last_error());
+                                    $row1 = pg_fetch_row($result1);
+                                    $row = $row1[0] + 1;                                   
+                                    $query = "INSERT INTO producto VALUES ('$row','$producto1') ";
                                     $result = pg_query($query) or die('La consulta fallo: ' . \pg_last_error());
                                     // Liberando el conjunto de resultados
                                     pg_free_result($result);
                                     // Cerrando la conexión
                                     pg_close($dbconn);
-                                    echo "?Thanks! We'd received your information.\n"; 
+                                    echo "Thanks! We'd received your information.\n"; 
                                  }
                             ?> </p>
 			</aside>

@@ -15,7 +15,8 @@
     <body>
         <div id="header-container">
 		<header class="wrapper clearfix">
-                    
+                    <h3><a href="index.php"><img src="images/es.png"width="30px" height="30px" style="float: left" ></a></h3>
+                    <h3><a href="index.php"><img src="images/ing.png"width="30px" height="30px" ></a></h3>
                     <h1 id="title"><a href="index.php"><img src="images/logo-insepet.png" ></a></h1>
 			<nav>
 				<ul>
@@ -34,7 +35,7 @@
 					<h1>Fuel Name :: Product Setup</h1>
 					<form action="product.php" method="post">                                                                                                                                        
                                             <p><input name="producto1" type="text"  placeholder="Product Name" id="field"  /></p>                                            
-                                            <p><input input type="submit" name="enviar" value="Submit"  id="button-blue"  /></p>
+                                            <p><input input type="submit" name="enviar" value="Submit"  class="button-blue"  /></p>
                                         </form>
 				</header>								
 			</article>

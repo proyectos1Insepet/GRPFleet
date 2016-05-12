@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>GRP700 Fleet:: Sistemas Insepet</title>
+	<title>GRP700 Fleet:: Ventas</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,13 +16,13 @@
         <div id="header-container">
 		<header class="wrapper clearfix">
                     <h3><a href="index.php"><img src="images/es.png"width="30px" height="30px" style="float: left" ></a></h3>
-                    <h3><a href="index.php"><img src="images/ing.png"width="30px" height="30px" ></a></h3>
+                    <h3><a href="../index.php"><img src="images/ing.png"width="30px" height="30px" ></a></h3>
                     <h1 id="title"><a href="index.php"><img src="images/logo-insepet.png" ></a></h1>
 			<nav>
 				<ul>
-                                    <li><a href="customer.php">Customer</a></li>
-					<li><a href="sales.php">Sales</a></li>
-					<li><a href="setup.php">Setup</a></li>
+                                    <li><a href="customer.php">Clientes</a></li>
+			            <li><a href="sales.php">Ventas</a></li>
+                                    <li><a href="setup.php">Conf.</a></li>
 				</ul>
 			</nav>
 		</header>            
@@ -44,16 +44,16 @@
                                         <p><table class="tabla" border="1">
                                             <thead>
                                                 <tr>                                                
-                                                <th>Sale number </th>
-                                                <th>Date </th>
-                                                <th>Customer ID </th>
-                                                <th>Transaction type </th>
-                                                <th>Side</th>
-                                                <th>Hose </th>
-                                                <th>Product </th>
-                                                <th>Sale Quantity </th>
-                                                <th>Sale Amount </th>
-                                                <th>Plate </th>                
+                                                <th>Número de venta </th>
+                                                <th>Fecha </th>
+                                                <th>ID Cliente </th>
+                                                <th>Tipo de transacción </th>
+                                                <th>Cara</th>
+                                                <th>Manguera </th>
+                                                <th>Producto </th>
+                                                <th>Cantidad vendida </th>
+                                                <th>Valor vendido </th>
+                                                <th>Placa </th>                
                                                 </tr>
                                             </thead>
                                             <tbody> 
@@ -86,13 +86,13 @@
                                                         echo "<td background-color:#F5D0A9;>".$row2['placa']." </td>";            
                                                         echo "</tr>";  
                                                         
-                                                    }else {echo '<br>Without Results.';}
+                                                    }else {echo '<br>Sin resultados.';}
                                                 }
                                                           
                                                 }
                                                 pg_free_result($result);
                                                 pg_free_result($result2);
-                                                // Cerrando la conexi�n
+                                                // Cerrando la conexi�n
                                                 pg_close($dbconn);
                                             ?> 
                                                 </tbody>

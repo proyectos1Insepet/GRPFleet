@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>GRP700 Fleet:: Vehicle</title>
+	<title>GRP700 Fleet:: Update Account</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -31,7 +31,8 @@
 		<div id="main" class="wrapper clearfix">
 			
 			<article>
-                            <h1>Vehicle Setup</h1>
+                            <h1>Customer Update</h1>
+                            <h3>Please type all data</h3>
                             <form action="#" method="post">
                                 <p class="special">
                                         <?php
@@ -46,10 +47,24 @@
                                                 echo "</select>";
                                         ?>
                                     </p> 
-                                    <p><input name="placa" type="text"  placeholder="Plate " id="field"  /></p>
-                                    <p><input name="serial" type="text" placeholder="ID Serial" id="field" /></p>
-                                    <p><input name="tanque" type="text" placeholder="Tank Size" id="field" /></p>
-                                    <p><input name="marca" type="text" placeholder="Brand" id="field"/></p>  
+                                    <p><input name="linea1" type="text"  placeholder="Client Name" id="field"  /></p>                                            
+                                    <p><input name="id_tax" type="text" placeholder="VAT" id="field" /></p>
+                                    <p><input name="dir" type="text" placeholder="Address" id="field" /></p>
+                                    <p><input name="tel" type="text" placeholder="Phone" id="field"/></p>                                            
+                                    <p><input name="ciudad" type="text" placeholder="City" id="field"/></p>                                    
+                                    <p><input name="state" type="text" placeholder="State" id="field"/></p>
+                                    <p class="special"><?php
+                                                $dbconn2 = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                                or die('Can not connect: ' . \pg_last_error());
+                                                $query2 = "SELECT  * FROM transaccion";
+                                                $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
+                                                echo "<select name='select2' id='field'>";
+                                                while($fila2=  pg_fetch_array($result2)){
+                                                    echo "<option value=".$fila2['tipo'].">".$fila2['descripcion']."</option>";
+                                                }
+                                                echo "</select>";
+                                                ?></p>
+                                    <p><input name="saldo" type="text" placeholder="Balance" id="field"/></p>
                                     <p><input type="checkbox" name="estado" value="1"> - Active</input></p>                                    
                                     <p><input input type="submit" name="enviar" value="Submit"  class="button-blue"  /></p>
                             </form>	
@@ -63,34 +78,34 @@
                                  <p class="special">
                                    <?php 
                                         if (filter_input(INPUT_POST,'enviar')) {   
-                                            $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
-                                            or die('Can not connect: ' . \pg_last_error());                                                                                
-                                            $cliente = filter_input(INPUT_POST,'select1');                                    
-                                            $placa = filter_input(INPUT_POST,'placa');
-                                            $serial = filter_input(INPUT_POST,'serial');
-                                            $tanque = filter_input(INPUT_POST,'tanque');
-                                            $marca = filter_input(INPUT_POST,'marca');   
+                                            $dbconn3 = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                            or die('Can not connect: ' . \pg_last_error());
+                                            $cliente  = filter_input(INPUT_POST,'select1');
+                                            $linea1 = filter_input(INPUT_POST,'linea1');                                    
+                                            $id_tax = filter_input(INPUT_POST,'id_tax');
+                                            $tel = filter_input(INPUT_POST,'tel');
+                                            $dir = filter_input(INPUT_POST,'dir');
+                                            $ciudad = filter_input(INPUT_POST,'ciudad');   
+                                            $state = filter_input(INPUT_POST,'state');
+                                            $saldo = filter_input(INPUT_POST,'saldo');
+                                            $tipo  = filter_input(INPUT_POST,'select2');
                                             $estado = filter_input(INPUT_POST,'estado');                                            
-                                            if ($estado == "1" ){
+                                            if ($estado === "1" ){
                                                 $activo = 1;
-                                            }else{
+                                            }else{                                            
                                                 $activo = 0;
                                             }
-                                            $query1 = "SELECT  MAX(id_vehiculo) FROM vehiculo";
-                                            $result1 = pg_query($query1) or die('Query error: ' . \pg_last_error());
-                                            $row1 = pg_fetch_row($result1);
-                                            $row = $row1[0] + 1;   
-                                            $query = "INSERT INTO vehiculo  VALUES('$cliente','$row','$placa','$serial','$tanque','$activo','$marca') ";
-                                            $result = pg_query($query) or die('Query error: ' . \pg_last_error());
+                                            $query3 = "UPDATE cuenta SET estado_cuenta = '$activo',nombre ='$linea1', tax_number = '$id_tax', direccion ='$dir', telefono ='$tel', ciudad ='$ciudad', provincia ='$state',tipo_transaccion ='$tipo', saldo ='$saldo' where id_cliente = '$cliente'";
+                                            $result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
                                             // Liberando el conjunto de resultados
-                                            pg_free_result($result);
+                                            pg_free_result($result3);
                                             // Cerrando la conexión
-                                            pg_close($dbconn);
+                                            pg_close($dbconn3);
                                             echo "Thanks! We'd received your information.\n"; 
                                         }
                                     ?> 
                                 </p>
-                                <p><a class="button-grey" href="restrict.php"/>Next</a><br></p>
+                                
                                 
                                     
                                     

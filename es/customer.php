@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>GRP700 Fleet:: Sistemas Insepet :: Customer</title>
+	<title>GRP700 Fleet:: Sistemas Insepet :: Clientes</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,13 +16,13 @@
         <div id="header-container">
 		<header class="wrapper clearfix">
                     <h3><a href="index.php"><img src="images/es.png"width="30px" height="30px" style="float: left" ></a></h3>
-                    <h3><a href="index.php"><img src="images/ing.png"width="30px" height="30px" ></a></h3>
+                    <h3><a href="../index.php"><img src="images/ing.png"width="30px" height="30px" ></a></h3>
                     <h1 id="title"><a href="index.php"><img src="images/logo-insepet.png" ></a></h1>
 			<nav>
 				<ul>
-                                    <li><a href="customer.php">Customer</a></li>
-					<li><a href="sales.php">Sales</a></li>
-                                        <li><a href="setup.php">Setup</a></li>
+                                    <li><a href="customer.php">Clientes</a></li>
+			            <li><a href="sales.php">Ventas</a></li>
+                                    <li><a href="setup.php">Conf.</a></li>
 				</ul>
 			</nav>
 		</header>            
@@ -32,14 +32,14 @@
 			
 			<article>
 				<header>
-					<h1>Customer Setup :: New Client</h1>
+					<h1>Configuración de cliente :: Nuevo Cliente</h1>
                                         <form action="#" method="post">
-                                            <p><input name="linea1" type="text"  placeholder="Client Name" id="field"  /></p>                                            
-                                            <p><input name="id_tax" type="text" placeholder="VAT" id="field" /></p>
-                                            <p><input name="dir" type="text" placeholder="Address" id="field" /></p>
-                                            <p><input name="tel" type="text" placeholder="Phone" id="field"/></p>                                            
-                                            <p><input name="ciudad" type="text" placeholder="City" id="field"/></p>                                    
-                                            <p><input name="state" type="text" placeholder="State" id="field"/></p>
+                                            <p><input name="linea1" type="text"  placeholder="Nombre/ Razon social" id="field"  /></p>                                            
+                                            <p><input name="id_tax" type="text" placeholder="NIT / Cédula" id="field" /></p>
+                                            <p><input name="dir" type="text" placeholder="Dirección" id="field" /></p>
+                                            <p><input name="tel" type="text" placeholder="Teléfono" id="field"/></p>                                            
+                                            <p><input name="ciudad" type="text" placeholder="Ciudad" id="field"/></p>                                    
+                                            <p><input name="state" type="text" placeholder="Departamento/ Provincia" id="field"/></p>
                                             <p class="special"><?php
                                                 $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
                                                 or die('Can not connect: ' . \pg_last_error());
@@ -51,9 +51,9 @@
                                                 }
                                                 echo "</select>";
                                                 ?></p>
-                                            <p><input name="saldo" type="text" placeholder="Balance" id="field"/></p>
+                                            <p><input name="saldo" type="text" placeholder="Cupo" id="field"/></p>
                                             
-                                            <p><input input type="submit" name="enviar" value="Submit"  class="button-blue"  /></p>
+                                            <p><input input type="submit" name="enviar" value="Enviar"  class="button-blue"  /></p>
                                         </form>
 				</header>								
 			</article>
@@ -82,9 +82,9 @@
                                             $result = pg_query($query) or die('Query error: ' . \pg_last_error());
                                             // Liberando el conjunto de resultados
                                             pg_free_result($result);
-                                            // Cerrando la conexi�n
+                                            // Cerrando la conexi�n
                                             pg_close($dbconn);
-                                            echo "Thanks! We'd received your information.\n"; 
+                                            echo "Gracias, hemos recibido su información.\n"; 
                                         }
                                     ?> 
                                 </p>

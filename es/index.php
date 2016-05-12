@@ -15,15 +15,15 @@
     <body>
         <div id="header-container">
 		<header class="wrapper clearfix">
-                    <h3><a href="es/index.php"><img src="images/es.png"width="30px" height="30px" style="float: left" ></a></h3>
-                    <h3><a href="index.php"><img src="images/ing.png"width="30px" height="30px" ></a></h3>
+                    <h3><a href="index.php"><img src="images/es.png"width="30px" height="30px" style="float: left" ></a></h3>
+                    <h3><a href="../index.php"><img src="images/ing.png"width="30px" height="30px" ></a></h3>
                     <h1 id="title"><a href="index.php"><img src="images/logo-insepet.png" ></a></h1>
                     
 			<nav>
 				<ul>
-                                    <li><a href="customer.php">Customer</a></li>
-					<li><a href="sales.php">Sales</a></li>
-					<li><a href="setup.php">Setup</a></li>
+                                    <li><a href="customer.php">Clientes</a></li>
+					<li><a href="sales.php">Ventas</a></li>
+					<li><a href="setup.php">Conf.</a></li>
 				</ul>
 			</nav>
 		</header>            
@@ -34,17 +34,16 @@
 			<article>
 				<header>
 					<h1>GRP700-Fleet</h1>
-					<p>Simple and effective Fleet control system. GRP700-Fleet allows
-                                           to control car fuel deliveries, customer fuel consumption, customer account
-                                           controls and dispenser basic configuration and control.</p>
+					<p>Control de Flotas simple y efectivo. El sistema GRP700x-Fleet permite controlar despacho
+                                           combustible a clientes, consumo de combustible, cuentas con clientes
+                                           y una configuración y control básico de dispensadores.</p>
 				</header>								
 			</article>
 			
 			<aside>
-				<h3>Simple and efficient</h3>
-				<p>You can create different accounts and use an ibutton identification system
-                                   or your preferred ID system. Reduce your administrative efford and increase your
-                                   profit.</p>
+				<h3>Simple y eficiente</h3>
+				<p>Usted puede crear diferentes cuentas, controlar el despacho de combustible para distintos vehículos,
+                                   basandose en la identificación por medio de ibutton o cualquier sistema similar.</p>
 			</aside>
 			
 		</div> <!-- #main -->

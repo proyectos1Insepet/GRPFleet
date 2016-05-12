@@ -11,7 +11,7 @@ CREATE TABLE producto(
 
 CREATE TABLE cuenta(
 	id_cliente SERIAL PRIMARY KEY,
-	estado_cuenta boolean DEFAULT false,
+	estado_cuenta boolean DEFAULT false,/*true cuenta activa*/
 	nombre VARCHAR (255),
 	tax_number VARCHAR (50),
 	direccion VARCHAR(255),
@@ -19,19 +19,44 @@ CREATE TABLE cuenta(
 	ciudad VARCHAR (50),
 	provincia VARCHAR (50),
 	tipo_transaccion INT references transaccion(tipo), 
-	saldo INT
+	saldo FLOAT
 	);
 	
 
 	
 CREATE TABLE vehiculo(
 	id_cliente SERIAL references cuenta(id_cliente),
-	id_vehiculo SERIAL,
-	placa VARCHAR (20) PRIMARY KEY,
-	serial VARCHAR (20),
+	id_vehiculo SERIAL PRIMARY KEY,
+	placa VARCHAR (20),
+	serial VARCHAR (20) UNIQUE NOT NULL,
 	tanque FLOAT,
-	estado_bloqueo BOOLEAN DEFAULT true,
+	estado_bloqueo boolean DEFAULT false, /* true = vehiculo activo */ 
 	marca VARCHAR (100)
+	);
+	 
+CREATE TABLE restricciones(
+	id_vehiculo SERIAL references vehiculo (id_vehiculo) UNIQUE,
+	id_producto INT references producto (id_producto),
+	visitaDia INT,
+	visitaSemana INT,
+	visitaMes INT,
+	volVisitaDia FLOAT DEFAULT 0.0,
+	volVisitaSemana FLOAT DEFAULT 0.0,
+	volVisitaMes FLOAT DEFAULT 0.0,
+	dinVisitaDia FLOAT DEFAULT 0.0,
+	dinVisitaSemana FLOAT DEFAULT 0.0,
+	dinVisitaMes FLOAT DEFAULT 0.0
+	);
+
+CREATE TABLE recibo(
+	linea1 VARCHAR(255),
+	linea2 VARCHAR(255),
+	id_tax VARCHAR (30),
+	tel    VARCHAR (20),
+	dir    VARCHAR (255),
+	vol    VARCHAR  (4),
+	moneda VARCHAR  (4),
+	footer VARCHAR (255) 	
 	);
 	
 	
