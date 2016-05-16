@@ -59,4 +59,41 @@ CREATE TABLE recibo(
 	footer VARCHAR (255) 	
 	);
 	
+CREATE TABLE venta(
+	id SERIAL PRIMARY KEY,
+	id_cliente SERIAL references cuenta(id_cliente),
+	fecha VARCHAR (255),
+	tipo_transaccion INT references transaccion (tipo),
+	dinero FLOAT,
+	volumen FLOAT	
+	);
 	
+CREATE TABLE mangueras(
+	man1 INT,
+	man2 INT,
+	man3 INT
+	);
+
+CREATE TABLE corte(
+	Pk_id_corte SERIAL PRIMARY KEY ,
+	ultima_venta INT,
+	t_electronico INT,
+	volVentaT FLOAT,
+	t_electronico2 INT,
+	volVentaT2 FLOAT,
+	t_electronico3 INT,
+	volVentaT3 FLOAT
+	);
+
+CREATE TABLE venta_detalle(
+	Fk_id SERIAL references venta (id),
+	placa VARCHAR (20),
+	km VARCHAR (30),
+	Fk_id_producto INT references producto (id_producto),
+	precio FLOAT,
+	cara INT,
+	manguera INT,
+	Fk_id_corte SERIAL references corte (Pk_id_corte),
+	dinero FLOAT,
+	volumen FLOAT
+	);
