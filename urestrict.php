@@ -171,7 +171,8 @@
                         
 			<!-- END FORM-->  								
 				
-			</div>                        
+			</div> 
+                        <p><a class="btn green" href="uvehicle.php"/>Actualizar estado</a><br></p>
                        <p>
                         <?php 
                                         if (filter_input(INPUT_POST,'enviar')) {   

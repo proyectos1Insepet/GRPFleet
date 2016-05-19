@@ -126,11 +126,8 @@
                                                 }
                                                 echo "</select>";
                                         ?>
-                                        </p> 
-                                        <p><input name="placa" type="text"  placeholder="Plate" id="field"  /></p>
-                                        <p><input name="serial" type="text" placeholder="Serial" id="field" /></p>
-                                        <p><input name="tanque" type="text" placeholder="Tank size" id="field" /></p>
-                                        <p><input name="marca" type="text" placeholder="Brand" id="field"/></p>  
+                                        </p>                                         
+                                        <p><input name="serial" type="text" placeholder="Serial" id="field" /></p>                                        
                                         <p><input type="checkbox" name="estado" value="1"> - Active</input></p>                                  
                                         
 				    </div>
@@ -154,17 +151,14 @@
                                             $dbconn2 = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
                                             or die('Can not connect: ' . \pg_last_error());                                                                                
                                             $vehiculo = filter_input(INPUT_POST,'select1');                                    
-                                            $placa = filter_input(INPUT_POST,'placa');
-                                            $serial = filter_input(INPUT_POST,'serial');
-                                            $tanque = filter_input(INPUT_POST,'tanque');
-                                            $marca = filter_input(INPUT_POST,'marca');   
+                                            $serial = filter_input(INPUT_POST,'serial');                                           
                                             $estado = filter_input(INPUT_POST,'estado');                                            
                                             if ($estado == "1" ){
                                                 $activo = 1;
                                             }else{
                                                 $activo = 0;
                                             }                                                                                        
-                                            $query2 = "UPDATE vehiculo SET placa ='$placa', serial ='$serial', tanque ='$tanque', estado_bloqueo ='$activo',marca ='$marca' WHERE id_vehiculo ='$vehiculo'";
+                                            $query2 = "UPDATE vehiculo SET serial ='$serial',estado_bloqueo ='$activo' WHERE id_vehiculo ='$vehiculo'";
                                             $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
                                             // Liberando el conjunto de resultados
                                             pg_free_result($result2);

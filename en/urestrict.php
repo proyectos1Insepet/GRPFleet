@@ -171,8 +171,9 @@
                         
 			<!-- END FORM-->  								
 				
-			</div>                        
-                       <p>
+			</div> 
+                        <p><a class="btn green" href="uvehicle.php"/>Actualizar estado</a><br></p>
+                        <p>
                         <?php 
                                         if (filter_input(INPUT_POST,'enviar')) {   
                                             $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")

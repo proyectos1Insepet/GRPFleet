@@ -113,7 +113,7 @@
 						<!-- BEGIN BORDERED TABLE PORTLET-->
 						<div class="portlet box green">
 							<div class="portlet-title">
-								<div class="caption"><i class="icon-coffee"></i>Detalle de venta</div>
+								<div class="caption"><i class="icon-filter"></i>Detalle de venta</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="#portlet-config" data-toggle="modal" class="config"></a>
