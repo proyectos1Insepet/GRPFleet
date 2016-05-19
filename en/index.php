@@ -225,21 +225,21 @@
         <div class="row-fluid service-box">
             <div class="span4">
                 <div class="service-box-heading">
-                    <em><i class="icon-location-arrow blue"></i></em>
+                    <em><a href="sales.php"><i class="icon-location-arrow blue"></i></a></em>
                     <span>Sales</span>
                 </div>
                 <p>Tables with all your dispenser sales.</p>
             </div>
             <div class="span4">
                 <div class="service-box-heading">
-                    <em><i class="icon-ok red"></i></em>
+                    <em><a href="customer.php"><i class="icon-ok red"></i></a></em>
                     <span>Customers</span>
                 </div>
                 <p>Type your customerr informatión, vehicle setup and related information.</p>
             </div>
             <div class="span4">
                 <div class="service-box-heading">
-                    <em><i class="icon-resize-small green"></i></em>
+                    <em><a href="setup.php"><i class="icon-resize-small green"></i></a></em>
                     <span>Setup</span>
                 </div>
                 <p>Your dispencer info, receipt setup, volume unit, currency simbol and all the data you need.</p>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GRP700 Fleet:: Actualizar Productos</title>
+    <title>GRP700 Fleet:: Configuración de vehículos</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -112,7 +112,7 @@
                          
                             <form class="form-horizontal" action="#" method="post">
 				<div class="control-group">
-                                    <label class="control-label" for="inputEmail">Producto</label>
+                                    <label class="control-label" for="inputEmail">Cuentas</label>
                                     <div class="controls">
 					<p>
                                             <?php

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
@@ -225,21 +225,21 @@
         <div class="row-fluid service-box">
             <div class="span4">
                 <div class="service-box-heading">
-                    <em><i class="icon-location-arrow blue"></i></em>
+                    <em><a href="sales.php"><i class="icon-location-arrow blue"></i></a></em>
                     <span>Ventas</span>
                 </div>
                 <p>Tablas con el histórico de ventas realizado en su equipo dispensador.</p>
             </div>
             <div class="span4">
                 <div class="service-box-heading">
-                    <em><i class="icon-ok red"></i></em>
+                    <em><a href="customer.php"><i class="icon-ok red"></i></a></em>
                     <span>Clientes</span>
                 </div>
                 <p>Ingrese la información de sus clientes, los vehículos que maneja cada uno y las restricciones.</p>
             </div>
             <div class="span4">
                 <div class="service-box-heading">
-                    <em><i class="icon-resize-small green"></i></em>
+                    <em><a href="setup.php"><i class="icon-resize-small green"></i></a></em>
                     <span>Configuración</span>
                 </div>
                 <p>Realice la configuración de su dispensador, la información de recibos, símbolo de moneda,volumen y demás parámetros de trabajo .</p>

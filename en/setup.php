@@ -156,7 +156,7 @@
                                     </div>
 				</div>
 			</form>
-                        <form action="uvehicle.php" class="form-horizontal">                              
+                        <form action="urestrict.php" class="form-horizontal">                              
                             <div class="control-group">
                                 <label class="control-label"></label>
                                     <div class="controls">                                   

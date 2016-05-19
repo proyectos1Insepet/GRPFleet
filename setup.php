@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
@@ -156,7 +156,7 @@
                                     </div>
 				</div>
 			</form>
-                        <form action="uvehicle.php" class="form-horizontal">                              
+                        <form action="urestrict.php" class="form-horizontal">                              
                             <div class="control-group">
                                 <label class="control-label"></label>
                                     <div class="controls">                                   

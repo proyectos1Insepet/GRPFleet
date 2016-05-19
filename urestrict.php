@@ -87,7 +87,7 @@
     <div class="row-fluid breadcrumbs margin-bottom-40">
         <div class="container">
             <div class="span4">
-                <h1>Configuración de restricciones</h1>
+                <h1>Actualización de restricciones</h1>
             </div>
             <div class="span8">
                 <ul class="pull-right breadcrumb">
@@ -193,7 +193,7 @@
                                             
                                             
                                             
-                                            $query3 = "INSERT INTO restricciones  VALUES('$vehiculo','$producto','$dia','$semana','$mes','$voldia','$volsemana','$volmes','$dindia','$dinsemana','$dinmes') ";
+                                            $query3 = "UPDATE restricciones SET id_producto ='$producto', visitadia = '$dia', visitasemana ='$semana', visitames = '$mes', volvisitadia = '$voldia', volvisitasemana = '$volsemana', volvisitames ='$volmes', dinvisitadia ='$dindia', dinvisitasemana = '$dinsemana', dinvisitames = '$dinmes' WHERE id_vehiculo ='$vehiculo' ";
                                             $result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
                                             // Liberando el conjunto de resultados
                                             pg_free_result($result3);

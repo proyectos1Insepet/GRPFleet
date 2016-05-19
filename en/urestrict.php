@@ -5,7 +5,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GRP700 Fleet:: Products</title>
+    <title>GRP700 Fleet:: Account restrictions</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -17,7 +17,8 @@
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
     <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    
     <!-- END GLOBAL MANDATORY STYLES -->
     <link href="assets/css/themes/red.css" rel="stylesheet" type="text/css" id="style_color"/>    
     <link rel="shortcut icon" href="favicon.ico" />
@@ -48,7 +49,7 @@
                     <!-- END RESPONSIVE MENU TOGGLER -->
 
                     <!-- BEGIN TOP NAVIGATION MENU -->
-                    <div class="nav-collapse collapse">
+                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="dropdown active">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="index.php">
@@ -86,13 +87,12 @@
     <div class="row-fluid breadcrumbs margin-bottom-40">
         <div class="container">
             <div class="span4">
-                <h1>Product setup</h1>
+                <h1>Restrictions update</h1>
             </div>
             <div class="span8">
                 <ul class="pull-right breadcrumb">
                     <li><a href="index.php">Home</a> <span class="divider">/</span></li>                    
-                    <li><a href="setup.php">Setup</a> <span class="divider">/</span></li>
-                    <li class="active">Products setup</li>
+                    <li class="active">Restrictions</li>                  
                 </ul>
             </div>
         </div>
@@ -106,55 +106,103 @@
 		<div class="row-fluid margin-bottom-40">
 			<!-- COLUMN 1 -->
                     <div class="span6">
-			<h3>Fuel types</h3>
+			<h3>Vehicle update</h3>
 			<!-- BEGIN FORM-->
                         <div class="margin-bottom-30">
-                            <h4>Fill all the spaces</h4>
-                            <form class="form-horizontal" action="product.php" method="post">
+                            
+                            <form class="form-horizontal" action="#" method="post">
 				<div class="control-group">
-                                    <label class="control-label" for="inputEmail">Product</label>
+                                    <label class="control-label" for="inputEmail">Vehicle and fuel</label>
                                     <div class="controls">
-					<p><input name="producto1" type="text"  placeholder="Nombre" id="field"  /></p>
+					<p>
+                                        <?php
+                                                $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                                or die('Can not connect: ' . \pg_last_error());
+                                                $query = "SELECT id_vehiculo,placa FROM vehiculo";
+                                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
+                                                echo "<select name='select1' id='field' class='small m-wrap'>";
+                                                while($fila=  pg_fetch_array($result)){
+                                                    echo "<option value=".$fila['id_vehiculo'].">".$fila['placa']."</option>";
+                                                }
+                                                echo "</select>";                                                                                                                                                                                            
+                                                $query2 = "SELECT id_producto,descripcion FROM producto";
+                                                $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
+                                                echo "<select name='select2' id='field' class='small m-wrap'>";
+                                                while($fila2=  pg_fetch_array($result2)){
+                                                    echo "<option value=".$fila2['id_producto'].">".$fila2['descripcion']."</option>";
+                                                }
+                                                echo "</select>";
+                                                
+                                        ?>
+                                    </p>
 				    </div>
-				</div>				
+				</div>
+				<div class="control-group">
+				    <label class="control-label" for="inputPassword"></label>
+                                    <div class="controls">					                                        
+                                    
+                                    <p><input name="vol" type="text" placeholder="Volumen asignado" id="vol" class="help-inline"/></p>  
+                                    <p><input name="din" type="text" placeholder="Dinero asignado" id="din" class="help-inline"/></p>
+                                    <p><input name="mes" type="text" placeholder="Visitas por mes" id="mes" class="help-inline" /></p>                                      
+                                    <p><input name="semana" type="text" placeholder="Visitas por semana" id="semana" class="help-inline"/></p>
+                                    <p><input name="dia" type="text"  placeholder="Visitas por día" id="dia" class="campo"  /></p>
+                                    
+                                    <p><input name="cal_vol_mon" type="text" placeholder="Volumen por mes" id="cal_vol_mon" class="help-inline" disabled="disabled"/></p>      
+                                    <p><input name="cal_vol_week" type="text" placeholder="Volumen por semana" id="cal_vol_week" class="help-inline" disabled="disabled"/></p> 
+                                    <p><input name="cal_vol_day" type="text" placeholder="Volume por día" id="cal_vol_day" class="help-inline" disabled="disabled"/></p> 
+                                    
+                                    <p><input name="cal_din_mon" type="text" placeholder="Dinero por mes" id="cal_din_mon" class="help-inline" disabled="disabled"/></p>      
+                                    <p><input name="cal_din_week" type="text" placeholder="Dinero por semana" id="cal_din_week" class="help-inline" disabled="disabled"/></p> 
+                                    <p><input name="cal_din_day" type="text" placeholder="Dinero por día" id="cal_din_day" class="help-inline" disabled="disabled"/></p> 
+                                    
+                                    
+                                    
+				    </div>
+				</div>
                                     <div class="control-group">
 					<div class="controls">                                            
-                                            <input input type="submit" name="enviar" value="Enviar"  class="btn black"  />
+                                            <p><input type="button" id="calcular" value="Calcular" class="btn red"/><br/></p>
+                                            <input input type="submit" name="enviar" value="Finalizar"  class="btn black"  />
 					</div>
 				    </div>
-                            </form>
-                            <form action="uproduct.php" class="form-horizontal">                              
-                            <div class="control-group">
-                                <label class="control-label"></label>
-                                    <div class="controls">                                   
-                                        <button type="submit" class="btn red">Update fuel</button>
-                                    </div>
-				</div>
-			</form>
+                            </form>					
 			</div>
                         
                         
 			<!-- END FORM-->  								
 				
-			</div>
-                        <p><?php 
-                                if (filter_input(INPUT_POST,'enviar')) {   
-                                    $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
-                                    or die('Can not connect: ' . \pg_last_error());
-                                    $producto1 = filter_input(INPUT_POST,'producto1');
-                                    $query1 = "SELECT  MAX(id_producto) FROM producto";
-                                    $result1 = pg_query($query1) or die('La consulta fallo: ' . \pg_last_error());
-                                    $row1 = pg_fetch_row($result1);
-                                    $row = $row1[0] + 1;                                   
-                                    $query = "INSERT INTO producto VALUES ('$row','$producto1') ";
-                                    $result = pg_query($query) or die('La consulta fallo: ' . \pg_last_error());
-                                    // Liberando el conjunto de resultados
-                                    pg_free_result($result);
-                                    // Cerrando la conexi�n
-                                    pg_close($dbconn);
-                                    echo "Thanks we've received your information\n";   
-                                 }
-                            ?> </p>
+			</div>                        
+                       <p>
+                        <?php 
+                                        if (filter_input(INPUT_POST,'enviar')) {   
+                                            $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                            or die('Can not connect: ' . \pg_last_error());                                                                                
+                                            $vehiculo = filter_input(INPUT_POST,'select1');                                    
+                                            $producto = filter_input(INPUT_POST,'select2');
+                                            $vol = filter_input(INPUT_POST,'vol');
+                                            $din = filter_input(INPUT_POST,'din');
+                                            $mes = filter_input(INPUT_POST,'mes');   
+                                            $semana = filter_input(INPUT_POST,'semana');
+                                            $dia = filter_input(INPUT_POST,'dia');
+                                            $volmes = round(($vol / $mes),2);
+                                            $volsemana = round(($volmes / $semana),2);
+                                            $voldia = round(($volsemana / $dia),2);
+                                            $dinmes = round(($din/$mes),2);                                                 
+                                            $dinsemana = round(($dinmes/$semana),2);
+                                            $dindia = round(($dinsemana/$dia),2);
+                                            
+                                            
+                                            
+                                            $query3 = "UPDATE restricciones SET id_producto ='$producto', visitadia = '$dia', visitasemana ='$semana', visitames = '$mes', volvisitadia = '$voldia', volvisitasemana = '$volsemana', volvisitames ='$volmes', dinvisitadia ='$dindia', dinvisitasemana = '$dinsemana', dinvisitames = '$dinmes' WHERE id_vehiculo ='$vehiculo' ";
+                                            $result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
+                                            // Liberando el conjunto de resultados
+                                            pg_free_result($result3);
+                                            // Cerrando la conexi�n
+                                            pg_close($dbconn);
+                                            echo "Thanks we've received your information\n"; 
+                                        }
+                                    ?> 
+                                </p>
 							                            									
 			</div>
 				
@@ -169,7 +217,7 @@
                 
                 <div class="span4 space-mobile">
                     <!-- BEGIN CONTACTS -->                                    
-                    <h2>Contact us</h2>
+                    <h2>Contactenos</h2>
                     <address class="margin-bottom-40">
                         Bogotá – Colombia <br />
                         Carrera 90 No. 17B – 75 Bodega 21 <br />
@@ -222,7 +270,8 @@
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="assets/plugins/back-to-top.js"></script>    
     <script type="text/javascript" src="assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
-    <script type="text/javascript" src="assets/plugins/hover-dropdown.js"></script>         
+    <script type="text/javascript" src="assets/plugins/hover-dropdown.js"></script>    
+    <script type="text/javascript" src="js/calculo.js"></script>    
     <!--[if lt IE 9]>
     <script src="assets/plugins/respond.min.js"></script>  
     <![endif]-->   

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GRP 700 X Fleet | Sales</title>
+    <title>GRP 700 X Fleet | Sale detail</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -35,7 +35,7 @@
 	<!-- END BEGIN STYLE CUSTOMIZER -->    
 
     <!-- BEGIN HEADER -->
-      <div class="front-header">
+     <div class="front-header">
         <div class="container">
             <div class="navbar">
                 <div class="navbar-inner">
@@ -90,7 +90,7 @@
     <!-- END HEADER -->
 
     <!-- BEGIN BREADCRUMBS -->   
-    <div class="row-fluid breadcrumbs margin-bottom-40">
+       <div class="row-fluid breadcrumbs margin-bottom-40">
         <div class="container">
             <div class="span4">
                 <h1>System sales</h1>
@@ -111,9 +111,9 @@
        <div class="row-fluid">					
 					<div class="span6">
 						<!-- BEGIN BORDERED TABLE PORTLET-->
-						<div class="portlet box red">
+						<div class="portlet box green">
 							<div class="portlet-title">
-								<div class="caption"><i class="fa fa-hand-o-right"></i>Registered sales</div>
+								<div class="caption"><i class="icon-coffee"></i>Sale detail</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -121,6 +121,7 @@
 									<a href="javascript:;" class="remove"></a>
 								</div>
 							</div>
+							
                                                     <?php
                                                         $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
                                                         or die('Can not connect: ' . \pg_last_error());
@@ -130,34 +131,64 @@
                                                         $ultima = $row[0];
                                                     ?>
 							<div class="portlet-body">
-								<table class="table table-hover">
+								<table class="table table-striped table-hover">
 									<thead>
 										<tr>
 											<th>Customer </th>
                                                                                         <th>Date </th>
-                                                                                        <th>Sale number</th>
+                                                                                        <th>Transaction</th>
                                                                                         </tr>
 									</thead>
                                                                         <tbody>
-                                                                            <?php   
-                                                                                echo "<tr>";
-                                                                                for($i= $ultima; $i>($ultima - 100); $i--){
-                                                                                $sql = "select v.id_cliente, v.fecha, v.tipo_transaccion, 
-                                                                                v.volumen, v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion, c.nombre from venta v inner join venta_detalle vd on v.id = vd.fk_id 
-                                                                                inner join producto p on vd.fk_id_producto = p.id_producto inner join cuenta c on v.id_cliente = c.id_cliente WHERE v.id = $i ";
-                                                                                $sql2 = "select vol, moneda from recibo";
-                                                                                if($i<=0){
-                                                                                break;
-                                                                                }
-                                                                                $result2 = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
-                                                                                $result3 = pg_query($sql2)or die('Query error: ' . \pg_last_error());
+                                                                            <?php 
+                                                                                $num_venta = filter_input(INPUT_GET, 'num_venta');
+                                                                                echo "<tr>";                                                                                
+                                                                                $sql = "select v.id_cliente, v.fecha,v.volumen,v.tipo_transaccion, p.descripcion,
+                                                                                c.nombre,t.descripcion from venta v inner join venta_detalle vd on v.id = vd.fk_id 
+                                                                                inner join producto p on vd.fk_id_producto = p.id_producto
+                                                                                inner join cuenta c on v.id_cliente = c.id_cliente inner join transaccion t on t.tipo = v.tipo_transaccion  WHERE v.id = $num_venta ";                                                                                                                                                               
+                                                                                $result2 = pg_query($sql)or die('Query error: ' . \pg_last_error());                                                                                 
                                                                                 if($result2){
                                                                                     if(pg_field_is_null($result2, 0, "id_cliente")==0){
                                                                                         $row2 = pg_fetch_assoc($result2);   
                                                                                         $row3 = pg_fetch_assoc($result3);                                                                                                                                                                                
                                                                                         echo "<td background-color:#F5D0A9;>"." ".$row2['nombre']."</td> ";
                                                                                         echo "<td background-color:#F5D0A9;>".$row2['fecha']." </td>";
-                                                                                        echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$i.'">'.$i.'</a>'."</td> ";
+                                                                                        echo "<td background-color:#F5D0A9;>".$row2['descripcion']." </td>";
+                                                                                        
+                                                                                                   
+                                                                                        echo "</tr>";  
+                                                        
+                                                                                        }else {echo '<br>Sin resultados.';}
+                                                                                    }                                                                                                                                                                                          
+                                                                                ?> 
+                                                                            <thead>
+										<tr>
+                                                                                        
+                                                                                        <th>Side</th>
+                                                                                        <th>Hose</th>                                                                                        
+                                                                                        <th>Fuel</th>
+                                                                                        </tr>
+									</thead>
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        <?php
+                                                                         echo "<tr>";
+                                                                               
+                                                                                $sql3 = "select v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion 
+                                                                                from venta v inner join venta_detalle vd on v.id = vd.fk_id 
+                                                                                inner join producto p on vd.fk_id_producto = p.id_producto WHERE v.id = $num_venta ";                                                                                
+                                                                                
+                                                                                $result4 = pg_query($sql3)or die('Query error: ' . \pg_last_error());                                                                                 
+                                                                                if($result4){
+                                                                                    if(pg_field_is_null($result2, 0, "id_cliente")==0){
+                                                                                        $row2 = pg_fetch_assoc($result4);   
+                                                                                        $row3 = pg_fetch_assoc($result5);                                                                                       
+                                                                                        echo "<td background-color:#F5D0A9;>".$row2['cara']." </td>";
+                                                                                        echo "<td background-color:#F5D0A9;>".$row2['manguera']." </td>";                                                                                        
+                                                                                        echo "<td background-color:#F5D0A9;>".$row2['descripcion']." </td>";
                                                                                         
                                                                                                    
                                                                                         echo "</tr>";  
@@ -165,9 +196,43 @@
                                                                                         }else {echo '<br>Sin resultados.';}
                                                                                     }
                                                           
-                                                                                }
-                                                
-                                            ?> 									                                                                                                                                                                                                                                                                                                            
+                                                                                
+                                                                            
+                                                                        ?>
+                                                                        <thead>
+										<tr>
+											<th>Quantity</th>
+                                                                                        <th>Amount</th>
+                                                                                        <th>Plate</th>
+                                                                                        </tr>
+									</thead>
+                                                                        <tbody>
+                                                                            <?php   
+                                                                                echo "<tr>";                                                                                
+                                                                                $sql5 = "select v.volumen, v.dinero, vd.placa  from venta v inner join venta_detalle vd on v.id = vd.fk_id 
+                                                                                 WHERE v.id = $num_venta ";
+                                                                                $sql2 = "select vol, moneda from recibo";
+                                                                                
+                                                                                $result6 = pg_query($sql5)or die('Query error: ' . \pg_last_error()); 
+                                                                                $result7 = pg_query($sql2)or die('Query error: ' . \pg_last_error());
+                                                                                if($result2){
+                                                                                    if(pg_field_is_null($result2, 0, "id_cliente")==0){
+                                                                                        $row2 = pg_fetch_assoc($result6);   
+                                                                                        $row3 = pg_fetch_assoc($result7);                                                                                                                                                                                
+                                                                                        echo "<td background-color:#F5D0A9;>".$row2['volumen']." ".$row3['vol']."</td>";
+                                                                                        echo "<td background-color:#F5D0A9;>".$row3['moneda']." ".$row2['dinero']." </td>";
+                                                                                        echo "<td background-color:#F5D0A9;>".$row2['placa']." </td>"; 
+                                                                                        
+                                                                                                   
+                                                                                        echo "</tr>";  
+                                                        
+                                                                                        }else {echo '<br>Sin resultados.';}
+                                                                                    }
+                                                                                                                                                                    
+                                                                                // Cerrando la conexi�n
+                                                                                pg_close($dbconn);
+                                                          
+                                                                                ?>
                                                                         
                                                                         
                                                                         
@@ -178,8 +243,8 @@
 									
 										
 								</table>
-							</div>
-						</div>
+                                                    </div>	
+                                                </div>
 						<!-- END BORDERED TABLE PORTLET-->
 					</div>
 				</div>
@@ -193,7 +258,7 @@
                 
                 <div class="span4 space-mobile">
                     <!-- BEGIN CONTACTS -->                                    
-                    <h2>Contact us</h2>
+                    <h2>Contactenos</h2>
                     <address class="margin-bottom-40">
                         Bogotá – Colombia <br />
                         Carrera 90 No. 17B – 75 Bodega 21 <br />

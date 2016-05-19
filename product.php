@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
@@ -114,7 +114,7 @@
 				<div class="control-group">
                                     <label class="control-label" for="inputEmail">Producto</label>
                                     <div class="controls">
-					<p><input name="linea1" type="text"  placeholder="Nombre" id="field"  /></p>
+					<p><input name="producto1" type="text"  placeholder="Nombre" id="field"  /></p>
 				    </div>
 				</div>				
                                     <div class="control-group">
