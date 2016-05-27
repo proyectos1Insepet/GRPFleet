@@ -1,3 +1,25 @@
+<?php 
+	session_start();	 
+	if (isset($_SESSION['loggedin']) & $_SESSION['loggedin'] == true)
+	{	 
+        }
+        else
+        {
+	echo "Esta pagina es solo para usuarios registrados.<br>";
+	echo "<a href='login.php'>Login Here!</a>";
+	 
+	exit;
+	}
+	$now = time(); // checking the time now when home page starts
+	 
+	if($now > $_SESSION['expire'])
+	{
+	session_destroy();
+	echo "Su sesion a terminado, <a href='login.php'>
+	      Necesita Hacer Login</a>";
+	exit;
+	}
+?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -134,7 +156,19 @@
                                             <input input type="submit" name="enviar" value="Enviar"  class="btn black"  />
 					</div>
 				    </div>
-                            </form>					
+                            </form>	
+                            
+                            <form class="form-horizontal" name="subirImg" enctype="multipart/form-data" method="post" action="">				
+				<div class="control-group">				    
+                                    <div class="controls">					                                        
+                                        <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                                        <input type="file" name="imagen" id="imagen" class="btn"/><i class="icon-plus"></i>
+                                    </div>                                    								                                    
+					<div class="controls">                                            
+                                            <input type="submit" name="subirBtn" id="subirBtn" value="Ingresar" class="btn green"/> 
+					</div>
+				    </div>
+                            </form>
 			</div>
                         
                         
@@ -142,25 +176,32 @@
 				
 			</div>
                         <p><?php 
-                                if (filter_input(INPUT_POST,'enviar')) {   
-                                    $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
-                                    or die('Can not connect: ' . \pg_last_error());
-                                    $linea1 = filter_input(INPUT_POST,'linea1');
-                                    $linea2 = filter_input(INPUT_POST,'linea2');
-                                    $id_tax = filter_input(INPUT_POST,'id_tax');
-                                    $tel = filter_input(INPUT_POST,'tel');
-                                    $dir = filter_input(INPUT_POST,'dir');
-                                    $vol = filter_input(INPUT_POST,'vol');
-                                    $moneda = filter_input(INPUT_POST,'moneda');
-                                    $footer = filter_input(INPUT_POST,'footer');   
-                                    $query = "UPDATE recibo SET linea1 = '$linea1', linea2 = '$linea2', id_tax = '$id_tax', tel = '$tel', dir = '$dir', vol = '$vol', moneda = '$moneda',  footer = '$footer'";
-                                    $result = pg_query($query) or die('The consult fail: ' . \pg_last_error());
-                                    // Liberando el conjunto de resultados
-                                    pg_free_result($result);
-                                    // Cerrando la conexi�n
-                                    pg_close($dbconn);
-                                    echo "Gracias, hemos recibido su información.\n"; 
-                                 }
+                        
+                            if (filter_input(INPUT_POST,'subirBtn')) {
+                                include_once("class_imgUpldr.php"); 
+                                $subir = new imgUpldr;
+                                // Inicializamos
+                                $subir->init($_FILES['imagen']);
+                            }
+                            if (filter_input(INPUT_POST,'enviar')) {   
+                                $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                or die('Can not connect: ' . \pg_last_error());
+                                $linea1 = filter_input(INPUT_POST,'linea1');
+                                $linea2 = filter_input(INPUT_POST,'linea2');
+                                $id_tax = filter_input(INPUT_POST,'id_tax');
+                                $tel = filter_input(INPUT_POST,'tel');
+                                $dir = filter_input(INPUT_POST,'dir');
+                                $vol = filter_input(INPUT_POST,'vol');
+                                $moneda = filter_input(INPUT_POST,'moneda');
+                                $footer = filter_input(INPUT_POST,'footer');   
+                                $query = "UPDATE recibo SET linea1 = '$linea1', linea2 = '$linea2', id_tax = '$id_tax', tel = '$tel', dir = '$dir', vol = '$vol', moneda = '$moneda',  footer = '$footer'";
+                                $result = pg_query($query) or die('The consult fail: ' . \pg_last_error());
+                                // Liberando el conjunto de resultados
+                                pg_free_result($result);
+                                // Cerrando la conexi�n
+                                pg_close($dbconn);
+                                echo "Gracias, hemos recibido su información.\n"; 
+                            }
                             ?> </p>
 							                            									
 			</div>

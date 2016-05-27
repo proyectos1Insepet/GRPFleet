@@ -4,7 +4,7 @@ CREATE TABLE transaccion(
 	);
 
 CREATE TABLE producto(
-	id_producto INT PRIMARY KEY,
+	id_producto SERIAL PRIMARY KEY,
 	descripcion VARCHAR (50)
 	);
 
@@ -49,6 +49,7 @@ CREATE TABLE restricciones(
 	);
 
 CREATE TABLE recibo(
+        logo   VARCHAR (25),
 	linea1 VARCHAR(255),
 	linea2 VARCHAR(255),
 	id_tax VARCHAR (30),
@@ -96,4 +97,10 @@ CREATE TABLE venta_detalle(
 	Fk_id_corte SERIAL references corte (Pk_id_corte),
 	dinero FLOAT,
 	volumen FLOAT
+	);
+	
+CREATE TABLE usuario(
+	Pk_id_user SERIAL PRIMARY KEY ,
+	usuario VARCHAR(20),
+	pass VARCHAR(255)
 	);

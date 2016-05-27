@@ -1,3 +1,27 @@
+<?php
+	session_start();
+	 
+	if (isset($_SESSION['loggedin']) & $_SESSION['loggedin'] == true)
+	{
+	 
+        }
+        else
+        {
+	echo "Esta pagina es solo para usuarios registrados.<br>";
+	echo "<a href='login.php'>Login Here!</a>";
+	 
+	exit;
+	}
+	$now = time(); // checking the time now when home page starts
+	 
+	if($now > $_SESSION['expire'])
+	{
+	session_destroy();
+	echo "Su sesion a terminado, <a href='login.php'>
+	      Necesita Hacer Login</a>";
+	exit;
+	}
+?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -150,8 +174,7 @@
                                                                                 $result2 = pg_query($sql)or die('Query error: ' . \pg_last_error());                                                                                 
                                                                                 if($result2){
                                                                                     if(pg_field_is_null($result2, 0, "id_cliente")==0){
-                                                                                        $row2 = pg_fetch_assoc($result2);   
-                                                                                        $row3 = pg_fetch_assoc($result3);                                                                                                                                                                                
+                                                                                        $row2 = pg_fetch_assoc($result2);                                                                                                                                                                                                                                                                          
                                                                                         echo "<td background-color:#F5D0A9;>"." ".$row2['nombre']."</td> ";
                                                                                         echo "<td background-color:#F5D0A9;>".$row2['fecha']." </td>";
                                                                                         echo "<td background-color:#F5D0A9;>".$row2['descripcion']." </td>";
@@ -162,7 +185,8 @@
                                                                                         }else {echo '<br>Sin resultados.';}
                                                                                     }                                                                                                                                                                                          
                                                                                 ?> 
-                                                                            <thead>
+                                                                            
+                                                                        <thead>
 										<tr>
                                                                                         
                                                                                         <th>Cara</th>
@@ -184,11 +208,10 @@
                                                                                 $result4 = pg_query($sql3)or die('Query error: ' . \pg_last_error());                                                                                 
                                                                                 if($result4){
                                                                                     if(pg_field_is_null($result2, 0, "id_cliente")==0){
-                                                                                        $row2 = pg_fetch_assoc($result4);   
-                                                                                        $row3 = pg_fetch_assoc($result5);                                                                                       
-                                                                                        echo "<td background-color:#F5D0A9;>".$row2['cara']." </td>";
-                                                                                        echo "<td background-color:#F5D0A9;>".$row2['manguera']." </td>";                                                                                        
-                                                                                        echo "<td background-color:#F5D0A9;>".$row2['descripcion']." </td>";
+                                                                                        $row4 = pg_fetch_assoc($result4);                                                                                         
+                                                                                        echo "<td background-color:#F5D0A9;>".$row4['cara']." </td>";
+                                                                                        echo "<td background-color:#F5D0A9;>".$row4['manguera']." </td>";                                                                                        
+                                                                                        echo "<td background-color:#F5D0A9;>".$row4['descripcion']." </td>";
                                                                                         
                                                                                                    
                                                                                         echo "</tr>";  
@@ -217,11 +240,11 @@
                                                                                 $result7 = pg_query($sql2)or die('Query error: ' . \pg_last_error());
                                                                                 if($result2){
                                                                                     if(pg_field_is_null($result2, 0, "id_cliente")==0){
-                                                                                        $row2 = pg_fetch_assoc($result6);   
-                                                                                        $row3 = pg_fetch_assoc($result7);                                                                                                                                                                                
-                                                                                        echo "<td background-color:#F5D0A9;>".$row2['volumen']." ".$row3['vol']."</td>";
-                                                                                        echo "<td background-color:#F5D0A9;>".$row3['moneda']." ".$row2['dinero']." </td>";
-                                                                                        echo "<td background-color:#F5D0A9;>".$row2['placa']." </td>"; 
+                                                                                        $row6 = pg_fetch_assoc($result6);   
+                                                                                        $row7 = pg_fetch_assoc($result7);                                                                                                                                                                                
+                                                                                        echo "<td background-color:#F5D0A9;>".$row6['volumen']." ".$row7['vol']."</td>";
+                                                                                        echo "<td background-color:#F5D0A9;>".$row7['moneda']." ".$row6['dinero']." </td>";
+                                                                                        echo "<td background-color:#F5D0A9;>".$row6['placa']." </td>"; 
                                                                                         
                                                                                                    
                                                                                         echo "</tr>";  
@@ -243,11 +266,18 @@
 									
 										
 								</table>
-                                                    </div>	
+                                                    </div>
+                                                    
                                                 </div>
 						<!-- END BORDERED TABLE PORTLET-->
-					</div>
+					</div>                                            
 				</div>
+        
+            <?php
+            echo '<a  target =_self href="pdf.php?fecha='.$row2['fecha'].'&n_venta='.$num_venta.'&nombre='.$row2['nombre'].'&transaccion='.$row2['descripcion'].'&producto='.$row4['descripcion'].'&cantidad='.$row6['volumen'].'&valor='.$row6['dinero'].'">'.'IMPRESIÓN</a>'."</td> ";
+            ?>
+            <input type="image" name="enviar"  src="/assets/img/pdf.png" alt="impresion" width="60px" height="60px" />
+        
     </div>
     <!-- END CONTAINER -->
 

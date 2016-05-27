@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+	session_start();
+	 
+	if (isset($_SESSION['loggedin']) & $_SESSION['loggedin'] == true)
+	{
+	 
+        }
+        else
+        {
+	echo "Esta pagina es solo para usuarios registrados.<br>";
+	echo "<a href='login.php'>Login Here!</a>";
+	 
+	exit;
+	}
+	$now = time(); // checking the time now when home page starts
+	 
+	if($now > $_SESSION['expire'])
+	{
+	session_destroy();
+	echo "Su sesion a terminado, <a href='login.php'>
+	      Necesita Hacer Login</a>";
+	exit;
+	}
+?><!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
@@ -69,7 +92,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="../index.php">Spanish</a></li>
-                                    <li><a href="en/index.php">English</a></li>                                    
+                                    <li><a href="index.php">English</a></li>                                    
                                 </ul>
                             </li>
                         </ul>

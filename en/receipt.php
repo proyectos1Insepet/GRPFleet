@@ -1,3 +1,25 @@
+<?php
+	session_start();	 
+	if (isset($_SESSION['loggedin']) & $_SESSION['loggedin'] == true)
+	{	 
+        }
+        else
+        {
+	echo "Esta pagina es solo para usuarios registrados.<br>";
+	echo "<a href='login.php'>Login Here!</a>";
+	 
+	exit;
+	}
+	$now = time(); // checking the time now when home page starts
+	 
+	if($now > $_SESSION['expire'])
+	{
+	session_destroy();
+	echo "Su sesion a terminado, <a href='login.php'>
+	      Necesita Hacer Login</a>";
+	exit;
+	}
+?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -69,7 +91,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="../index.php">Spanish</a></li>
-                                    <li><a href="en/index.php">English</a></li>                                    
+                                    <li><a href="index.php">English</a></li>                                    
                                 </ul>
                             </li>
                         </ul>
@@ -86,7 +108,7 @@
     <div class="row-fluid breadcrumbs margin-bottom-40">
         <div class="container">
             <div class="span4">
-                <h1>Recaipt setup</h1>
+                <h1>Receipt setup</h1>
             </div>
             <div class="span8">
                 <ul class="pull-right breadcrumb">
@@ -134,7 +156,18 @@
                                             <input input type="submit" name="enviar" value="Send"  class="btn black"  />
 					</div>
 				    </div>
-                            </form>					
+                            </form>
+                            <form class="form-horizontal" name="subirImg" enctype="multipart/form-data" method="post" action="">				
+				<div class="control-group">				    
+                                    <div class="controls">					                                        
+                                        <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+                                        <input type="file" name="imagen" id="imagen" class="btn"/><i class="icon-plus"></i>
+                                    </div>                                    								                                    
+					<div class="controls">                                            
+                                            <input type="submit" name="subirBtn" id="subirBtn" value="Ingresar" class="btn green"/> 
+					</div>
+				    </div>
+                            </form>
 			</div>
                         
                         
@@ -142,6 +175,12 @@
 				
 			</div>
                         <p><?php 
+                                if (filter_input(INPUT_POST,'subirBtn')) {
+                                    include_once("../class_imgUpldr.php"); 
+                                    $subir = new imgUpldr;
+                                    // Inicializamos
+                                    $subir->init($_FILES['imagen']);
+                                }
                                 if (filter_input(INPUT_POST,'enviar')) {   
                                     $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
                                     or die('Can not connect: ' . \pg_last_error());
