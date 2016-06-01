@@ -93,6 +93,7 @@
                             <li><a href="customer.php">Clientes</a></li>
                             <li><a href="sales.php">Ventas</a></li>
                             <li><a href="setup.php">Configuracion</a></li>  
+                            <li><a href="report.php">Reporte</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
                                     Idioma
@@ -117,13 +118,13 @@
     <div class="row-fluid breadcrumbs margin-bottom-40">
         <div class="container">
             <div class="span4">
-                <h1>Ventas en el sistema</h1>
+                <h1>Ventas</h1>
             </div>
             <div class="span8">
                 <ul class="pull-right breadcrumb">
-                    <li><a href="index.php">Inicio</a> <span class="divider">/</span></li>
-                    <li class="active">Ventas <span class="divider"></span></li>
-                
+                    <li><a href="index.php">Inicio</a> <span class="divider">/</span></li>                    
+                    <li class="active">Ventas</li>
+                    
                 </ul>
             </div>
         </div>
@@ -146,7 +147,7 @@
 			    </div>
                     </div>
                         <?php
-                            $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                             or die('Can not connect: ' . \pg_last_error());
                             $query = "SELECT  MAX (id) FROM venta";
                             $result = pg_query($query) or die('Query error: ' . \pg_last_error()); 

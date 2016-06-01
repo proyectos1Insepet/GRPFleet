@@ -87,6 +87,7 @@
                             <li><a href="customer.php">Clientes</a></li>
                             <li><a href="sales.php">Ventas</a></li>
                             <li><a href="setup.php">Configuracion</a></li> 
+                            <li><a href="report.php">Reporte</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
                                     Idioma
@@ -140,7 +141,7 @@
                                     <div class="controls">
 					<p>
                                         <?php
-                                                $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                                 or die('Can not connect: ' . \pg_last_error());
                                                 $query = "SELECT id_vehiculo,placa FROM vehiculo";
                                                 $result = pg_query($query) or die('Query error: ' . \pg_last_error());
@@ -200,7 +201,7 @@
                        <p>
                         <?php 
                                         if (filter_input(INPUT_POST,'enviar')) {   
-                                            $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                             or die('Can not connect: ' . \pg_last_error());                                                                                
                                             $vehiculo = filter_input(INPUT_POST,'select1');                                    
                                             $producto = filter_input(INPUT_POST,'select2');

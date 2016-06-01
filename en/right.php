@@ -5,7 +5,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>Metronic Frotnend | Login Accepted</title>
+    <title>GRPFleet| Login Accepted</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -108,7 +108,7 @@
                 </blockquote>                                                
                  <p><?php 
             if (filter_input(INPUT_POST,'enviar')) {   
-                $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                 or die('Can not connect: ' . \pg_last_error());                                                                                
                 $usuario = filter_input(INPUT_POST,'username');                                    
                 $clave = md5(filter_input(INPUT_POST,'password'));
@@ -151,23 +151,7 @@
                         </div>
                     </div>
                 </div>                            
-                <!-- END BLOG TALKS -->
-
-                <!-- BEGIN BLOG PHOTOS STREAM -->
-                <div class="blog-photo-stream margin-bottom-20">
-                    <h2>Photos Stream</h2>
-                    <ul class="unstyled">
-                        <li><a href="#"><img src="assets/img/people/img5-small.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="assets/img/works/img1.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="assets/img/people/img4-large.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="assets/img/works/img6.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="assets/img/pics/img1-large.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="assets/img/pics/img2-large.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="assets/img/works/img3.jpg" alt=""></a></li>
-                        <li><a href="#"><img src="assets/img/people/img2-large.jpg" alt=""></a></li>
-                    </ul>                    
-                </div>
-                <!-- END BLOG PHOTOS STREAM -->
+                <!-- END BLOG TALKS -->              
 
                 <!-- BEGIN BLOG TAGS -->
                 <div class="blog-tags margin-bottom-20">

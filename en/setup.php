@@ -85,7 +85,8 @@
                             </li>
                             <li><a href="customer.php">Customer</a></li>
                             <li><a href="sales.php">Sales</a></li>
-                            <li><a href="setup.php">Setup</a></li> 
+                            <li><a href="setup.php">Setup</a></li>
+                            <li><a href="report.php">Report</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
                                     Language

@@ -15,7 +15,7 @@ class PDF extends FPDF
 // Cabecera de página
 function Header()
 {
-    $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+    $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                 or die('Can not connect: ' . \pg_last_error());    
     $query = "SELECT logo, linea1,linea2, id_tax, tel, dir FROM recibo";
     $result = pg_query($query) or die('The consult fail: ' . \pg_last_error());
@@ -51,7 +51,7 @@ function Header()
  //Pie de página
 function Footer()
 {
-    $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+    $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                 or die('Can not connect: ' . \pg_last_error());    
     $query = "SELECT footer FROM recibo";
     $result = pg_query($query) or die('The consult fail: ' . \pg_last_error());
@@ -76,7 +76,7 @@ function Footer()
 }
 
 // Creación del objeto de la clase heredada
- $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+ $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                 or die('Can not connect: ' . \pg_last_error());    
  $query = "SELECT moneda,vol FROM recibo";
  $result = pg_query($query) or die('The consult fail: ' . \pg_last_error());

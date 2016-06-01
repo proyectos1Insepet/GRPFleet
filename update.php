@@ -86,6 +86,7 @@
                             <li><a href="customer.php">Clientes</a></li>
                             <li><a href="sales.php">Ventas</a></li>
                             <li><a href="setup.php">Configuracion</a></li> 
+                            <li><a href="report.php">Reporte</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
                                     Idioma
@@ -140,7 +141,7 @@
                                     <div class="controls">
 					<p>
                                         <?php
-                                                $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                                 or die('Can not connect: ' . \pg_last_error());
                                                 $query = "SELECT  id_cliente, nombre FROM cuenta";
                                                 $result = pg_query($query) or die('Query error: ' . \pg_last_error());
@@ -163,7 +164,7 @@
                                     <p><input name="ciudad" type="text" placeholder="Ciudad" id="field"/></p>                                    
                                     <p><input name="state" type="text" placeholder="Departamento / Provincia" id="field"/></p>
                                     <p><?php
-                                        $dbconn2 = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                        $dbconn2 = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                         or die('Can not connect: ' . \pg_last_error());
                                         $query2 = "SELECT  * FROM transaccion";
                                         $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
@@ -192,7 +193,7 @@
                        <p>
                         <?php 
                             if (filter_input(INPUT_POST,'enviar')) {   
-                            $dbconn3 = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                            $dbconn3 = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                             or die('Can not connect: ' . \pg_last_error());
                             $cliente  = filter_input(INPUT_POST,'select1');
                             $linea1 = filter_input(INPUT_POST,'linea1');                                    

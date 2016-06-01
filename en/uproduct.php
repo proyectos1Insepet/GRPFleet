@@ -86,6 +86,7 @@
                             <li><a href="customer.php">Customer</a></li>
                             <li><a href="sales.php">Sales</a></li>
                             <li><a href="setup.php">Setup</a></li> 
+                            <li><a href="report.php">Report</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
                                     Language
@@ -140,7 +141,7 @@
                                     <div class="controls">
 					<p>
                                             <?php
-                                                $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                                 or die('Can not connect: ' . \pg_last_error());
                                                 $query = "SELECT  id_producto, descripcion FROM producto";
                                                 $result = pg_query($query) or die('Query error: ' . \pg_last_error());
@@ -169,7 +170,7 @@
 			</div>
                         <p><?php 
                                 if (filter_input(INPUT_POST,'enviar')) {   
-                                    $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                    $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                     or die('Can not connect: ' . \pg_last_error());
                                     $producto1 = filter_input(INPUT_POST,'producto1');
                                     $id = filter_input(INPUT_POST,'select1');                                                                     

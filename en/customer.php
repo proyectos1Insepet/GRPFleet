@@ -86,6 +86,7 @@
                             <li><a href="customer.php">Customer</a></li>
                             <li><a href="sales.php">Sales</a></li>
                             <li><a href="setup.php">Setup</a></li> 
+                            <li><a href="report.php">Report</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
                                     Language
@@ -150,7 +151,7 @@
                                     <p><input name="ciudad" type="text" placeholder="City" id="field" class="help-inline"/></p>                                    
                                     <p><input name="state" type="text" placeholder="State" id="field"/></p>
                                     <p><?php
-                                                $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                                 or die('Can not connect: ' . \pg_last_error());
                                                 $query = "SELECT  * FROM transaccion";
                                                 $result = pg_query($query) or die('Query error: ' . \pg_last_error());
@@ -179,7 +180,7 @@
                        <p>
                         <?php 
                                         if (filter_input(INPUT_POST,'enviar')) {   
-                                            $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                             or die('Can not connect: ' . \pg_last_error());
                                             $query1 = "SELECT  MAX(id_cliente) FROM cuenta";
                                             $result1 = pg_query($query1) or die('Query error: ' . \pg_last_error());

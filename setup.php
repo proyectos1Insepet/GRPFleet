@@ -86,6 +86,7 @@
                             <li><a href="customer.php">Clientes</a></li>
                             <li><a href="sales.php">Ventas</a></li>
                             <li><a href="setup.php">Configuracion</a></li> 
+                            <li><a href="report.php">Reporte</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
                                     Idioma

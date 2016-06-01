@@ -117,7 +117,7 @@ class imgUpldr {
 		}
 		// Asignamos el nombre a la imagen según la fecha en formato aaaammddhhiiss y la extensión
 		$this->_name = date("Ymdh").".".$this->_ext;                
-                $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                 or die('Can not connect: ' . \pg_last_error());
                                 
                 $query = "UPDATE recibo SET logo= '$this->_name'";

@@ -25,11 +25,11 @@
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if !IE]><!--> <html lang="es"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GRP700 Fleet:: Vehicles</title>
+    <title>GRP 700 X Fleet | Reporte de ventas</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -39,17 +39,24 @@
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style-metro.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/style2.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="assets/plugins/fancybox/source/jquery.fancybox.css">               
     <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="assets/css/pages/prices.css" rel="stylesheet" type="text/css"/>
+    <!-- END PAGE LEVEL STYLES -->    
     <link href="assets/css/themes/red.css" rel="stylesheet" type="text/css" id="style_color"/>    
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />          
 </head>
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body>	  
+<body>
+	<!-- BEGIN STYLE CUSTOMIZER -->
+	
+	<!-- END BEGIN STYLE CUSTOMIZER -->    
 
     <!-- BEGIN HEADER -->
      <div class="front-header">
@@ -85,7 +92,7 @@
                             </li>
                             <li><a href="customer.php">Customer</a></li>
                             <li><a href="sales.php">Sales</a></li>
-                            <li><a href="setup.php">Setup</a></li>
+                            <li><a href="setup.php">Setup</a></li> 
                             <li><a href="report.php">Report</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
@@ -100,7 +107,7 @@
                         </ul>
                                                   
                     </div>
-                    <!-- END TOP NAVIGATION MENU -->
+                    <!-- BEGIN TOP NAVIGATION MENU -->
                 </div>
             </div>
         </div>                   
@@ -111,13 +118,14 @@
     <div class="row-fluid breadcrumbs margin-bottom-40">
         <div class="container">
             <div class="span4">
-                <h1>Vehicle setup</h1>
+                <h1>System Sales</h1>
             </div>
             <div class="span8">
                 <ul class="pull-right breadcrumb">
-                    <li><a href="index.php">Home</a> <span class="divider">/</span></li>                    
-                    <li><a href="setup.php">Setup</a> <span class="divider">/</span></li>
-                    <li class="active">Vehicle</li>
+                    <li><a href="index.php">Home</a> <span class="divider">/</span></li>
+                    <li><a href="report.php">Report</a> <span class="divider">/</span></li>
+                    <li class="active">Detail</li>
+                
                 </ul>
             </div>
         </div>
@@ -126,97 +134,73 @@
 
     <!-- BEGIN CONTAINER -->   
     <div class="container min-hight">
-
-		<!-- ROW 1 -->
-		<div class="row-fluid margin-bottom-40">
-			<!-- COLUMN 1 -->
-                    <div class="span6">
-			<h3>Vehicles in an account</h3>
-			<!-- BEGIN FORM-->
-                        <div class="margin-bottom-30">
-                         
-                            <form class="form-horizontal" action="#" method="post">
-				<div class="control-group">
-                                    <label class="control-label" for="inputEmail">Product</label>
-                                    <div class="controls">
-					<p>
-                                            <?php
-                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                                or die('Can not connect: ' . \pg_last_error());
-                                                $query = "SELECT  id_cliente, nombre FROM cuenta";
-                                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                                echo "<select name='select1' id='field' class='small m-wrap'>";
-                                                while($fila=  pg_fetch_array($result)){
-                                                    echo "<option value=".$fila['id_cliente'].">".$fila['nombre']."</option>";
-                                                }
-                                                echo "</select>";
-                                        ?>
-                                        </p> 
-                                        <p><input name="placa" type="text"  placeholder="Plate" id="field"  /></p>
-                                        <p><input name="serial" type="text" placeholder="Serial" id="field" /></p>
-                                        <p><input name="tanque" type="text" placeholder="Tank size" id="field" /></p>
-                                        <p><input name="marca" type="text" placeholder="Brand" id="field"/></p>  
-                                        <p><input type="checkbox" name="estado" value="1"> - Active</input></p>                                    
-                                        
-				    </div>
-				</div>				
-                                    <div class="control-group">
-					<div class="controls">                                            
-                                            <input input type="submit" name="enviar" value="Send"  class="btn black"  />
-					</div>
-				    </div>
-                            </form>
-                            
-			</div>
-                        
-                        
-			<!-- END FORM-->  								
-				
-			</div>
-                        <p><a class="btn green" href="restrict.php"/>Next</a><br></p>
-                        <p><?php 
-                                        if (filter_input(INPUT_POST,'enviar')) {   
-                                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                            or die('Can not connect: ' . \pg_last_error());                                                                                
-                                            $cliente = filter_input(INPUT_POST,'select1');                                    
-                                            $placa = filter_input(INPUT_POST,'placa');
-                                            $serial = filter_input(INPUT_POST,'serial');
-                                            $tanque = filter_input(INPUT_POST,'tanque');
-                                            $marca = filter_input(INPUT_POST,'marca');   
-                                            $estado = filter_input(INPUT_POST,'estado');                                            
-                                            if ($estado == "1" ){
-                                                $activo = 1;
-                                            }else{
-                                                $activo = 0;
+        <div class="row-fluid">		        
+            <div class="span6">
+		<!-- BEGIN BORDERED TABLE PORTLET-->
+		<div class="portlet box red">
+                    <div class="portlet-title">
+                        <div class="caption"><i class="icon-dashboard"></i><?php 
+                        $cliente = filter_input(INPUT_GET, 'cliente');
+                        echo "$cliente"?></div>
+                            <div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+				<a href="#portlet-config" data-toggle="modal" class="config"></a>
+				<a href="javascript:;" class="reload"></a>
+				<a href="javascript:;" class="remove"></a>
+			    </div>
+                    </div>
+                        <?php
+                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+                            or die('Can not connect: ' . \pg_last_error());                            
+                        ?>
+			<div class="portlet-body">
+                            <table class="table table-hover">
+				<thead>
+                                    <tr>
+					<th>Fecha</th>
+                                        <th>Valor</th>
+                                        <th>Cantidad</th>
+                                    </tr>
+				</thead>
+                                <tbody>
+                                    <?php   
+                                        echo "<tr>";
+                                            $cliente = filter_input(INPUT_GET, 'cliente');
+                                            $sql = "SELECT id_cliente FROM cuenta WHERE nombre ='$cliente';";                                            
+                                            $result = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
+                                            $row = pg_fetch_row($result);
+                                            $sql2 = "SELECT  v.fecha, v.dinero, v.volumen,c.nombre FROM venta v INNER JOIN cuenta c ON c.id_cliente = v.id_cliente  WHERE v.id_cliente = $row[0];";                                            
+                                            $result2 = pg_query($sql2)or die('Query error: ' . \pg_last_error());                                                                                        
+                                            $row2 = pg_fetch_row($result2); 
+                                            $sql3 = "SELECT vol, moneda FROM recibo"; 
+                                            $result3 = pg_query($sql3)or die('Query error: ' . \pg_last_error());
+                                            $row3 = pg_fetch_assoc($result3);
+                                            while ($row2 = pg_fetch_row($result2)) { 
+                                                echo "<td background-color:#F5D0A9;>".$row2[0]." </td>";
+                                                echo "<td background-color:#F5D0A9;>".$row3['moneda']." ".$row2[1]." </td>";
+                                                echo "<td background-color:#F5D0A9;>".$row2[2]." ".$row3['vol']." </td>";
+                                                echo "</tr>";     
                                             }
-                                            $query1 = "SELECT  MAX(id_vehiculo) FROM vehiculo";
-                                            $result1 = pg_query($query1) or die('Query error: ' . \pg_last_error());
-                                            $row1 = pg_fetch_row($result1);
-                                            $row = $row1[0] + 1;   
-                                            $query = "INSERT INTO vehiculo  VALUES('$cliente','$row','$placa','$serial','$tanque','$activo','$marca') ";
-                                            $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                            // Liberando el conjunto de resultados
-                                            pg_free_result($result);
-                                            // Cerrando la conexi�n
-                                            pg_close($dbconn);
-                                            echo "Thanks we've received your information\n"; 
-                                        }
-                                    ?> </p>
-							                            									
+                                            ?> 									                                                                                                                                                                                                                                                                                                            
+                                                                        
+                                </tbody>
+                            </table>
 			</div>
-				
-				
-			</div>			
+		</div>
+		<!-- END BORDERED TABLE PORTLET-->
+            </div>
+	</div>        
+    </div>
+    <!-- END CONTAINER -->
 
     <!-- BEGIN FOOTER -->
-     <!-- BEGIN FOOTER -->
    <div class="front-footer">
         <div class="container">
             <div class="row-fluid">
                 
                 <div class="span4 space-mobile">
                     <!-- BEGIN CONTACTS -->                                    
-                    <h2>Contact us</h2>
+                    <h2>Contact US</h2>
                     <address class="margin-bottom-40">
                         Bogotá – Colombia <br />
                         Carrera 90 No. 17B – 75 Bodega 21 <br />

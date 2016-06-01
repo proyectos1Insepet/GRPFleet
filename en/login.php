@@ -78,7 +78,7 @@
 		<!-- END LOGIN FORM -->  
                 <?php 
             if (filter_input(INPUT_POST,'enviar')) {   
-                $dbconn = pg_connect("host=localhost dbname=grpfleet user=db_admin password='12345'")
+                $dbconn = pg_connect("host= 127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                 or die('Can not connect: ' . \pg_last_error());                                                                                
                 $usuario = filter_input(INPUT_POST,'username');                                    
                 $clave = filter_input(INPUT_POST,'password');
