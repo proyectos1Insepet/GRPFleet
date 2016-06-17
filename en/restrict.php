@@ -165,7 +165,7 @@
 				<div class="control-group">
 				    <label class="control-label" for="inputPassword"></label>
                                     <div class="controls">					                                        
-                                    
+                                    <p><input name="ppu" type="text" placeholder="PPU" id="ppu" class="help-inline"/></p> 
                                     <p><input name="vol" type="text" placeholder="Assigned vol" id="vol" class="help-inline"/></p>  
                                     <p><input name="din" type="text" placeholder="Assigned money" id="din" class="help-inline"/></p>
                                     <p><input name="mes" type="text" placeholder="Visit per month" id="mes" class="help-inline" /></p>                                      
@@ -209,6 +209,8 @@
                                             $mes = filter_input(INPUT_POST,'mes');   
                                             $semana = filter_input(INPUT_POST,'semana');
                                             $dia = filter_input(INPUT_POST,'dia');
+											$precio = filter_input(INPUT_POST,'ppu');
+                                            $ppu = sprintf("%05s",$precio);
                                             $volmes = round(($vol / $mes),2);
                                             $volsemana = round(($volmes / $semana),2);
                                             $voldia = round(($volsemana / $dia),2);
@@ -218,7 +220,7 @@
                                             
                                             
                                             
-                                            $query3 = "INSERT INTO restricciones  VALUES('$vehiculo','$producto','$dia','$semana','$mes','$voldia','$volsemana','$volmes','$dindia','$dinsemana','$dinmes') ";
+                                            $query3 = "INSERT INTO restricciones  VALUES('$vehiculo','$producto','$dia','$semana','$mes','$voldia','$volsemana','$volmes','$dindia','$dinsemana','$dinmes','$ppu') ";
                                             $result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
                                             // Liberando el conjunto de resultados
                                             pg_free_result($result3);

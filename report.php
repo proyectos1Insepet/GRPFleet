@@ -181,6 +181,58 @@
                             </table>
 			</div>
 		</div>
+                
+                <div class="portlet box green">
+                    <div class="portlet-title">
+			<div class="caption"><i class="icon-dashboard"></i>Historico de turnos</div>
+                            <div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+				<a href="#portlet-config" data-toggle="modal" class="config"></a>
+				<a href="javascript:;" class="reload"></a>
+				<a href="javascript:;" class="remove"></a>
+			    </div>
+                    </div>
+                        
+			<div class="portlet-body">
+                            <table class="table table-hover">
+				<thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Vol 1</th>
+                                        <th>Din 1</th>
+                                        <th>Vol 2</th>
+                                        <th>Din 2</th>
+                                        <th>Vol 3</th>
+                                        <th>Din 3</th>
+                                        
+                                    </tr>
+				</thead>
+                                <tbody>
+                                    <?php   
+                                        echo "<tr>";
+                                        
+                                            $query = "SELECT pk_id_corte,volventat,t_electronico,volventat2,t_electronico2,volventat3,t_electronico3 FROM corte;";
+                                            $query2 = "select vol, moneda from recibo";                                            
+                                            $res = pg_query($query)or die('Query error: ' . \pg_last_error()); 
+                                            $res2 = pg_query($query2)or die('Query error: ' . \pg_last_error());
+                                            $fila = pg_fetch_assoc($res2); 
+                                            $array = pg_fetch_all($res);                                            
+                                            while ($row = pg_fetch_row($res)) { 
+                                                echo "<td background-color:#F5D0A9;>".$row[0]."</td> ";                                                
+                                                echo "<td background-color:#F5D0A9;>".$row[1]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[2]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[3]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[4]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[5]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[6]."</td> ";                                                
+                                                echo "</tr>";     
+                                            }
+                                            ?> 									                                                                                                                                                                                                                                                                                                            
+                                                                        
+                                </tbody>
+                            </table>
+			</div>
+		</div>
 		<!-- END BORDERED TABLE PORTLET-->
             </div>
 	</div>        

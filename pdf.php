@@ -26,6 +26,7 @@ function Header()
      // Logo
     $this->Image($img,25,10,33);
     $this->Ln(25);
+    $this->Ln(4);
     $this->SetFont('Arial','',10);
     $this->Cell(0,5,'==============================',0,0,'C');
     $this->Ln(5);

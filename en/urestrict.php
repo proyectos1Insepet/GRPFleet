@@ -165,20 +165,20 @@
 				<div class="control-group">
 				    <label class="control-label" for="inputPassword"></label>
                                     <div class="controls">					                                        
+                                    <p><input name="ppu" type="text" placeholder="PPU" id="ppu" class="help-inline"/></p>  
+                                    <p><input name="vol" type="text" placeholder="Assigned volume" id="vol" class="help-inline"/></p>  
+                                    <p><input name="din" type="text" placeholder="Assigned money" id="din" class="help-inline"/></p>
+                                    <p><input name="mes" type="text" placeholder="Visits per month" id="mes" class="help-inline" /></p>                                      
+                                    <p><input name="semana" type="text" placeholder="Visits per week" id="semana" class="help-inline"/></p>
+                                    <p><input name="dia" type="text"  placeholder="Visits per day" id="dia" class="campo"  /></p>
                                     
-                                    <p><input name="vol" type="text" placeholder="Volumen asignado" id="vol" class="help-inline"/></p>  
-                                    <p><input name="din" type="text" placeholder="Dinero asignado" id="din" class="help-inline"/></p>
-                                    <p><input name="mes" type="text" placeholder="Visitas por mes" id="mes" class="help-inline" /></p>                                      
-                                    <p><input name="semana" type="text" placeholder="Visitas por semana" id="semana" class="help-inline"/></p>
-                                    <p><input name="dia" type="text"  placeholder="Visitas por día" id="dia" class="campo"  /></p>
+                                    <p><input name="cal_vol_mon" type="text" placeholder="Volume per month" id="cal_vol_mon" class="help-inline" disabled="disabled"/></p>      
+                                    <p><input name="cal_vol_week" type="text" placeholder="Volume per week" id="cal_vol_week" class="help-inline" disabled="disabled"/></p> 
+                                    <p><input name="cal_vol_day" type="text" placeholder="Volume per day" id="cal_vol_day" class="help-inline" disabled="disabled"/></p> 
                                     
-                                    <p><input name="cal_vol_mon" type="text" placeholder="Volumen por mes" id="cal_vol_mon" class="help-inline" disabled="disabled"/></p>      
-                                    <p><input name="cal_vol_week" type="text" placeholder="Volumen por semana" id="cal_vol_week" class="help-inline" disabled="disabled"/></p> 
-                                    <p><input name="cal_vol_day" type="text" placeholder="Volume por día" id="cal_vol_day" class="help-inline" disabled="disabled"/></p> 
-                                    
-                                    <p><input name="cal_din_mon" type="text" placeholder="Dinero por mes" id="cal_din_mon" class="help-inline" disabled="disabled"/></p>      
-                                    <p><input name="cal_din_week" type="text" placeholder="Dinero por semana" id="cal_din_week" class="help-inline" disabled="disabled"/></p> 
-                                    <p><input name="cal_din_day" type="text" placeholder="Dinero por día" id="cal_din_day" class="help-inline" disabled="disabled"/></p> 
+                                    <p><input name="cal_din_mon" type="text" placeholder="Money per month" id="cal_din_mon" class="help-inline" disabled="disabled"/></p>      
+                                    <p><input name="cal_din_week" type="text" placeholder="Money per week" id="cal_din_week" class="help-inline" disabled="disabled"/></p> 
+                                    <p><input name="cal_din_day" type="text" placeholder="Money per day" id="cal_din_day" class="help-inline" disabled="disabled"/></p> 
                                     
                                     
                                     
@@ -186,8 +186,8 @@
 				</div>
                                     <div class="control-group">
 					<div class="controls">                                            
-                                            <p><input type="button" id="calcular" value="Calcular" class="btn red"/><br/></p>
-                                            <input input type="submit" name="enviar" value="Finalizar"  class="btn black"  />
+                                            <p><input type="button" id="calcular" value="Calculate" class="btn red"/><br/></p>
+                                            <input input type="submit" name="enviar" value="Finish"  class="btn black"  />
 					</div>
 				    </div>
                             </form>					
@@ -197,7 +197,7 @@
 			<!-- END FORM-->  								
 				
 			</div> 
-                        <p><a class="btn green" href="uvehicle.php"/>Actualizar estado</a><br></p>
+                        <p><a class="btn green" href="uvehicle.php"/>Update state</a><br></p>
                         <p>
                         <?php 
                                         if (filter_input(INPUT_POST,'enviar')) {   
@@ -210,6 +210,8 @@
                                             $mes = filter_input(INPUT_POST,'mes');   
                                             $semana = filter_input(INPUT_POST,'semana');
                                             $dia = filter_input(INPUT_POST,'dia');
+											$precio = filter_input(INPUT_POST,'ppu');
+                                            $ppu = sprintf("%05s",$precio);
                                             $volmes = round(($vol / $mes),2);
                                             $volsemana = round(($volmes / $semana),2);
                                             $voldia = round(($volsemana / $dia),2);
@@ -219,7 +221,7 @@
                                             
                                             
                                             
-                                            $query3 = "UPDATE restricciones SET id_producto ='$producto', visitadia = '$dia', visitasemana ='$semana', visitames = '$mes', volvisitadia = '$voldia', volvisitasemana = '$volsemana', volvisitames ='$volmes', dinvisitadia ='$dindia', dinvisitasemana = '$dinsemana', dinvisitames = '$dinmes' WHERE id_vehiculo ='$vehiculo' ";
+                                            $query3 = "UPDATE restricciones SET id_producto ='$producto', visitadia = '$dia', visitasemana ='$semana', visitames = '$mes', volvisitadia = '$voldia', volvisitasemana = '$volsemana', volvisitames ='$volmes', dinvisitadia ='$dindia', dinvisitasemana = '$dinsemana', dinvisitames = '$dinmes', ppu='$ppu' WHERE id_vehiculo ='$vehiculo' ";
                                             $result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
                                             // Liberando el conjunto de resultados
                                             pg_free_result($result3);
@@ -243,7 +245,7 @@
                 
                 <div class="span4 space-mobile">
                     <!-- BEGIN CONTACTS -->                                    
-                    <h2>Contactenos</h2>
+                    <h2>Contact Us</h2>
                     <address class="margin-bottom-40">
                         Bogotá – Colombia <br />
                         Carrera 90 No. 17B – 75 Bodega 21 <br />

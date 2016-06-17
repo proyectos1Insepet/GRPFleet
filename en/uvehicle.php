@@ -159,7 +159,8 @@
 				</div>				
                                     <div class="control-group">
 					<div class="controls">                                            
-                                            <input input type="submit" name="enviar" value="Send"  class="btn black"  />
+                                            <input input type="submit" name="enviar" value="Update"  class="btn black"  />
+                                            <input input type="submit" name="borrar" value="Delete vehicle"  class="btn black"  />
 					</div>
 				    </div>
                             </form>
@@ -191,6 +192,23 @@
                                             pg_close($dbconn2);
                                             echo "Thanks, we've received your information .\n"; 
                                         }
+										
+										if(filter_input(INPUT_POST,'borrar')){
+                                    $dbconn2 = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+                                    or die('Can not connect: ' . \pg_last_error());                                                                                
+                                    $vehiculo = filter_input(INPUT_POST,'select1');
+                                    $sql = "DELETE FROM restricciones WHERE id_vehiculo ='$vehiculo'";
+                                    $resultado = pg_query($sql) or die('Query error: ' . \pg_last_error());
+                                    $sql2 ="DELETE FROM vehiculo WHERE id_vehiculo ='$vehiculo'";
+                                    $resultado2 = pg_query($sql2) or die('Query error: ' . \pg_last_error());
+                                    // Liberando el conjunto de resultados
+                                    pg_free_result($resultado);
+                                    pg_free_result($resultado2);
+                                    // Cerrando la conexi�n
+                                    pg_close($dbconn2);
+                                    echo "Thanks, we've received your information .\n";
+                                    
+                                }
                                     ?>  </p>
 							                            									
 			</div>

@@ -177,34 +177,63 @@
 				
 			</div>
                         <p><a class="btn green" href="vehicle.php"/>Siguiente</a><br></p>
-                       <p>
+                        <p><a class="btn green" href="customerdetail.php"/>Clientes Registrados</a><br></p>
+                        
+                        <h3>Venta Privada</h3>
+                        <p>
                         <?php 
-                                        if (filter_input(INPUT_POST,'enviar')) {   
-                                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                            or die('Can not connect: ' . \pg_last_error());
-                                            $query1 = "SELECT  MAX(id_cliente) FROM cuenta";
-                                            $result1 = pg_query($query1) or die('Query error: ' . \pg_last_error());
-                                            $row1 = pg_fetch_row($result1);
-                                            $row = $row1[0] + 1;                                     
-                                            $linea1 = filter_input(INPUT_POST,'linea1');                                    
-                                            $id_tax = filter_input(INPUT_POST,'id_tax');
-                                            $tel = filter_input(INPUT_POST,'tel');
-                                            $dir = filter_input(INPUT_POST,'dir');
-                                            $ciudad = filter_input(INPUT_POST,'ciudad');   
-                                            $state = filter_input(INPUT_POST,'state');
-                                            $saldo = filter_input(INPUT_POST,'saldo');
-                                            $tipo  = filter_input(INPUT_POST,'select1');
-                                            $estado = true;
-                                            $query = "INSERT INTO cuenta (id_cliente,estado_cuenta, nombre, tax_number, direccion, telefono, ciudad, provincia, tipo_transaccion, saldo)  VALUES('$row','$estado','$linea1','$id_tax','$dir','$tel','$ciudad','$state','$tipo','$saldo') ";
-                                            $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                            // Liberando el conjunto de resultados
-                                            pg_free_result($result);
-                                            // Cerrando la conexi�n
-                                            pg_close($dbconn);
-                                            echo "Gracias, hemos recibido la información.\n"; 
-                                        }
-                                    ?>  
-                                </p>
+                            //$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+                            //or die('Can not connect: ' . \pg_last_error());
+                            if(filter_input(INPUT_POST, 'activar')){
+                                $activo = true;
+                                $query2 = "UPDATE cuenta SET estado_cuenta ='$activo' WHERE tipo_transaccion =1"; 
+                                $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
+                                pg_close($dbconn);
+                                echo "Gracias, hemos recibido la información.\n"; 
+                            }
+                            if(filter_input(INPUT_POST, 'desactivar')){
+                                $activo = 0;
+                                $query2 = "UPDATE cuenta SET estado_cuenta ='$activo' WHERE tipo_transaccion =1"; 
+                                $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
+                                pg_close($dbconn);
+                                echo "Gracias, hemos recibido la información.\n"; 
+                            }
+                        
+                            if (filter_input(INPUT_POST,'enviar')) {                                   
+                                $query1 = "SELECT  MAX(id_cliente) FROM cuenta";
+                                $result1 = pg_query($query1) or die('Query error: ' . \pg_last_error());
+                                $row1 = pg_fetch_row($result1);
+                                $row = $row1[0] + 1;                                     
+                                $linea1 = filter_input(INPUT_POST,'linea1');                                    
+                                $id_tax = filter_input(INPUT_POST,'id_tax');
+                                $tel = filter_input(INPUT_POST,'tel');
+                                $dir = filter_input(INPUT_POST,'dir');
+                                $ciudad = filter_input(INPUT_POST,'ciudad');   
+                                $state = filter_input(INPUT_POST,'state');
+                                $saldo = filter_input(INPUT_POST,'saldo');
+                                $tipo  = filter_input(INPUT_POST,'select1');
+                                $estado = true;
+                                $query = "INSERT INTO cuenta (id_cliente,estado_cuenta, nombre, tax_number, direccion, telefono, ciudad, provincia, tipo_transaccion, saldo)  VALUES('$row','$estado','$linea1','$id_tax','$dir','$tel','$ciudad','$state','$tipo','$saldo') ";
+                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
+                                // Liberando el conjunto de resultados
+                                pg_free_result($result);
+                                // Cerrando la conexi�n
+                                pg_close($dbconn);
+                                echo "Gracias, hemos recibido la información.\n"; 
+                            }
+                        ?>  
+                    </p>
+                        <form class="form-horizontal" action="#" method="post">
+                            <div class="control-group">
+				<div class="controls">                                            
+                                    <p><input input type="submit" name="activar" value="Activar"  class="btn blue"/></p>
+				</div>
+                                <div class="controls">                                            
+                                    <p><input input type="submit" name="desactivar" value="Desactivar"  class="btn blue"/></p>
+				</div>
+                            </div>                                
+                        </form>                       
+                    
 							                            									
 			</div>
 				

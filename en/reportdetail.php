@@ -7,7 +7,7 @@
         }
         else
         {
-	echo "Esta pagina es solo para usuarios registrados.<br>";
+	echo "This page is for registered users.<br>";
 	echo "<a href='login.php'>Login Here!</a>";
 	 
 	exit;
@@ -17,8 +17,8 @@
 	if($now > $_SESSION['expire'])
 	{
 	session_destroy();
-	echo "Su sesion a terminado, <a href='login.php'>
-	      Necesita Hacer Login</a>";
+	echo "Your sesion exired, <a href='login.php'>
+	      Login again</a>";
 	exit;
 	}
 ?>
@@ -29,7 +29,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GRP 700 X Fleet | Reporte de ventas</title>
+    <title>GRP 700 X Fleet | Sales report</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -157,9 +157,9 @@
                             <table class="table table-hover">
 				<thead>
                                     <tr>
-					<th>Fecha</th>
-                                        <th>Valor</th>
-                                        <th>Cantidad</th>
+					<th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Quantity</th>
                                     </tr>
 				</thead>
                                 <tbody>

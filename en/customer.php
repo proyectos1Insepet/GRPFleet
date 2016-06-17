@@ -7,7 +7,7 @@
         }
         else
         {
-	echo "Esta pagina es solo para usuarios registrados.<br>";
+	echo "This page is for registered users.<br>";
 	echo "<a href='login.php'>Login Here!</a>";
 	 
 	exit;
@@ -17,8 +17,8 @@
 	if($now > $_SESSION['expire'])
 	{
 	session_destroy();
-	echo "Su sesion a terminado, <a href='login.php'>
-	      Necesita Hacer Login</a>";
+	echo "Your sesion exired, <a href='login.php'>
+	      Login again</a>";
 	exit;
 	}
 ?>
@@ -29,7 +29,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GRP700 Fleet:: Actualizar cuenta</title>
+    <title>GRP700 Fleet:: Customer account</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -177,39 +177,67 @@
 				
 			</div>
                         <p><a class="btn green" href="vehicle.php"/>Next</a><br></p>
-                       <p>
+                        <p><a class="btn green" href="customerdetail.php"/>Registered Customer</a><br></p>
+                        <h3>Private Sales</h3>
+                        <p>
                         <?php 
-                                        if (filter_input(INPUT_POST,'enviar')) {   
-                                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                            or die('Can not connect: ' . \pg_last_error());
-                                            $query1 = "SELECT  MAX(id_cliente) FROM cuenta";
-                                            $result1 = pg_query($query1) or die('Query error: ' . \pg_last_error());
-                                            $row1 = pg_fetch_row($result1);
-                                            $row = $row1[0] + 1;                                     
-                                            $linea1 = filter_input(INPUT_POST,'linea1');                                    
-                                            $id_tax = filter_input(INPUT_POST,'id_tax');
-                                            $tel = filter_input(INPUT_POST,'tel');
-                                            $dir = filter_input(INPUT_POST,'dir');
-                                            $ciudad = filter_input(INPUT_POST,'ciudad');   
-                                            $state = filter_input(INPUT_POST,'state');
-                                            $saldo = filter_input(INPUT_POST,'saldo');
-                                            $tipo  = filter_input(INPUT_POST,'select1');
-                                            $estado = true;
-                                            $query = "INSERT INTO cuenta (id_cliente,estado_cuenta, nombre, tax_number, direccion, telefono, ciudad, provincia, tipo_transaccion, saldo)  VALUES('$row','$estado','$linea1','$id_tax','$dir','$tel','$ciudad','$state','$tipo','$saldo') ";
-                                            $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                            // Liberando el conjunto de resultados
-                                            pg_free_result($result);
-                                            // Cerrando la conexi�n
-                                            pg_close($dbconn);
-                                            echo "Thanks we received your information\n"; 
-                                        }
-                                    ?>  
-                                </p>
+                            //$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+                            //or die('Can not connect: ' . \pg_last_error());
+                            if(filter_input(INPUT_POST, 'activar')){
+                                $activo = true;
+                                $query2 = "UPDATE cuenta SET estado_cuenta ='$activo' WHERE tipo_transaccion =1"; 
+                                $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
+                                pg_close($dbconn);
+                                echo "Thanks, we`ve received your information.\n"; 
+                            }
+                            if(filter_input(INPUT_POST, 'desactivar')){
+                                $activo = 0;
+                                $query2 = "UPDATE cuenta SET estado_cuenta ='$activo' WHERE tipo_transaccion =1"; 
+                                $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
+                                pg_close($dbconn);
+                                echo "Thanks, we`ve received your information.\n"; 
+                            }
+                        
+                            if (filter_input(INPUT_POST,'enviar')) {                                   
+                                $query1 = "SELECT  MAX(id_cliente) FROM cuenta";
+                                $result1 = pg_query($query1) or die('Query error: ' . \pg_last_error());
+                                $row1 = pg_fetch_row($result1);
+                                $row = $row1[0] + 1;                                     
+                                $linea1 = filter_input(INPUT_POST,'linea1');                                    
+                                $id_tax = filter_input(INPUT_POST,'id_tax');
+                                $tel = filter_input(INPUT_POST,'tel');
+                                $dir = filter_input(INPUT_POST,'dir');
+                                $ciudad = filter_input(INPUT_POST,'ciudad');   
+                                $state = filter_input(INPUT_POST,'state');
+                                $saldo = filter_input(INPUT_POST,'saldo');
+                                $tipo  = filter_input(INPUT_POST,'select1');
+                                $estado = true;
+                                $query = "INSERT INTO cuenta (id_cliente,estado_cuenta, nombre, tax_number, direccion, telefono, ciudad, provincia, tipo_transaccion, saldo)  VALUES('$row','$estado','$linea1','$id_tax','$dir','$tel','$ciudad','$state','$tipo','$saldo') ";
+                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
+                                // Liberando el conjunto de resultados
+                                pg_free_result($result);
+                                // Cerrando la conexi�n
+                                pg_close($dbconn);
+                                echo "Thanks, we`ve received your information.\n"; 
+                            }
+                        ?>  
+                    </p>
+                        <form class="form-horizontal" action="#" method="post">
+                            <div class="control-group">
+				<div class="controls">                                            
+                                    <p><input input type="submit" name="activar" value="Activate"  class="btn blue"/></p>
+				</div>
+                                <div class="controls">                                            
+                                    <p><input input type="submit" name="desactivar" value="Deactivate"  class="btn blue"/></p>
+				</div>
+                            </div>                                
+                        </form>                       
+                    
 							                            									
 			</div>
 				
 				
-			</div>			
+			</div>					
 
     <!-- BEGIN FOOTER -->
      <!-- BEGIN FOOTER -->

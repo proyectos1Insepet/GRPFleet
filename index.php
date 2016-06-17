@@ -392,16 +392,16 @@
         <!-- BEGIN STEPS -->
         <div class="row-fluid no-space-steps margin-bottom-40">
             <div class="span4 front-steps front-step-one">
-                <h2>Goal definition</h2>
-                <p>Lorem ipsum dolor sit amet sit consectetur adipisicing eiusmod tempor.</p>
+                <h2>Definición de Objetivos</h2>
+                <p>Nos marcamos una ruta de trabajo para nuestros desarrollos.</p>
             </div>
             <div class="span4 front-steps front-step-two">
-                <h2>Analyse</h2>
-                <p>Lorem ipsum dolor sit amet sit consectetur adipisicing eiusmod tempor.</p>
+                <h2>Analizar</h2>
+                <p>Pruebas y correcciones que nos permiten mejorar.</p>
             </div>
             <div class="span4 front-steps front-step-three">
-                <h2>Implementation</h2>
-                <p>Lorem ipsum dolor sit amet sit consectetur adipisicing eiusmod tempor.</p>
+                <h2>Implementacion</h2>
+                <p>Puesta en marcha de nuestros productos y servicios.</p>
             </div>
         </div>
         <!-- END STEPS -->
@@ -416,52 +416,34 @@
                 <ul class="bxslider1 clients-list">
                     <li>
                         <a href="#">
-                            <img src="assets/img/clients/client_1_gray.png" alt="" /> 
-                            <img src="assets/img/clients/client_1.png" class="color-img" alt="" />
+                            <img src="assets/img/clients/client_1_gray.jpg" alt="" /> 
+                            <img src="assets/img/clients/client_1.jpg" class="color-img" alt="" />
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <img src="assets/img/clients/client_2_gray.png" alt="" /> 
-                            <img src="assets/img/clients/client_2.png" class="color-img" alt="" />
+                            <img src="assets/img/clients/client_2_gray.jpg" alt="" /> 
+                            <img src="assets/img/clients/client_2.jpg" class="color-img" alt="" />
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <img src="assets/img/clients/client_3_gray.png" alt="" /> 
-                            <img src="assets/img/clients/client_3.png" class="color-img" alt="" />
+                            <img src="assets/img/clients/client_3_gray.jpg" alt="" /> 
+                            <img src="assets/img/clients/client_3.jpg" class="color-img" alt="" />
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <img src="assets/img/clients/client_4_gray.png" alt="" /> 
-                            <img src="assets/img/clients/client_4.png" class="color-img" alt="" />
+                            <img src="assets/img/clients/client_4_gray.jpg" alt="" /> 
+                            <img src="assets/img/clients/client_4.jpg" class="color-img" alt="" />
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <img src="assets/img/clients/client_5_gray.png" alt="" /> 
-                            <img src="assets/img/clients/client_5.png" class="color-img" alt="" />
+                            <img src="assets/img/clients/client_5_gray.jpg" alt="" /> 
+                            <img src="assets/img/clients/client_5.jpg" class="color-img" alt="" />
                         </a>
-                    </li>
-                    <li>
-                        <a href="#">                        
-                            <img src="assets/img/clients/client_6_gray.png" alt="" /> 
-                            <img src="assets/img/clients/client_6.png" class="color-img" alt="" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="assets/img/clients/client_7_gray.png" alt="" /> 
-                            <img src="assets/img/clients/client_7.png" class="color-img" alt="" />
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">                        
-                            <img src="assets/img/clients/client_8_gray.png" alt="" /> 
-                            <img src="assets/img/clients/client_8.png" class="color-img" alt="" />
-                        </a>
-                    </li>
+                    </li>                                                          
                 </ul>                        
             </div>
         </div>

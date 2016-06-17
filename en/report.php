@@ -29,7 +29,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GRP 700 X Fleet | Sales Report</title>
+    <title>GRP 700 X Fleet | Sales report</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -79,7 +79,7 @@
                     <!-- END RESPONSIVE MENU TOGGLER -->
 
                     <!-- BEGIN TOP NAVIGATION MENU -->
-                    <div class="nav-collapse collapse">
+                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="dropdown active">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="index.php">
@@ -92,7 +92,7 @@
                             </li>
                             <li><a href="customer.php">Customer</a></li>
                             <li><a href="sales.php">Sales</a></li>
-                            <li><a href="setup.php">Setup</a></li> 
+                            <li><a href="setup.php">Setup</a></li>
                             <li><a href="report.php">Report</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
@@ -107,7 +107,7 @@
                         </ul>
                                                   
                     </div>
-                    <!-- BEGIN TOP NAVIGATION MENU -->
+                    <!-- END TOP NAVIGATION MENU -->
                 </div>
             </div>
         </div>                   
@@ -118,12 +118,12 @@
     <div class="row-fluid breadcrumbs margin-bottom-40">
         <div class="container">
             <div class="span4">
-                <h1>System Sales</h1>
+                <h1>System sales</h1>
             </div>
             <div class="span8">
                 <ul class="pull-right breadcrumb">
                     <li><a href="index.php">Home</a> <span class="divider">/</span></li>
-                    <li class="active">Report<span class="divider"></span></li>
+                    <li class="active">Report</li>
                 
                 </ul>
             </div>
@@ -138,7 +138,7 @@
 		<!-- BEGIN BORDERED TABLE PORTLET-->
 		<div class="portlet box red">
                     <div class="portlet-title">
-			<div class="caption"><i class="icon-dashboard"></i>Total sales</div>
+			<div class="caption"><i class="icon-dashboard"></i>Sales totals</div>
                             <div class="tools">
 				<a href="javascript:;" class="collapse"></a>
 				<a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -154,7 +154,7 @@
                             <table class="table table-hover">
 				<thead>
                                     <tr>
-					<th>Customer </th>
+					<th>Customer</th>
                                         <th>Amount</th>
                                         <th>Quantity</th>
                                     </tr>
@@ -181,6 +181,58 @@
                             </table>
 			</div>
 		</div>
+                
+                <div class="portlet box green">
+                    <div class="portlet-title">
+			<div class="caption"><i class="icon-dashboard"></i>Historical Shifts</div>
+                            <div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+				<a href="#portlet-config" data-toggle="modal" class="config"></a>
+				<a href="javascript:;" class="reload"></a>
+				<a href="javascript:;" class="remove"></a>
+			    </div>
+                    </div>
+                        
+			<div class="portlet-body">
+                            <table class="table table-hover">
+				<thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Vol 1</th>
+                                        <th>Money 1</th>
+                                        <th>Vol 2</th>
+                                        <th>Money 2</th>
+                                        <th>Vol 3</th>
+                                        <th>Money 3</th>
+                                        
+                                    </tr>
+				</thead>
+                                <tbody>
+                                    <?php   
+                                        echo "<tr>";
+                                        
+                                            $query = "SELECT pk_id_corte,volventat,t_electronico,volventat2,t_electronico2,volventat3,t_electronico3 FROM corte;";
+                                            $query2 = "select vol, moneda from recibo";                                            
+                                            $res = pg_query($query)or die('Query error: ' . \pg_last_error()); 
+                                            $res2 = pg_query($query2)or die('Query error: ' . \pg_last_error());
+                                            $fila = pg_fetch_assoc($res2); 
+                                            $array = pg_fetch_all($res);                                            
+                                            while ($row = pg_fetch_row($res)) { 
+                                                echo "<td background-color:#F5D0A9;>".$row[0]."</td> ";                                                
+                                                echo "<td background-color:#F5D0A9;>".$row[1]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[2]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[3]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[4]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[5]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[6]."</td> ";                                                
+                                                echo "</tr>";     
+                                            }
+                                            ?> 									                                                                                                                                                                                                                                                                                                            
+                                                                        
+                                </tbody>
+                            </table>
+			</div>
+		</div>
 		<!-- END BORDERED TABLE PORTLET-->
             </div>
 	</div>        
@@ -194,7 +246,7 @@
                 
                 <div class="span4 space-mobile">
                     <!-- BEGIN CONTACTS -->                                    
-                    <h2>Contact US</h2>
+                    <h2>Contactenos</h2>
                     <address class="margin-bottom-40">
                         Bogotá – Colombia <br />
                         Carrera 90 No. 17B – 75 Bodega 21 <br />

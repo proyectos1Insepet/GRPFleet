@@ -165,7 +165,7 @@
 				<div class="control-group">
 				    <label class="control-label" for="inputPassword"></label>
                                     <div class="controls">					                                        
-                                    
+                                    <p><input name="ppu" type="text" placeholder="PPU" id="ppu" class="help-inline"/></p>  
                                     <p><input name="vol" type="text" placeholder="Volumen asignado" id="vol" class="help-inline"/></p>  
                                     <p><input name="din" type="text" placeholder="Dinero asignado" id="din" class="help-inline"/></p>
                                     <p><input name="mes" type="text" placeholder="Visitas por mes" id="mes" class="help-inline" /></p>                                      
@@ -210,6 +210,8 @@
                                             $mes = filter_input(INPUT_POST,'mes');   
                                             $semana = filter_input(INPUT_POST,'semana');
                                             $dia = filter_input(INPUT_POST,'dia');
+                                            $precio = filter_input(INPUT_POST,'ppu');
+                                            $ppu = sprintf("%05s",$precio);
                                             $volmes = round(($vol / $mes),2);
                                             $volsemana = round(($volmes / $semana),2);
                                             $voldia = round(($volsemana / $dia),2);
@@ -219,7 +221,7 @@
                                             
                                             
                                             
-                                            $query3 = "UPDATE restricciones SET id_producto ='$producto', visitadia = '$dia', visitasemana ='$semana', visitames = '$mes', volvisitadia = '$voldia', volvisitasemana = '$volsemana', volvisitames ='$volmes', dinvisitadia ='$dindia', dinvisitasemana = '$dinsemana', dinvisitames = '$dinmes' WHERE id_vehiculo ='$vehiculo' ";
+                                            $query3 = "UPDATE restricciones SET id_producto ='$producto', visitadia = '$dia', visitasemana ='$semana', visitames = '$mes', volvisitadia = '$voldia', volvisitasemana = '$volsemana', volvisitames ='$volmes', dinvisitadia ='$dindia', dinvisitasemana = '$dinsemana', dinvisitames = '$dinmes', ppu='$ppu' WHERE id_vehiculo ='$vehiculo' ";
                                             $result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
                                             // Liberando el conjunto de resultados
                                             pg_free_result($result3);
