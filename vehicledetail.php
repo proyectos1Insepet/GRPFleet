@@ -29,7 +29,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GRP700 Fleet:: Actualizar cuenta</title>
+    <title>GRP 700 X Fleet | Reporte de ventas</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -39,20 +39,27 @@
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style-metro.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/style2.css" rel="stylesheet" type="text/css"/>
     <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="assets/plugins/fancybox/source/jquery.fancybox.css">               
     <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="assets/css/pages/prices.css" rel="stylesheet" type="text/css"/>
+    <!-- END PAGE LEVEL STYLES -->    
     <link href="assets/css/themes/red.css" rel="stylesheet" type="text/css" id="style_color"/>    
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />          
 </head>
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
-<body>	  
+<body>
+	<!-- BEGIN STYLE CUSTOMIZER -->
+	
+	<!-- END BEGIN STYLE CUSTOMIZER -->    
 
     <!-- BEGIN HEADER -->
-    <div class="front-header">
+     <div class="front-header">
         <div class="container">
             <div class="navbar">
                 <div class="navbar-inner">
@@ -100,7 +107,7 @@
                         </ul>
                                                   
                     </div>
-                    <!-- END TOP NAVIGATION MENU -->
+                    <!-- BEGIN TOP NAVIGATION MENU -->
                 </div>
             </div>
         </div>                   
@@ -111,12 +118,14 @@
     <div class="row-fluid breadcrumbs margin-bottom-40">
         <div class="container">
             <div class="span4">
-                <h1>Configuración de cliente</h1>
+                <h1>Ventas en el sistema</h1>
             </div>
             <div class="span8">
                 <ul class="pull-right breadcrumb">
-                    <li><a href="index.php">Inicio</a> <span class="divider">/</span></li>                    
-                    <li class="active">Clientes</li>                  
+                    <li><a href="index.php">Inicio</a> <span class="divider">/</span></li>
+                    <li><a href="report.php">Reporte</a> <span class="divider">/</span></li>
+                    <li class="active">Detalle</li>
+                
                 </ul>
             </div>
         </div>
@@ -125,123 +134,71 @@
 
     <!-- BEGIN CONTAINER -->   
     <div class="container min-hight">
-
-		<!-- ROW 1 -->
-		<div class="row-fluid margin-bottom-40">
-			<!-- COLUMN 1 -->
-                    <div class="span6">
-			<h3>Datos de cliente</h3>
-			<!-- BEGIN FORM-->
-                        <div class="margin-bottom-30">
-                            <h4>Digite la información solicitada</h4>
-                            <form class="form-horizontal" action="#" method="post">
-				<div class="control-group">
-                                    <label class="control-label" for="inputEmail">Cuenta</label>
-                                    <div class="controls">
-					<p><input name="linea1" type="text"  placeholder="Nombre de cliente" id="field"  /></p>                                            
-				    </div>
-				</div>
-				<div class="control-group">
-				    <label class="control-label" for="inputPassword"></label>
-                                    <div class="controls">					                                        
-                                    
-                                    <p><input name="id_tax" type="text" placeholder="NIT / CC" id="field" class="help-inline"/></p>
-                                    <p><input name="dir" type="text" placeholder="Direccion" id="field" class="help-inline" /></p>
-                                    <p><input name="tel" type="text" placeholder="Teléfono" id="field" class="help-inline"/></p>                                            
-                                    <p><input name="ciudad" type="text" placeholder="Ciudad" id="field" class="help-inline"/></p>                                    
-                                    <p><input name="state" type="text" placeholder="Departamento / Provincia" id="field"/></p>
-                                    <p><?php
-                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                                or die('Can not connect: ' . \pg_last_error());
-                                                $query = "SELECT  * FROM transaccion";
-                                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                                echo "<select name='select1' id='field' class='small m-wrap'>";
-                                                while($fila=  pg_fetch_array($result)){
-                                                    echo "<option value=".$fila['tipo'].">".$fila['descripcion']."</option>";
-                                                }
-                                                echo "</select>";
-                                    ?></p>
-                                     <p><input name="saldo" type="text" placeholder="Saldo" id="field"/></p>                                    
-				    </div>
-				</div>
-                                    <div class="control-group">
-					<div class="controls">                                            
-                                            <input input type="submit" name="enviar" value="Enviar"  class="btn black"  />
-					</div>
-				    </div>
-                            </form>					
+        <div class="row-fluid">		        
+            <div class="span6">
+		<!-- BEGIN BORDERED TABLE PORTLET-->
+		<div class="portlet box red">
+                    <div class="portlet-title">
+                        <div class="caption"><i class="icon-dashboard"></i><?php 
+                        $cliente = filter_input(INPUT_GET, 'cliente');
+                        echo "$cliente"?></div>
+                            <div class="tools">
+				<a href="javascript:;" class="collapse"></a>
+				<a href="#portlet-config" data-toggle="modal" class="config"></a>
+				<a href="javascript:;" class="reload"></a>
+				<a href="javascript:;" class="remove"></a>
+			    </div>
+                    </div>
+                        <?php
+                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+                            or die('Can not connect: ' . \pg_last_error());                            
+                        ?>
+			<div class="portlet-body">
+                            <table class="table table-hover">
+				<thead>
+                                    <tr>
+										<th>Fecha</th>
+                                        <th>Vehiculo</th>
+										<th>Cantidad</th>
+                                        <th># Venta</th>
+                                    </tr>
+				</thead>
+                                <tbody>
+                                    <?php   
+                                        echo "<tr>";
+                                            $placa = filter_input(INPUT_GET, 'placa');
+                                            $sql = "SELECT id_cliente FROM vehiculo WHERE placa ='$placa';";                                            
+                                            $result = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
+                                            $row = pg_fetch_row($result);
+                                            $sql2 = "SELECT  v.fecha, v.dinero, v.volumen,v.id,c.nombre, vd.placa FROM venta v 
+											INNER JOIN cuenta c ON c.id_cliente = v.id_cliente 
+											INNER JOIN venta_detalle vd ON vd.fk_id = v.id
+											WHERE v.id_cliente = $row[0] order by v.id;";                                            
+                                            $result2 = pg_query($sql2)or die('Query error: ' . \pg_last_error());                                                                                        
+                                            $row2 = pg_fetch_row($result2); 
+                                            $sql3 = "SELECT vol, moneda FROM recibo"; 
+                                            $result3 = pg_query($sql3)or die('Query error: ' . \pg_last_error());
+                                            $row3 = pg_fetch_assoc($result3);											
+                                            while ($row2 = pg_fetch_row($result2)) { 
+                                                echo "<td background-color:#F5D0A9;>".$row2[0]." </td>";
+												echo "<td background-color:#F5D0A9;>".$row2[5]." </td>";    
+												echo "<td background-color:#F5D0A9;>".$row2[2]." ".$row3['vol']." </td>";
+												echo "<td background-color:#F5D0A9;>".$row2[3]." </td>";    												                                                
+                                                echo "</tr>";     
+                                            }
+                                            ?> 									                                                                                                                                                                                                                                                                                                            
+                                                                        
+                                </tbody>
+                            </table>
 			</div>
-                        
-                        
-			<!-- END FORM-->  								
-				
-			</div>
-                        <p><a class="btn green" href="vehicle.php"/>Siguiente</a><br></p>
-                        <p><a class="btn green" href="customerdetail.php"/>Clientes Registrados</a><br></p>
-                        
-                        <!--<h3>Venta Privada</h3>
-                        <p>
-                        <?php 
-                            //$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                            //or die('Can not connect: ' . \pg_last_error());
-                            if(filter_input(INPUT_POST, 'activar')){
-                                $activo = true;
-                                $query2 = "UPDATE cuenta SET estado_cuenta ='$activo' WHERE tipo_transaccion =1"; 
-                                $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
-                                pg_close($dbconn);
-                                echo "Gracias, hemos recibido la información.\n"; 
-                            }
-                            if(filter_input(INPUT_POST, 'desactivar')){
-                                $activo = 0;
-                                $query2 = "UPDATE cuenta SET estado_cuenta ='$activo' WHERE tipo_transaccion =1"; 
-                                $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
-                                pg_close($dbconn);
-                                echo "Gracias, hemos recibido la información.\n"; 
-                            }
-                        
-                            if (filter_input(INPUT_POST,'enviar')) {                                   
-                                $query1 = "SELECT  MAX(id_cliente) FROM cuenta";
-                                $result1 = pg_query($query1) or die('Query error: ' . \pg_last_error());
-                                $row1 = pg_fetch_row($result1);
-                                $row = $row1[0] + 1;                                     
-                                $linea1 = filter_input(INPUT_POST,'linea1');                                    
-                                $id_tax = filter_input(INPUT_POST,'id_tax');
-                                $tel = filter_input(INPUT_POST,'tel');
-                                $dir = filter_input(INPUT_POST,'dir');
-                                $ciudad = filter_input(INPUT_POST,'ciudad');   
-                                $state = filter_input(INPUT_POST,'state');
-                                $saldo = filter_input(INPUT_POST,'saldo');
-                                $tipo  = filter_input(INPUT_POST,'select1');
-                                $estado = true;
-                                $query = "INSERT INTO cuenta (id_cliente,estado_cuenta, nombre, tax_number, direccion, telefono, ciudad, provincia, tipo_transaccion, saldo)  VALUES('$row','$estado','$linea1','$id_tax','$dir','$tel','$ciudad','$state','$tipo','$saldo') ";
-                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                // Liberando el conjunto de resultados
-                                pg_free_result($result);
-                                // Cerrando la conexi�n
-                                pg_close($dbconn);
-                                echo "Gracias, hemos recibido la información.\n"; 
-                            }
-                        ?>  
-                    </p>
-                        <form class="form-horizontal" action="#" method="post">
-                            <div class="control-group">
-				<div class="controls">                                            
-                                    <p><input input type="submit" name="activar" value="Activar"  class="btn blue"/></p>
-				</div>
-                                <div class="controls">                                            
-                                    <p><input input type="submit" name="desactivar" value="Desactivar"  class="btn blue"/></p>
-				</div>
-                            </div>                                
-                        </form>                       
-                    --> 
-							                            									
-			</div>
-				
-				
-			</div>			
+		</div>
+		<!-- END BORDERED TABLE PORTLET-->
+            </div>
+	</div>        
+    </div>
+    <!-- END CONTAINER -->
 
     <!-- BEGIN FOOTER -->
-     <!-- BEGIN FOOTER -->
    <div class="front-footer">
         <div class="container">
             <div class="row-fluid">

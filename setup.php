@@ -132,36 +132,31 @@
                     <div class="span6">
 			<h3>Opciones</h3>
 			<!-- BEGIN FORM-->
-                        <form action="receipt.php" class="form-horizontal">
-<!--                            <div class="control-group">
-                                <label class="control-label">Small Input</label>
-                                <div class="controls">
-                                    <input type="text" placeholder="small" class="m-wrap small" />
-                                    <span class="help-inline">Some hint here</span>
-                                </div>  
-                            </div>-->                                
+                        <form action="receipt.php" class="form-horizontal">                              
                             <div class="control-group">
                                 <label class="control-label"></label>
                                     <div class="controls">
                                         <button type="submit" class="btn blue"><i class="icon-ok"></i> Configuración de recibo</button>                                        
                                     </div>
-				</div>
-			</form>
-                        <form action="product.php" class="form-horizontal">
-<!--                            <div class="control-group">
-                                <label class="control-label">Small Input</label>
-                                <div class="controls">
-                                    <input type="text" placeholder="small" class="m-wrap small" />
-                                    <span class="help-inline">Some hint here</span>
-                                </div>  
-                            </div>-->                                
+							</div>
+						</form>
+                        <form action="product.php" class="form-horizontal">                              
                             <div class="control-group">
                                 <label class="control-label"></label>
                                     <div class="controls">
                                         <button type="submit" class="btn blue"><i class="icon-ok"></i> Tipos de combustible</button>                                       
                                     </div>
-				</div>
-			</form>
+				            </div>
+			            </form>
+						
+						<form action="pistero.php" class="form-horizontal">                              
+                            <div class="control-group">
+                                <label class="control-label"></label>
+                                    <div class="controls">
+                                        <button type="submit" class="btn blue"><i class="icon-ok"></i> Ingreso de pistero</button>                                        
+                                    </div>
+							</div>
+						</form>
 			<!-- END FORM-->  								
 				
 			</div>
