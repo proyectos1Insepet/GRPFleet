@@ -154,7 +154,8 @@
                             <table class="table table-hover">
 				<thead>
                                     <tr>
-					<th>Cliente </th>
+										<th>ID Cliente </th>
+										<th>Cliente </th>
                                         <th>Valor</th>
                                         <th>Cantidad</th>
                                     </tr>
@@ -163,14 +164,15 @@
                                     <?php   
                                         echo "<tr>";
                                         
-                                            $sql = "SELECT  SUM(v.dinero), SUM(v.volumen), c.nombre FROM venta v  INNER JOIN cuenta c ON v.id_cliente = c.id_cliente GROUP BY c.nombre;";
+                                            $sql = "SELECT  SUM(v.dinero), SUM(v.volumen), c.nombre,c.id_cliente FROM venta v  INNER JOIN cuenta c ON v.id_cliente = c.id_cliente GROUP BY c.nombre,c.id_cliente;";
                                             $sql2 = "select vol, moneda from recibo";                                            
                                             $result = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
                                             $result2 = pg_query($sql2)or die('Query error: ' . \pg_last_error());
                                             $row2 = pg_fetch_assoc($result2); 
                                             $arr = pg_fetch_all($result);                                            
                                             while ($row = pg_fetch_row($result)) { 
-                                                echo "<td background-color:#F5D0A9;>".'<a href="reportdetail.php?cliente='.$row[2].'">'.$row[2].'</a>'."</td> ";                                                
+                                                echo "<td background-color:#F5D0A9;>".'<a href="reportdetail.php?id_cliente='.$row[3].'">'.$row[3].'</a>'."</td> ";                                                
+												echo "<td background-color:#F5D0A9;>".$row[2]." </td>";
                                                 echo "<td background-color:#F5D0A9;>".$row2['moneda']." ".$row[0]." </td>";
                                                 echo "<td background-color:#F5D0A9;>".$row[1]." ".$row2['vol']." </td>";
                                                 echo "</tr>";     

@@ -165,14 +165,14 @@
                                 <tbody>
                                     <?php   
                                         echo "<tr>";
-                                            $cliente = filter_input(INPUT_GET, 'cliente');
+                                            $cliente = filter_input(INPUT_GET, 'id_cliente');
                                             $sql = "SELECT id_cliente FROM cuenta WHERE nombre ='$cliente';";                                            
                                             $result = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
                                             $row = pg_fetch_row($result);
                                             $sql2 = "SELECT  v.fecha, v.dinero, v.volumen,v.id,c.nombre, vd.placa FROM venta v 
 											INNER JOIN cuenta c ON c.id_cliente = v.id_cliente 
 											INNER JOIN venta_detalle vd ON vd.fk_id = v.id
-											WHERE v.id_cliente = $row[0];";                                            
+											WHERE v.id_cliente = $cliente;";                                            
                                             $result2 = pg_query($sql2)or die('Query error: ' . \pg_last_error());                                                                                        
                                             $row2 = pg_fetch_row($result2); 
                                             $sql3 = "SELECT vol, moneda FROM recibo"; 
