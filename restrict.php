@@ -133,67 +133,114 @@
                     <div class="span6">
 			<h3>Restricciones a vehículos</h3>
 			<!-- BEGIN FORM-->
-                        <div class="margin-bottom-30">
-                            
-                            <form class="form-horizontal" action="#" method="post">
-				<div class="control-group">
-                                    <label class="control-label" for="inputEmail">Vehículo y combustible</label>
-                                    <div class="controls">
-					<p>
-                                        <?php
-                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                                or die('Can not connect: ' . \pg_last_error());
-                                                $query = "SELECT id_vehiculo,placa FROM vehiculo";
-                                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                                echo "<select name='select1' id='field' class='small m-wrap'>";
-                                                while($fila=  pg_fetch_array($result)){
-                                                    echo "<option value=".$fila['id_vehiculo'].">".$fila['placa']."</option>";
-                                                }
-                                                echo "</select>";                                                                                                                                                                                            
-                                                $query2 = "SELECT id_producto,descripcion FROM producto";
-                                                $result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
-                                                echo "<select name='select2' id='field' class='small m-wrap'>";
-                                                while($fila2=  pg_fetch_array($result2)){
-                                                    echo "<option value=".$fila2['id_producto'].">".$fila2['descripcion']."</option>";
-                                                }
-                                                echo "</select>";
-                                                
-                                        ?>
-                                    </p>
+            <div class="margin-bottom-30">
+                <form class="form-horizontal" action="#" method="post">
+					<div class="control-group">
+                        <label class="control-label" for="inputEmail">Vehículo y combustible</label>
+                        <div class="controls">
+							<p>
+                                <?php
+                                    $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+                                    or die('Can not connect: ' . \pg_last_error());
+                                    $query = "SELECT id_vehiculo,placa FROM vehiculo";
+                                    $result = pg_query($query) or die('Query error: ' . \pg_last_error());
+									echo "<select name='select1' id='field' class='small m-wrap'>";
+									while($fila=  pg_fetch_array($result)){
+										echo "<option value=".$fila['id_vehiculo'].">".$fila['placa']."</option>";
+									}
+									echo "</select>";                                                                                                                                                                                            
+									$query2 = "SELECT id_producto,descripcion FROM producto";
+									$result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
+									echo "<select name='select2' id='field' class='small m-wrap'>";
+									while($fila2=  pg_fetch_array($result2)){
+										echo "<option value=".$fila2['id_producto'].">".$fila2['descripcion']."</option>";
+									}
+									echo "</select>";
+									
+     							?>
+	     					</p>
+				        </div>
 				    </div>
-				</div>
-				<div class="control-group">
-				    <label class="control-label" for="inputPassword"></label>
-                                    <div class="controls">					                                        
-                                    <p><input name="ppu" type="text" placeholder="PPU" id="ppu" class="help-inline"/></p>  
-                                    <p><input name="vol" type="text" placeholder="Volumen asignado" id="vol" class="help-inline"/></p>  
-                                    <p><input name="din" type="text" placeholder="Dinero asignado" id="din" class="help-inline"/></p>
-                                    <p><input name="mes" type="text" placeholder="Visitas por mes" id="mes" class="help-inline" /></p>                                      
-                                    <p><input name="semana" type="text" placeholder="Visitas por semana" id="semana" class="help-inline"/></p>
-                                    <p><input name="dia" type="text"  placeholder="Visitas por día" id="dia" class="campo"  /></p>
-                                    
-                                    <p><input name="cal_vol_mon" type="text" placeholder="Volumen por mes" id="cal_vol_mon" class="help-inline" disabled="disabled"/></p>      
-                                    <p><input name="cal_vol_week" type="text" placeholder="Volumen por semana" id="cal_vol_week" class="help-inline" disabled="disabled"/></p> 
-                                    <p><input name="cal_vol_day" type="text" placeholder="Volume por día" id="cal_vol_day" class="help-inline" disabled="disabled"/></p> 
-                                    
-                                    <p><input name="cal_din_mon" type="text" placeholder="Dinero por mes" id="cal_din_mon" class="help-inline" disabled="disabled"/></p>      
-                                    <p><input name="cal_din_week" type="text" placeholder="Dinero por semana" id="cal_din_week" class="help-inline" disabled="disabled"/></p> 
-                                    <p><input name="cal_din_day" type="text" placeholder="Dinero por día" id="cal_din_day" class="help-inline" disabled="disabled"/></p> 
-                                    
-                                    
-                                    
+				    <div class="control-group">
+				        <label class="control-label">PPU</label>
+                        <div class="controls">					                                        
+							<p><input name="ppu" type="text" placeholder="PPU" id="ppu"/></p>                                      
+				        </div>
 				    </div>
-				</div>
-                                    <div class="control-group">
-					<div class="controls">                                            
-                                            <p><input type="button" id="calcular" value="Calcular" class="btn red"/><br/></p>
-                                            <input input type="submit" name="enviar" value="Finalizar"  class="btn black"  />
-					</div>
+					<div class="control-group">
+				        <label class="control-label">Volumen asignado</label>
+                        <div class="controls">					                                        
+							<p><input name="vol" type="text" placeholder="Volumen asignado" id="vol"/></p>  
+				        </div>
 				    </div>
-                            </form>					
-			</div>
-                        
-                        
+                    <div class="control-group">
+				        <label class="control-label">Dinero asignado</label>
+                        <div class="controls">					                                        
+							<p><input name="din" type="text" placeholder="Dinero asignado" id="din"/></p>
+				        </div>
+				    </div>  
+					<div class="control-group">
+				        <label class="control-label">Visitas por mes</label>
+                        <div class="controls">					                                        
+							<p><input name="mes" type="text" placeholder="Visitas por mes" id="mes"/></p>                                      
+				        </div>
+				    </div>
+                    <div class="control-group">
+				        <label class="control-label">Visitas por semana</label>
+                        <div class="controls">					                                        
+							<p><input name="semana" type="text" placeholder="Visitas por semana" id="semana"/></p>                                      
+				        </div>
+				    </div>
+					<div class="control-group">
+				        <label class="control-label">Visitas por dia</label>
+                        <div class="controls">					                                        
+							<p><input name="dia" type="text"  placeholder="Visitas por día" id="dia" /></p>
+				        </div>
+				    </div>
+                    <div class="control-group">
+				        <label class="control-label">Volumen por mes</label>
+                        <div class="controls">					                                        
+							<p><input name="cal_vol_mon" type="text" placeholder="Volumen por mes" id="cal_vol_mon" disabled="disabled"/></p>      
+				        </div>
+				    </div>                
+                    <div class="control-group">
+				        <label class="control-label">Volumen por semana</label>
+                        <div class="controls">					                                        
+							<p><input name="cal_vol_week" type="text" placeholder="Volumen por semana" id="cal_vol_week" disabled="disabled"/></p> 
+				        </div>
+				    </div>                
+                    <div class="control-group">
+				        <label class="control-label">Volumen por día</label>
+                        <div class="controls">					                                        
+							<p><input name="cal_vol_day" type="text" placeholder="Volume por día" id="cal_vol_day" disabled="disabled"/></p> 
+				        </div>
+				    </div>               
+                    <div class="control-group">
+				        <label class="control-label">Dinero por mes</label>
+                        <div class="controls">					                                        
+							<p><input name="cal_din_mon" type="text" placeholder="Dinero por mes" id="cal_din_mon" disabled="disabled"/></p>      
+				        </div>
+				    </div>                
+                    <div class="control-group">
+				        <label class="control-label">Dinero por semana</label>
+                        <div class="controls">					                                        
+							<p><input name="cal_din_week" type="text" placeholder="Dinero por semana" id="cal_din_week"  disabled="disabled"/></p> 
+				        </div>
+				    </div>                
+                    <div class="control-group">
+				        <label class="control-label">Dinero por día</label>
+                        <div class="controls">					                                        
+							<p><input name="cal_din_day" type="text" placeholder="Dinero por día" id="cal_din_day" disabled="disabled"/></p> 
+				        </div>
+				    </div>                                                                                      
+                    <div class="control-group">
+						<div class="controls">                                            
+							<p><input type="button" id="calcular" value="Calcular" class="btn red"/><br/></p>
+                               <input input type="submit" name="enviar" value="Finalizar"  class="btn black"  />
+						</div>
+				    </div>
+                </form>					
+			</div>                                              
 			<!-- END FORM-->  								
 				
 			</div>                        

@@ -133,40 +133,71 @@
                     <div class="span6">
 			<h3>Vehículos en cuentas</h3>
 			<!-- BEGIN FORM-->
-                        <div class="margin-bottom-30">
-                         
-                            <form class="form-horizontal" action="#" method="post">
-				<div class="control-group">
-                                    <label class="control-label" for="inputEmail">Cuentas</label>
-                                    <div class="controls">
-					<p>
-                                            <?php
-                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                                or die('Can not connect: ' . \pg_last_error());
-                                                $query = "SELECT  id_cliente, nombre FROM cuenta";
-                                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                                echo "<select name='select1' id='field'>";
-                                                while($fila=  pg_fetch_array($result)){
-                                                    echo "<option value=".$fila['id_cliente'].">".$fila['nombre']."</option>";
-                                                }
-                                                echo "</select>";
-                                        ?>
-                                        </p> 
-                                        <p><input name="placa" type="text"  placeholder="Placa" id="field"  /></p>
-                                        <p><input name="serial" type="text" placeholder="Serial" id="field" /></p>
-                                        <p><input name="tanque" type="text" placeholder="Tamaño de tanque" id="field" /></p>
-                                        <p><input name="marca" type="text" placeholder="Marca" id="field"/></p>  
-                                        <p><input type="checkbox" name="estado" value="1"> - Activo</input></p>                                    
-                                        
-				    </div>
-				</div>				
-                                    <div class="control-group">
-					<div class="controls">                                            
-                                            <input input type="submit" name="enviar" value="Enviar"  class="btn black"  />
+            <div class="margin-bottom-30">                         
+                <form class="form-horizontal" action="#" method="post">
+					<div class="control-group">
+						<label class="control-label" for="inputEmail">Cuentas</label>
+						<div class="controls">
+							<p>
+								<?php
+									$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+									or die('Can not connect: ' . \pg_last_error());
+									$query = "SELECT  id_cliente, nombre FROM cuenta";
+									$result = pg_query($query) or die('Query error: ' . \pg_last_error());
+									echo "<select name='select1' id='field'>";
+									while($fila=  pg_fetch_array($result)){
+										echo "<option value=".$fila['id_cliente'].">".$fila['nombre']."</option>";
+									}
+									echo "</select>";
+								?>
+							</p> 							                                   										
+						</div>
 					</div>
+					<div class="control-group">
+						<label class="control-label">Placa</label>
+						<div class="controls">
+							<p><input class="m-wrap" name="placa" type="text"  placeholder="Placa" id="field" /></p>
+						</div>
+					</div>   
+					<div class="control-group">
+						<label class="control-label">Serial</label>
+						<div class="controls">
+							<p><input class="m-wrap" name="serial" type="text" placeholder="Serial" id="field" /></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">ID</label>
+						<div class="controls">
+							<p><input class="m-wrap" name="idvehiculo" type="text"  placeholder="ID" id="field" /></p>
+						</div>
+					</div> 
+					<div class="control-group">
+						<label class="control-label">Tamaño de tanque</label>
+						<div class="controls">
+							<p><input class="m-wrap" name="tanque" type="text" placeholder="Tamaño de tanque" id="field" /></p>
+						</div>
+					</div>	
+					<div class="control-group">
+						<label class="control-label">Marca</label>
+						<div class="controls">
+							<p><input class="m-wrap" name="marca" type="text" placeholder="Marca" id="field"/></p>  
+						</div>
+					</div>	
+					<div class="control-group">
+						<label class="control-label">Activo</label>
+						<div class="controls">
+							<p><input class="m-wrap" type="checkbox" name="estado" value="1"></input></p>
+						</div>
+					</div>	
+							
+							
+													
+                    <div class="control-group">
+						<div class="controls">                                            
+                            <input input type="submit" name="enviar" value="Enviar"  class="btn black"  />
+						</div>
 				    </div>
-                            </form>
-                            
+                </form>                           
 			</div>
                         
                         
@@ -178,12 +209,13 @@
                                         if (filter_input(INPUT_POST,'enviar')) {   
                                             $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                             or die('Can not connect: ' . \pg_last_error());                                                                                
-                                            $cliente = filter_input(INPUT_POST,'select1');                                    
-                                            $placa = filter_input(INPUT_POST,'placa');
-                                            $serial = filter_input(INPUT_POST,'serial');
-                                            $tanque = filter_input(INPUT_POST,'tanque');
-                                            $marca = filter_input(INPUT_POST,'marca');   
-                                            $estado = filter_input(INPUT_POST,'estado');                                            
+                                            $cliente    = filter_input(INPUT_POST,'select1');                                    
+                                            $placa      = filter_input(INPUT_POST,'placa');
+                                            $serial     = filter_input(INPUT_POST,'serial');
+											$idvehiculo = filter_input (INPUT_POST,'idvehiculo');
+                                            $tanque     = filter_input(INPUT_POST,'tanque');
+                                            $marca      = filter_input(INPUT_POST,'marca');   
+                                            $estado     = filter_input(INPUT_POST,'estado'); 											
                                             if ($estado == "1" ){
                                                 $activo = 1;
                                             }else{
@@ -193,11 +225,11 @@
                                             $result1 = pg_query($query1) or die('Query error: ' . \pg_last_error());
                                             $row1 = pg_fetch_row($result1);
                                             $row = $row1[0] + 1;   
-                                            $query = "INSERT INTO vehiculo  VALUES('$cliente','$row','$placa','$serial','$tanque','$activo','$marca') ";
+                                            $query = "INSERT INTO vehiculo (id_cliente, id_vehiculo, placa, serial,idvehiculo, tanque, estado_bloqueo, marca) VALUES('$cliente','$row','$placa','$serial','$idvehiculo','$tanque','$activo','$marca') ";
                                             $result = pg_query($query) or die('Query error: ' . \pg_last_error());
                                             // Liberando el conjunto de resultados
                                             pg_free_result($result);
-                                            // Cerrando la conexi�n
+                                            // Cerrando la conexión
                                             pg_close($dbconn);
                                             echo "Gracias, hemos recibido su información.\n"; 
                                         }

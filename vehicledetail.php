@@ -149,10 +149,7 @@
 				<a href="javascript:;" class="remove"></a>
 			    </div>
                     </div>
-                        <?php
-                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                            or die('Can not connect: ' . \pg_last_error());                            
-                        ?>
+                        
 			<div class="portlet-body">
                             <table class="table table-hover">
 				<thead>
@@ -165,28 +162,27 @@
 				</thead>
                                 <tbody>
                                     <?php   
-                                        echo "<tr>";
-                                            $placa = filter_input(INPUT_GET, 'placa');
-                                            $sql = "SELECT id_cliente FROM vehiculo WHERE placa ='$placa';";                                            
-                                            $result = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
-                                            $row = pg_fetch_row($result);
-                                            $sql2 = "SELECT  v.fecha, v.dinero, v.volumen,v.id,c.nombre, vd.placa FROM venta v 
-											INNER JOIN cuenta c ON c.id_cliente = v.id_cliente 
-											INNER JOIN venta_detalle vd ON vd.fk_id = v.id
-											WHERE v.id_cliente = $row[0] order by v.id;";                                            
-                                            $result2 = pg_query($sql2)or die('Query error: ' . \pg_last_error());                                                                                        
-                                            $row2 = pg_fetch_row($result2); 
-                                            $sql3 = "SELECT vol, moneda FROM recibo"; 
-                                            $result3 = pg_query($sql3)or die('Query error: ' . \pg_last_error());
-                                            $row3 = pg_fetch_assoc($result3);											
-                                            while ($row2 = pg_fetch_row($result2)) { 
-                                                echo "<td background-color:#F5D0A9;>".$row2[0]." </td>";
-												echo "<td background-color:#F5D0A9;>".$row2[5]." </td>";    
-												echo "<td background-color:#F5D0A9;>".$row2[2]." ".$row3['vol']." </td>";
-												echo "<td background-color:#F5D0A9;>".$row2[3]." </td>";    												                                                
-                                                echo "</tr>";     
-                                            }
-                                            ?> 									                                                                                                                                                                                                                                                                                                            
+										$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+										or die('Can not connect: ' . \pg_last_error());  
+										echo "<tr>";
+										$idcliente   = filter_input(INPUT_GET, 'id');
+										$placa  = filter_input(INPUT_GET, 'placa');										
+										$sql2 = "SELECT  v.fecha, v.dinero, v.volumen,v.id,c.nombre, vd.placa FROM venta v 
+										INNER JOIN cuenta c ON c.id_cliente = v.id_cliente 
+										INNER JOIN venta_detalle vd ON vd.fk_id = v.id
+										WHERE v.id_cliente = $idcliente AND vd.placa ='$placa';";                                            
+										$result2 = pg_query($sql2)or die('Query error: ' . \pg_last_error());                                                                                        										
+										$sql3 = "SELECT vol, moneda FROM recibo"; 
+										$result3 = pg_query($sql3)or die('Query error: ' . \pg_last_error());
+										$row3 = pg_fetch_assoc($result3);											
+										while ($row2 = pg_fetch_row($result2)) { 
+											echo "<td background-color:#F5D0A9;>".$row2[0]." </td>";
+											echo "<td background-color:#F5D0A9;>".$row2[5]." </td>";    
+											echo "<td background-color:#F5D0A9;>".$row2[2]." ".$row3['vol']." </td>";
+											echo "<td background-color:#F5D0A9;>".$row2[3]." </td>";    												                                                
+											echo "</tr>";     
+										}
+										?> 									                                                                                                                                                                                                                                                                                                            
                                                                         
                                 </tbody>
                             </table>

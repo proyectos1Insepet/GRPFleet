@@ -132,46 +132,72 @@
                     <div class="span6">
 			<h3>Datos de cliente</h3>
 			<!-- BEGIN FORM-->
-                        <div class="margin-bottom-30">
-                            <h4>Digite la información solicitada</h4>
-                            <form class="form-horizontal" action="#" method="post">
-				<div class="control-group">
-                                    <label class="control-label" for="inputEmail">Cuenta</label>
-                                    <div class="controls">
-					<p><input name="linea1" type="text"  placeholder="Nombre de cliente" id="field"  /></p>                                            
-				    </div>
-				</div>
-				<div class="control-group">
-				    <label class="control-label" for="inputPassword"></label>
-                                    <div class="controls">					                                        
-                                    
-                                    <p><input name="id_tax" type="text" placeholder="NIT / CC" id="field" class="help-inline"/></p>
-                                    <p><input name="dir" type="text" placeholder="Direccion" id="field" class="help-inline" /></p>
-                                    <p><input name="tel" type="text" placeholder="Teléfono" id="field" class="help-inline"/></p>                                            
-                                    <p><input name="ciudad" type="text" placeholder="Ciudad" id="field" class="help-inline"/></p>                                    
-                                    <p><input name="state" type="text" placeholder="Departamento / Provincia" id="field"/></p>
-                                    <p><?php
-                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                                or die('Can not connect: ' . \pg_last_error());
-                                                $query = "SELECT  * FROM transaccion";
-                                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                                echo "<select name='select1' id='field' class='small m-wrap'>";
-                                                while($fila=  pg_fetch_array($result)){
-                                                    echo "<option value=".$fila['tipo'].">".$fila['descripcion']."</option>";
-                                                }
-                                                echo "</select>";
-                                    ?></p>
-                                     <p><input name="saldo" type="text" placeholder="Saldo" id="field"/></p>                                    
-				    </div>
-				</div>
-                                    <div class="control-group">
-					<div class="controls">                                            
-                                            <input input type="submit" name="enviar" value="Enviar"  class="btn black"  />
+			<div class="margin-bottom-30">
+				<h4>Digite la información solicitada</h4>
+				<form class="form-horizontal" action="#" method="post">
+					<div class="control-group">
+						<label class="control-label">Cuenta</label>
+						<div class="controls">
+						<p><input name="linea1" type="text"  placeholder="Nombre de cliente" id="field"  /></p>                                            
+						</div>
 					</div>
-				    </div>
-                            </form>					
+					<div class="control-group">
+						<label class="control-label">NIT / RUT / CC</label>
+						<div class="controls">
+							<p><input name="id_tax" type="text" placeholder="NIT / CC" id="field" /></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Dirección</label>
+						<div class="controls">
+							<p><input name="dir" type="text" placeholder="Direccion" id="field" /></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Teléfono</label>
+						<div class="controls">
+							<p><input name="tel" type="text" placeholder="Teléfono" id="field" /></p>                                            
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Dep. / Provincia</label>
+						<div class="controls">
+							<p><input name="state" type="text" placeholder="Departamento / Provincia" id="field"/></p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Tipo de cuenta</label>
+						<div class="controls">
+							<p>
+								<?php
+									$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+									or die('Can not connect: ' . \pg_last_error());
+									$query = "SELECT  * FROM transaccion";
+									$result = pg_query($query) or die('Query error: ' . \pg_last_error());
+									echo "<select name='select1' id='field' class='small m-wrap'>";
+									while($fila=  pg_fetch_array($result)){
+										echo "<option value=".$fila['tipo'].">".$fila['descripcion']."</option>";
+									}
+									echo "</select>";
+								?>
+							</p>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Saldo</label>
+						<div class="controls">
+							<p><input name="saldo" type="text" placeholder="Saldo" id="field"/></p>                                    
+						</div>
+					</div>
+									
+					<div class="control-group">
+						<div class="controls">                                            
+							<input input type="submit" name="enviar" value="Enviar"  class="btn black"  />
+						</div>
+					</div>
+				</form>					
 			</div>
-                        
+			
                         
 			<!-- END FORM-->  								
 				

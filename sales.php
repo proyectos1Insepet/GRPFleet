@@ -168,11 +168,16 @@
                                     <?php   
                                         echo "<tr>";
                                         for($i= $ultima; $i>($ultima - 100); $i--){
-                                            $sql = "select v.id_cliente, v.fecha, v.tipo_transaccion,v.volumen, v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion, c.nombre from venta v 
-											inner join venta_detalle vd on v.id = vd.fk_id 
-                                            inner join producto p on vd.fk_id_producto = p.id_producto 
-											inner join cuenta c on v.id_cliente = c.id_cliente WHERE v.id = $i ";
-                                            $sql2 = "select vol, moneda from recibo";
+                                            $sql = "select v.id_cliente,
+											(select extract(year from (select fecha from venta where id_cliente =v.id_cliente))), 
+											(select extract(day from (select fecha from venta where id_cliente =v.id_cliente))),
+											(select extract(month from (select fecha from venta where id_cliente =v.id_cliente))),
+											(select extract(hour from (select fecha from venta where id_cliente =v.id_cliente))),
+											(select extract(minutes from (select fecha from venta where id_cliente =v.id_cliente))),
+											v.tipo_transaccion,v.volumen, v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion, c.nombre from venta v                                                                                          inner join venta_detalle vd on v.id = vd.fk_id                                                                                                         
+											inner join producto p on vd.fk_id_producto = p.id_producto                                                                                             
+											inner join cuenta c on v.id_cliente = c.id_cliente WHERE v.id = $i;";
+                                            $sql2  = "select vol, moneda from recibo";											
                                             if($i<=0){
                                                 break;
                                             }
@@ -180,11 +185,11 @@
                                             $result3 = pg_query($sql2)or die('Query error: ' . \pg_last_error());
                                             if($result2){
                                                 if(pg_field_is_null($result2, 0, "id_cliente")==0){
-                                                    $row2 = pg_fetch_assoc($result2);   
+                                                    $row2 = pg_fetch_row($result2);   
                                                     $row3 = pg_fetch_assoc($result3);                                                                                                                                                                                
-                                                    echo "<td background-color:#F5D0A9;>"." ".$row2['nombre']."</td> ";
-													echo "<td background-color:#F5D0A9;>".$row2['placa']." </td>";
-                                                    echo "<td background-color:#F5D0A9;>".$row2['fecha']." </td>";
+                                                    echo "<td background-color:#F5D0A9;>"." ".$row2[13]."</td> ";
+													echo "<td background-color:#F5D0A9;>".$row2[9]." </td>";
+                                                    echo "<td background-color:#F5D0A9;>".$row2[1]."-".$row2[2]."-".$row2[3]." ".$row2[4].":".$row2[5]." </td>";
                                                     echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$i.'">'.$i.'</a>'."</td> ";
 													
                                                     echo "</tr>";  

@@ -29,7 +29,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GRP700 Fleet:: Pistero - Encargado</title>
+    <title>GRP700 Fleet:: Operario - Encargado</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -111,13 +111,13 @@
     <div class="row-fluid breadcrumbs margin-bottom-40">
         <div class="container">
             <div class="span4">
-                <h1>Configuración de productos</h1>
+                <h1>Ingreso de operarios</h1>
             </div>
             <div class="span8">
                 <ul class="pull-right breadcrumb">
                     <li><a href="index.php">Inicio</a> <span class="divider">/</span></li>                    
                     <li><a href="setup.php">Configuración</a> <span class="divider">/</span></li>
-                    <li class="active">Configuración de productos</li>
+                    <li class="active">Operarios</li>
                 </ul>
             </div>
         </div>
@@ -135,19 +135,19 @@
 			<!-- BEGIN FORM-->
                         <div class="margin-bottom-30">
                             <h4>Digite la información solicitada</h4>
-                            <form class="form-horizontal" action="pistero.php" method="post">
+                            <form class="form-horizontal" action="operario.php" method="post">
 								<div class="control-group">
                                     <label class="control-label" for="inputEmail">Nombre:</label>
                                     <div class="controls">
-									<p><input name="nombrepistero" type="text"  placeholder="Nombre" id="field"  /></p>
+									<p><input name="operario" type="text"  placeholder="Nombre" id="field"  /></p>
 									</div>
 									
-									<label class="control-label" for="inputEmail">Cédula de Identidad:</label>
+									<label class="control-label" for="inputEmail">Identificación:</label>
                                     <div class="controls">
 									<p><input name="cedula" type="text"  placeholder="CI" id="field"  /></p>
 									</div>
 									
-									<label class="control-label" for="inputEmail">Ibutton asignado:</label>
+									<label class="control-label" for="inputEmail">Ibutton-ID asignado:</label>
                                     <div class="controls">
 									<p><input name="serial" type="text" placeholder="Serial" id="field" /></p>
 									</div>
@@ -169,14 +169,14 @@
                                 if (filter_input(INPUT_POST,'enviar')) {   
                                     $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                     or die('Can not connect: ' . \pg_last_error());
-                                    $nombrepistero = filter_input(INPUT_POST,'nombrepistero');
+                                    $operario = filter_input(INPUT_POST,'operario');
                                     $cedula = filter_input(INPUT_POST,'cedula');
 									$serial = filter_input(INPUT_POST,'serial');                                                                      
-                                    $query = "INSERT INTO operario (nombre,documento,ibutton) VALUES ('$nombrepistero','$cedula','$serial') ";
+                                    $query = "INSERT INTO operario (nombre,documento,ibutton) VALUES ('$operario','$cedula','$serial') ";
                                     $result = pg_query($query) or die('La consulta fallo: ' . \pg_last_error());
                                     // Liberando el conjunto de resultados
                                     pg_free_result($result);
-                                    // Cerrando la conexi�n
+                                    // Cerrando la conexion
                                     pg_close($dbconn);
                                     echo "Gracias, hemos recibido su información.\n";  
                                  }

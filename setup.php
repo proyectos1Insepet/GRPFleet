@@ -149,11 +149,11 @@
 				            </div>
 			            </form>
 						
-						<form action="pistero.php" class="form-horizontal">                              
+						<form action="operario.php" class="form-horizontal">                              
                             <div class="control-group">
                                 <label class="control-label"></label>
                                     <div class="controls">
-                                        <button type="submit" class="btn blue"><i class="icon-ok"></i> Ingreso de pistero</button>                                        
+                                        <button type="submit" class="btn blue"><i class="icon-ok"></i> Ingreso de Operario</button>                                        
                                     </div>
 							</div>
 						</form>

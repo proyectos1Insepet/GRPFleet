@@ -171,7 +171,7 @@
                                             $row2 = pg_fetch_assoc($result2); 
                                             $arr = pg_fetch_all($result);                                            
                                             while ($row = pg_fetch_row($result)) { 
-                                                echo "<td background-color:#F5D0A9;>".'<a href="reportdetail.php?id_cliente='.$row[3].'">'.$row[3].'</a>'."</td> ";                                                
+                                                echo "<td background-color:#F5D0A9;>".'<a href="reportdetail.php?id_cliente='.$row[3].'&cliente='.$row[2].'">'.$row[3].'</a>'."</td> ";                                                
 												echo "<td background-color:#F5D0A9;>".$row[2]." </td>";
                                                 echo "<td background-color:#F5D0A9;>".$row2['moneda']." ".$row[0]." </td>";
                                                 echo "<td background-color:#F5D0A9;>".$row[1]." ".$row2['vol']." </td>";
