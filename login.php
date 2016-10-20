@@ -33,7 +33,8 @@
 <body class="login">
 	<!-- BEGIN LOGO -->
 	<div class="logo">
-		<img src="assets/img/logo-big.png" alt="" /> 
+		<img src="assets/img/logo-big.png" alt="" /><br></br>
+		<img src="assets/img/logo-big2.jpg" alt="" />
 	</div>
 	<!-- END LOGO -->
 	<!-- BEGIN LOGIN -->

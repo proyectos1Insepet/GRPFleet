@@ -1,3 +1,4 @@
+
 <?php
 	session_start();
 	 
@@ -22,6 +23,7 @@
 	exit;
 	}
 ?>
+
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -134,8 +136,11 @@
     <!-- BEGIN CONTAINER -->   
     <div class="container min-hight">
         <div class="row-fluid">		        
-        <div class="span6">
-		<p><a class="btn green" href="filtrafecha.php"/>Ventas por fecha</a><br></p>
+        <div class="span6">		
+		<form class="form-horizontal" action="" method="post">	
+			<p><a class="btn green" href="filtrafecha.php"/>Ventas por fecha</a><br></p>
+			<input input type="submit" name="csv" value="Generar CSV"  class="btn black"  />			
+		 
 		<!-- BEGIN BORDERED TABLE PORTLET-->
 		<div class="portlet box red">
             <div class="portlet-title">
@@ -202,7 +207,19 @@
 			</div>
 		</div>
 		<!-- END BORDERED TABLE PORTLET-->
-            </div>
+		<?php
+		if (filter_input(INPUT_POST,'csv')) { 			
+			$output = fopen('datos.csv', 'w');
+			for($i= $ultima; $i>($ultima - 100); $i--){
+				fputcsv($output, $row2);
+			}
+
+			fclose($file); 
+		}
+?>
+		</form>
+		
+    </div>
 	</div>        
     </div>
     <!-- END CONTAINER -->

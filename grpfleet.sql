@@ -1,4 +1,4 @@
-﻿CREATE TABLE transaccion(
+CREATE TABLE transaccion(
 	tipo INT PRIMARY KEY,
 	descripcion VARCHAR (50)
 	);
@@ -29,7 +29,6 @@ CREATE TABLE vehiculo(
 	id_vehiculo SERIAL PRIMARY KEY,
 	placa VARCHAR (20),
 	serial VARCHAR (20) UNIQUE NOT NULL,
-	idvehiculo varchar(10),
 	tanque FLOAT,
 	estado_bloqueo boolean DEFAULT false, /* true = vehiculo activo */ 
 	marca VARCHAR (100)
@@ -64,7 +63,7 @@ CREATE TABLE recibo(
 CREATE TABLE venta(
 	id SERIAL PRIMARY KEY,
 	id_cliente SERIAL references cuenta(id_cliente),
-	fecha timestamp without time zone DEFAULT now(),
+	fecha VARCHAR (255),
 	tipo_transaccion INT references transaccion (tipo),
 	dinero FLOAT,
 	volumen FLOAT	
@@ -104,10 +103,4 @@ CREATE TABLE usuario(
 	Pk_id_user SERIAL PRIMARY KEY ,
 	usuario VARCHAR(20),
 	pass VARCHAR(255)
-	);
-CREATE TABLE operario(
-	Pk_idoperario SERIAL PRIMARY KEY ,
-	nombre VARCHAR(100),
-	documento VARCHAR(50),
-	ibutton VARCHAR(20)
 	);

@@ -29,7 +29,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GRP700 Fleet:: Actualizar Productos</title>
+    <title>GRP700 Fleet:: Actualizar cuenta</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -85,7 +85,7 @@
                             </li>
                             <li><a href="customer.php">Clientes</a></li>
                             <li><a href="sales.php">Ventas</a></li>
-                            <li><a href="setup.php">Configuracion</a></li>
+                            <li><a href="setup.php">Configuracion</a></li> 
                             <li><a href="report.php">Reporte</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
@@ -111,13 +111,13 @@
     <div class="row-fluid breadcrumbs margin-bottom-40">
         <div class="container">
             <div class="span4">
-                <h1>Configuración de productos</h1>
+                <h1>Actualización de cuenta</h1>
             </div>
             <div class="span8">
                 <ul class="pull-right breadcrumb">
                     <li><a href="index.php">Inicio</a> <span class="divider">/</span></li>                    
                     <li><a href="setup.php">Configuración</a> <span class="divider">/</span></li>
-                    <li class="active">Actualización de productos</li>
+                    <li class="active">Actualización</li>
                 </ul>
             </div>
         </div>
@@ -131,58 +131,144 @@
 		<div class="row-fluid margin-bottom-40">
 			<!-- COLUMN 1 -->
                     <div class="span6">
-			<h3>Actualización de nombres</h3>
+			<h3>Datos de cuenta</h3>
 			<!-- BEGIN FORM-->
                         <div class="margin-bottom-30">
-                         
+                            <h4>Digite la información solicitada</h4>
                             <form class="form-horizontal" action="#" method="post">
 				<div class="control-group">
-                                    <label class="control-label" for="inputEmail">Producto</label>
-                                    <div class="controls">
-					<p>
-                                            <?php
-                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                                or die('Can not connect: ' . \pg_last_error());
-                                                $query = "SELECT  id_producto, descripcion FROM producto";
-                                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                                echo "<select name='select1' id='field' class='small m-wrap'>";
-                                                while($fila=  pg_fetch_array($result)){
-                                                    echo "<option value=".$fila['id_producto'].">".$fila['id_producto'].". ".$fila['descripcion']."</option>";
-                                                }
-                                                echo "</select>";
-                                            ?>
-                                        </p> 
-                                        <p><input name="producto1"  type="text"  placeholder="Nuevo nombre" id="field"  /></p>
+                    <label class="control-label" for="inputEmail">Cuenta</label>
+                    <div class="controls">
+						<p>
+							<?php
+									$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+									or die('Can not connect: ' . \pg_last_error());
+									$query = "SELECT  id_cliente, nombre FROM cuenta";
+									$result = pg_query($query) or die('Query error: ' . \pg_last_error());
+									echo "<select name='select1' id='field'>";
+									while($fila=  pg_fetch_array($result)){
+										echo "<option value=".$fila['id_cliente'].">".$fila['nombre']."</option>";
+									}
+									echo "</select>";
+							?>
+                        </p> 
 				    </div>
-				</div>				
-                                    <div class="control-group">
-					<div class="controls">                                            
-                                            <input input type="submit" name="enviar" value="Enviar"  class="btn black"  />
+				</div>
+				<div class="control-group">
+					<label class="control-label">Nombre de cliente</label>
+					<div class="controls">
+						<p><input name="linea1" type="text"  placeholder="Nombre de cliente" id="field"  /></p>                                            
 					</div>
+				</div> 
+				<div class="control-group">
+					<label class="control-label">NIT / CC</label>
+					<div class="controls">
+						<p><input name="id_tax" type="text" placeholder="NIT / CC" id="field" /></p>
+					</div>
+				</div> 
+				<div class="control-group">
+					<label class="control-label">Dirección</label>
+					<div class="controls">
+						<p><input name="dir" type="text" placeholder="Direccion" id="field" /></p>
+					</div>
+				</div> 
+				<div class="control-group">
+					<label class="control-label">Teléfono</label>
+					<div class="controls">
+						<p><input name="tel" type="text" placeholder="Teléfono" id="field"/></p>                                            
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Ciudad</label>
+					<div class="controls">
+						<p><input name="ciudad" type="text" placeholder="Ciudad" id="field"/></p>                                    
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Departamento / Provincia</label>
+					<div class="controls">
+						<p><input name="state" type="text" placeholder="Departamento / Provincia" id="field"/></p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Departamento / Provincia</label>
+					<div class="controls">
+						<p><input name="state" type="text" placeholder="Departamento / Provincia" id="field"/></p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Tipo de cuenta</label>
+					<div class="controls">
+						 <p>
+							<?php
+								$dbconn2 = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+								or die('Can not connect: ' . \pg_last_error());
+								$query2 = "SELECT  * FROM transaccion";
+								$result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
+								echo "<select name='select2' id='field' class='small m-wrap'>";
+								while($fila2=  pg_fetch_array($result2)){
+									echo "<option value=".$fila2['tipo'].">".$fila2['descripcion']."</option>";
+								}
+								echo "</select>";
+							?>
+						</p>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Saldo</label>
+					<div class="controls">
+						<p><input name="saldo" type="text" placeholder="Saldo" id="field"/></p>
+					</div>
+				</div>
+				
+				<div class="control-group">
+				    <label class="control-label">Activo</label>
+                    <div class="controls">					                                        
+						<p><input type="checkbox" name="estado" value="1"></p>                                                                        
 				    </div>
-                            </form>
-                            
-			</div>
+				</div>
+                <div class="control-group">
+					<div class="controls">                                            
+                        <input input type="submit" name="enviar" value="Enviar"  class="btn black"  />
+					</div>
+				</div>
+            </form>					
+		</div>
                         
                         
 			<!-- END FORM-->  								
 				
 			</div>
-                        <p><?php 
-                                if (filter_input(INPUT_POST,'enviar')) {   
-                                    $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                    or die('Can not connect: ' . \pg_last_error());
-                                    $producto1 = filter_input(INPUT_POST,'producto1');
-                                    $id = filter_input(INPUT_POST,'select1');                                                                     
-                                    $query = "UPDATE producto SET descripcion='$producto1' where id_producto = '$id' ";
-                                    $result = pg_query($query) or die('La consulta fallo: ' . \pg_last_error());
-                                    // Liberando el conjunto de resultados
-                                    pg_free_result($result);
-                                    // Cerrando la conexi�n
-                                    pg_close($dbconn);
-                                    echo "Gracias, hemos recibido su información.\n"; 
-                                 }
-                        ?></p>
+                       <p>
+                        <?php 
+                            if (filter_input(INPUT_POST,'enviar')) {   
+                            $dbconn3 = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+                            or die('Can not connect: ' . \pg_last_error());
+                            $cliente  = filter_input(INPUT_POST,'select1');
+                            $linea1 = filter_input(INPUT_POST,'linea1');                                    
+                            $id_tax = filter_input(INPUT_POST,'id_tax');
+                            $tel = filter_input(INPUT_POST,'tel');
+                            $dir = filter_input(INPUT_POST,'dir');
+                            $ciudad = filter_input(INPUT_POST,'ciudad');   
+                            $state = filter_input(INPUT_POST,'state');
+                            $saldo = filter_input(INPUT_POST,'saldo');
+                            $tipo  = filter_input(INPUT_POST,'select2');
+                            $estado = filter_input(INPUT_POST,'estado');                                            
+                            if ($estado === "1" ){
+                                $activo = 1;
+                            }else{                                            
+                                $activo = 0;
+                            }
+                            $query3 = "UPDATE cuenta SET estado_cuenta = '$activo',nombre ='$linea1', tax_number = '$id_tax', direccion ='$dir', telefono ='$tel', ciudad ='$ciudad', provincia ='$state',tipo_transaccion ='$tipo', saldo ='$saldo' where id_cliente = '$cliente'";
+                            $result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
+                            // Liberando el conjunto de resultados
+                            pg_free_result($result3);
+                            // Cerrando la conexi�n
+                            pg_close($dbconn3);
+                            echo "Gracias, hemos recibido la información.\n"; 
+                            }
+                                    ?> 
+                                </p>
 							                            									
 			</div>
 				

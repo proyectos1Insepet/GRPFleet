@@ -205,7 +205,7 @@
                         <p><a class="btn green" href="vehicle.php"/>Siguiente</a><br></p>
                         <p><a class="btn green" href="customerdetail.php"/>Clientes Registrados</a><br></p>
                         
-                        <!--<h3>Venta Privada</h3>
+                        <!--<h3>Venta Privada</h3>-->
                         <p>
                         <?php 
                             //$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
@@ -248,18 +248,7 @@
                                 echo "Gracias, hemos recibido la información.\n"; 
                             }
                         ?>  
-                    </p>
-                        <form class="form-horizontal" action="#" method="post">
-                            <div class="control-group">
-				<div class="controls">                                            
-                                    <p><input input type="submit" name="activar" value="Activar"  class="btn blue"/></p>
-				</div>
-                                <div class="controls">                                            
-                                    <p><input input type="submit" name="desactivar" value="Desactivar"  class="btn blue"/></p>
-				</div>
-                            </div>                                
-                        </form>                       
-                    --> 
+                    </p>                                                                
 							                            									
 			</div>
 				
