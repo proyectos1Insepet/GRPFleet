@@ -152,14 +152,14 @@
                         ?>
 			<div class="portlet-body">
                             <table class="table table-hover">
-				<thead>
+								<thead>
                                     <tr>
 										<th>ID Cliente </th>
 										<th>Cliente </th>
                                         <th>Valor</th>
                                         <th>Cantidad</th>
                                     </tr>
-				</thead>
+							</thead>
                                 <tbody>
                                     <?php   
                                         echo "<tr>";

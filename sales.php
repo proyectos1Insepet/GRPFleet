@@ -134,18 +134,19 @@
     <!-- BEGIN CONTAINER -->   
     <div class="container min-hight">
         <div class="row-fluid">		        
-            <div class="span6">
+        <div class="span6">
+		<p><a class="btn green" href="filtrafecha.php"/>Ventas por fecha</a><br></p>
 		<!-- BEGIN BORDERED TABLE PORTLET-->
 		<div class="portlet box red">
-                    <div class="portlet-title">
-			<div class="caption"><i class="icon-dashboard"></i>Ventas registradas</div>
-                            <div class="tools">
+            <div class="portlet-title">
+				<div class="caption"><i class="icon-dashboard"></i>Ventas registradas</div>
+                <div class="tools">
 				<a href="javascript:;" class="collapse"></a>
 				<a href="#portlet-config" data-toggle="modal" class="config"></a>
 				<a href="javascript:;" class="reload"></a>
 				<a href="javascript:;" class="remove"></a>
 			    </div>
-                    </div>
+            </div>
                         <?php
                             $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                             or die('Can not connect: ' . \pg_last_error());
@@ -156,24 +157,20 @@
                         ?>
 			<div class="portlet-body">
                             <table class="table table-hover">
-				<thead>
+								<thead>
                                     <tr>
 					                    <th>Cliente </th>
 										<th>ID Veh. </th>
                                         <th>Fecha </th>
                                         <th># Venta</th>
                                     </tr>
-				</thead>
+								</thead>
                                 <tbody>
                                     <?php   
                                         echo "<tr>";
                                         for($i= $ultima; $i>($ultima - 100); $i--){
                                             $sql = "select v.id_cliente,
-											(select extract(year from (select fecha from venta where id_cliente =v.id_cliente))), 
-											(select extract(day from (select fecha from venta where id_cliente =v.id_cliente))),
-											(select extract(month from (select fecha from venta where id_cliente =v.id_cliente))),
-											(select extract(hour from (select fecha from venta where id_cliente =v.id_cliente))),
-											(select extract(minutes from (select fecha from venta where id_cliente =v.id_cliente))),
+											fecha,
 											v.tipo_transaccion,v.volumen, v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion, c.nombre from venta v                                                                                          inner join venta_detalle vd on v.id = vd.fk_id                                                                                                         
 											inner join producto p on vd.fk_id_producto = p.id_producto                                                                                             
 											inner join cuenta c on v.id_cliente = c.id_cliente WHERE v.id = $i;";
@@ -187,9 +184,9 @@
                                                 if(pg_field_is_null($result2, 0, "id_cliente")==0){
                                                     $row2 = pg_fetch_row($result2);   
                                                     $row3 = pg_fetch_assoc($result3);                                                                                                                                                                                
-                                                    echo "<td background-color:#F5D0A9;>"." ".$row2[13]."</td> ";
-													echo "<td background-color:#F5D0A9;>".$row2[9]." </td>";
-                                                    echo "<td background-color:#F5D0A9;>".$row2[1]."-".$row2[2]."-".$row2[3]." ".$row2[4].":".$row2[5]." </td>";
+                                                    echo "<td background-color:#F5D0A9;>"." ".$row2[9]."</td> ";
+													echo "<td background-color:#F5D0A9;>".$row2[5]." </td>";
+                                                    echo "<td background-color:#F5D0A9;>".$row2[1]." </td>";
                                                     echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$i.'">'.$i.'</a>'."</td> ";
 													
                                                     echo "</tr>";  

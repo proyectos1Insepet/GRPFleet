@@ -130,41 +130,55 @@
 		<!-- ROW 1 -->
 		<div class="row-fluid margin-bottom-40">
 			<!-- COLUMN 1 -->
-                    <div class="span6">
+            <div class="span6">
 			<h3>Actualización de vehículos</h3>
 			<!-- BEGIN FORM-->
-                        <div class="margin-bottom-30">
-                         
-                            <form class="form-horizontal" action="#" method="post">
-				<div class="control-group">
-                                    <label class="control-label" for="inputEmail">Placa</label>
-                                    <div class="controls">
-					<p>
-                                             <?php
-                                                $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                                or die('Can not connect: ' . \pg_last_error());
-                                                $query = "SELECT  id_vehiculo, placa FROM vehiculo";
-                                                $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                                echo "<select name='select1' id='field' class='small m-wrap'>";
-                                                while($fila=  pg_fetch_array($result)){
-                                                    echo "<option value=".$fila['id_vehiculo'].">".$fila['placa']."</option>";
-                                                }
-                                                echo "</select>";
-                                        ?>
-                                        </p>                                         
-                                        <p><input name="serial" type="text" placeholder="Serial" id="field" /></p>                                        
-                                        <p><input type="checkbox" name="estado" value="1"> - Activo</input></p>                                  
-                                        
-				    </div>
-				</div>				
-                                    <div class="control-group">
-					<div class="controls">                                            
-                                            <input input type="submit" name="enviar" value="Actualizar"  class="btn black"  />
-                                            <input input type="submit" name="borrar" value="Borrar Vehiculo"  class="btn black"  />
-					</div>
-				    </div>
-                            </form>
-                            
+				<div class="margin-bottom-30">
+					<form class="form-horizontal" action="#" method="post">
+						<div class="control-group">
+							<label class="control-label" for="inputEmail">Placa</label>
+							<div class="controls">
+								<p>
+									<?php
+										$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+										or die('Can not connect: ' . \pg_last_error());
+										$query = "SELECT  id_vehiculo, placa FROM vehiculo";
+										$result = pg_query($query) or die('Query error: ' . \pg_last_error());
+										echo "<select name='select1' id='field' class='small m-wrap'>";
+										while($fila=  pg_fetch_array($result)){
+											echo "<option value=".$fila['id_vehiculo'].">".$fila['placa']."</option>";
+										}
+										echo "</select>";
+									?>
+								</p>  
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Serial</label>
+							<div class="controls">
+								<p><input class="m-wrap" name="serial" type="text" placeholder="Serial" id="field" /></p>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">ID</label>
+							<div class="controls">
+								<p><input class="m-wrap" name="idvehiculo" type="text"  placeholder="ID" id="field" /></p>
+							</div>
+						</div>   
+						<div class="control-group">
+							<label class="control-label">Activo</label>
+							<div class="controls">
+								<p><input class="m-wrap" type="checkbox" name="estado" value="1"></input></p>
+							</div>
+						</div>                                        									  							
+						<div class="control-group">
+							<div class="controls">                                            
+								<input input type="submit" name="enviar" value="Actualizar"  class="btn black"  />
+								<input input type="submit" name="borrar" value="Borrar Vehiculo"  class="btn black"  />
+							</div>
+						</div>
+					</form>
+				</div>       
 			</div>
                         
                         
