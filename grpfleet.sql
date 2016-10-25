@@ -1,4 +1,4 @@
-CREATE TABLE transaccion(
+﻿CREATE TABLE transaccion(
 	tipo INT PRIMARY KEY,
 	descripcion VARCHAR (50)
 	);
@@ -104,3 +104,15 @@ CREATE TABLE usuario(
 	usuario VARCHAR(20),
 	pass VARCHAR(255)
 	);
+
+CREATE TABLE configuracion(
+	mangueras INT,
+	p1 INT,
+	p2 INT,
+	p3 INT,
+	versionS INT,
+	dDinero INT,
+	dVolumen INT,
+	ppux10 INT,
+	pantallas INT
+);

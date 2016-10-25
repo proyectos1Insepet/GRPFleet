@@ -1,4 +1,3 @@
-
 <?php
 	session_start();
 	 
@@ -137,9 +136,9 @@
     <div class="container min-hight">
         <div class="row-fluid">		        
         <div class="span6">		
-		<form class="form-horizontal" action="" method="post">	
+		<form class="form-horizontal" action="csv.php" method="post">	
 			<p><a class="btn green" href="filtrafecha.php"/>Ventas por fecha</a><br></p>
-			<input input type="submit" name="csv" value="Generar CSV"  class="btn black"  />			
+			<p><input input type="submit" name="csv" value="Generar CSV"  class="btn black"  /></p>
 		 
 		<!-- BEGIN BORDERED TABLE PORTLET-->
 		<div class="portlet box red">
@@ -208,13 +207,13 @@
 		</div>
 		<!-- END BORDERED TABLE PORTLET-->
 		<?php
-		if (filter_input(INPUT_POST,'csv')) { 			
-			$output = fopen('datos.csv', 'w');
-			for($i= $ultima; $i>($ultima - 100); $i--){
-				fputcsv($output, $row2);
-			}
+		if (filter_input(INPUT_POST,'csv')) { 
+			header('Content-Type: text/csv; charset=utf-8');
+			header('Content-Disposition: attachment; filename=data.csv');
+			$output = fopen('php://output', 'w');
 
-			fclose($file); 
+			// output the column headings
+			fputcsv($output, array('Column 1', 'Column 2', 'Column 3'));		
 		}
 ?>
 		</form>
