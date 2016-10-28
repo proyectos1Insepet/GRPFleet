@@ -157,6 +157,14 @@
                                     </div>
 							</div>
 						</form>
+						<form action="dispensador.php" class="form-horizontal">                              
+                            <div class="control-group">
+                                <label class="control-label"></label>
+                                    <div class="controls">
+                                        <button type="submit" class="btn blue"><i class="icon-ok"></i> Configuración equipo</button>                                        
+                                    </div>
+							</div>
+						</form>
 			<!-- END FORM-->  								
 				
 			</div>

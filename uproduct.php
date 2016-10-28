@@ -139,7 +139,7 @@
 				<div class="control-group">
                                     <label class="control-label" for="inputEmail">Producto</label>
                                     <div class="controls">
-					<p>
+					                   <p>
                                             <?php
                                                 $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                                 or die('Can not connect: ' . \pg_last_error());
@@ -153,7 +153,7 @@
                                             ?>
                                         </p> 
                                         <p><input name="producto1"  type="text"  placeholder="Nuevo nombre" id="field"  /></p>
-				    </div>
+									</div>
 				</div>				
                                     <div class="control-group">
 					<div class="controls">                                            

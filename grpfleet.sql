@@ -107,12 +107,18 @@ CREATE TABLE usuario(
 
 CREATE TABLE configuracion(
 	mangueras INT,
+	mangueras2 INT,
 	p1 INT,
 	p2 INT,
 	p3 INT,
+	p1b INT,
+	p2b INT,
+	p3b INT,
 	versionS INT,
 	dDinero INT,
 	dVolumen INT,
-	ppux10 INT,
+	ppux10 INT,	
+	solkm INT,
+	efectivo INT,
 	pantallas INT
 );
