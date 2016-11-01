@@ -206,16 +206,7 @@
 			</div>
 		</div>
 		<!-- END BORDERED TABLE PORTLET-->
-		<?php
-		if (filter_input(INPUT_POST,'csv')) { 
-			header('Content-Type: text/csv; charset=utf-8');
-			header('Content-Disposition: attachment; filename=data.csv');
-			$output = fopen('php://output', 'w');
 
-			// output the column headings
-			fputcsv($output, array('Column 1', 'Column 2', 'Column 3'));		
-		}
-?>
 		</form>
 		
     </div>

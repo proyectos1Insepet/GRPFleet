@@ -135,65 +135,73 @@
     <!-- BEGIN CONTAINER -->   
     <div class="container min-hight">
         <div class="row-fluid">		        
-            <div class="span6">
-		<!-- BEGIN BORDERED TABLE PORTLET-->
-		<div class="portlet box red">
-                    <div class="portlet-title">
-                        <div class="caption"><i class="icon-dashboard"></i><?php 
-                        $cliente = filter_input(INPUT_GET, 'cliente');
-                        echo "$cliente"?></div>
-                            <div class="tools">
-				<a href="javascript:;" class="collapse"></a>
-				<a href="#portlet-config" data-toggle="modal" class="config"></a>
-				<a href="javascript:;" class="reload"></a>
-				<a href="javascript:;" class="remove"></a>
-			    </div>
-                    </div>
-                        <?php
-                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                            or die('Can not connect: ' . \pg_last_error());                            
-                        ?>
-			<div class="portlet-body">
-                            <table class="table table-hover">
-				<thead>
-                                    <tr>
-										<th>Fecha</th>
-                                        <th>Vehiculo</th>
-                                        <th>Cantidad</th>
-                                    </tr>
-				</thead>
-                                <tbody>
-                                    <?php   
-                                        echo "<tr>";
-                                            $idcliente = filter_input(INPUT_GET, 'id_cliente');
-                                            $sql = "SELECT id_cliente FROM cuenta WHERE nombre ='$cliente';";                                            
-                                            $result = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
-                                            $row = pg_fetch_row($result);
-                                            $sql2 = "SELECT  v.fecha, v.dinero, v.volumen,v.id,c.nombre, vd.placa FROM venta v 
-											INNER JOIN cuenta c ON c.id_cliente = v.id_cliente 
-											INNER JOIN venta_detalle vd ON vd.fk_id = v.id
-											WHERE v.id_cliente = $idcliente;";                                            
-                                            $result2 = pg_query($sql2)or die('Query error: ' . \pg_last_error());                                                                                                                                    
-                                            $sql3 = "SELECT vol, moneda FROM recibo"; 
-                                            $result3 = pg_query($sql3)or die('Query error: ' . \pg_last_error());
-                                            $row3 = pg_fetch_assoc($result3);											
-											$consulta = "SELECT id_cliente FROM vehiculo WHERE placa ='$row2[5]';";
-											$resconsulta = pg_query($consulta)or die('Query error: ' . \pg_last_error());
-											$fila = pg_fetch_row($resconsulta); 											
-                                            while ($row2 = pg_fetch_row($result2)) { 
-                                                echo "<td background-color:#F5D0A9;>".$row2[0]." </td>";
-												echo "<td background-color:#F5D0A9;>".'<a href="vehicledetail.php?placa='.$row2[5].'&id='.$idcliente.'">'.$row2[5].'</a>'."</td> ";                                                 
-                                                echo "<td background-color:#F5D0A9;>".$row2[2]." ".$row3['vol']." </td>";
-                                                echo "</tr>";     
-                                            }
-                                            ?> 									                                                                                                                                                                                                                                                                                                            
-                                                                        
-                                </tbody>
-                            </table>
-			</div>
-		</div>
-		<!-- END BORDERED TABLE PORTLET-->
-            </div>
+        <div class="span6">
+			<form class="form-horizontal" action="csvdetail.php" method="post">					
+				<p><input input type="submit" name="csv" value="Generar CSV"  class="btn black"  /></p>
+			<!-- BEGIN BORDERED TABLE PORTLET-->
+				<div class="portlet box red">
+					<div class="portlet-title">
+						<div class="caption"><i class="icon-dashboard"></i>
+							<?php 
+								$cliente = filter_input(INPUT_GET, 'cliente');
+								echo "$cliente"
+							?>
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"></a>
+							<a href="#portlet-config" data-toggle="modal" class="config"></a>
+							<a href="javascript:;" class="reload"></a>
+							<a href="javascript:;" class="remove"></a>
+						</div>
+					</div>					
+					<?php
+						$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+						or die('Can not connect: ' . \pg_last_error());                            
+					?>
+					<div class="portlet-body">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Fecha</th>
+									<th>Vehiculo</th>
+									<th>Cantidad</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php   
+									echo "<tr>";
+										$idcliente = filter_input(INPUT_GET, 'id_cliente');
+										$sql = "SELECT id_cliente FROM cuenta WHERE nombre ='$cliente';";                                            
+										$result = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
+										$row = pg_fetch_row($result);
+										$sql2 = "SELECT  v.fecha, v.dinero, v.volumen,v.id,c.nombre, vd.placa FROM venta v 
+										INNER JOIN cuenta c ON c.id_cliente = v.id_cliente 
+										INNER JOIN venta_detalle vd ON vd.fk_id = v.id
+										WHERE v.id_cliente = $idcliente;";                                            
+										$result2 = pg_query($sql2)or die('Query error: ' . \pg_last_error());                                                                                                                                    
+										$sql3 = "SELECT vol, moneda FROM recibo"; 
+										$result3 = pg_query($sql3)or die('Query error: ' . \pg_last_error());
+										$row3 = pg_fetch_assoc($result3);											
+										$consulta = "SELECT id_cliente FROM vehiculo WHERE placa ='$row2[5]';";
+										$resconsulta = pg_query($consulta)or die('Query error: ' . \pg_last_error());
+										$fila = pg_fetch_row($resconsulta); 											
+										while ($row2 = pg_fetch_row($result2)) { 
+											echo "<td background-color:#F5D0A9;>".$row2[0]." </td>";
+											echo "<td background-color:#F5D0A9;>".'<a href="vehicledetail.php?placa='.$row2[5].'&id='.$idcliente.'">'.$row2[5].'</a>'."</td> ";                                                 
+											echo "<td background-color:#F5D0A9;>".$row2[2]." ".$row3['vol']." </td>";
+											echo "</tr>";     
+										}
+									?> 									                                                                                                                                                                                                                                                                                                            
+																				
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<p><input input type="hidden" name="cliente" value="<?php echo $cliente?>" /></p>
+				<p><input input type="hidden" name="idcliente" value="<?php echo $idcliente?>" /></p>
+			<!-- END BORDERED TABLE PORTLET-->
+			</form>
+        </div>
 	</div>        
     </div>
     <!-- END CONTAINER -->

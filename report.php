@@ -135,55 +135,57 @@
     <div class="container min-hight">
         <div class="row-fluid">		        
             <div class="span6">
-		<!-- BEGIN BORDERED TABLE PORTLET-->
-		<div class="portlet box red">
-                    <div class="portlet-title">
-			<div class="caption"><i class="icon-dashboard"></i>Totales de ventas</div>
-                            <div class="tools">
-				<a href="javascript:;" class="collapse"></a>
-				<a href="#portlet-config" data-toggle="modal" class="config"></a>
-				<a href="javascript:;" class="reload"></a>
-				<a href="javascript:;" class="remove"></a>
-			    </div>
-                    </div>
-                        <?php
-                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                            or die('Can not connect: ' . \pg_last_error());                            
-                        ?>
-			<div class="portlet-body">
-                            <table class="table table-hover">
+			<form class="form-horizontal" action="csvreport.php" method="post">					
+				<p><input input type="submit" name="csv" value="Generar CSV"  class="btn black"  /></p>
+					<!-- BEGIN BORDERED TABLE PORTLET-->
+					<div class="portlet box red">
+						<div class="portlet-title">
+						<div class="caption"><i class="icon-dashboard"></i>Totales de ventas</div>
+						<div class="tools">
+						<a href="javascript:;" class="collapse"></a>
+						<a href="#portlet-config" data-toggle="modal" class="config"></a>
+						<a href="javascript:;" class="reload"></a>
+						<a href="javascript:;" class="remove"></a>
+						</div>
+						</div>
+						<?php
+							$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+							or die('Can not connect: ' . \pg_last_error());                            
+						?>
+						<div class="portlet-body">
+							<table class="table table-hover">
 								<thead>
-                                    <tr>
+									<tr>
 										<th>ID Cliente </th>
 										<th>Cliente </th>
-                                        <th>Valor</th>
-                                        <th>Cantidad</th>
-                                    </tr>
+										<th>Valor</th>
+										<th>Cantidad</th>
+									</tr>
 							</thead>
-                                <tbody>
-                                    <?php   
-                                        echo "<tr>";
-                                        
-                                            $sql = "SELECT  SUM(v.dinero), SUM(v.volumen), c.nombre,c.id_cliente FROM venta v  INNER JOIN cuenta c ON v.id_cliente = c.id_cliente GROUP BY c.nombre,c.id_cliente;";
-                                            $sql2 = "select vol, moneda from recibo";                                            
-                                            $result = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
-                                            $result2 = pg_query($sql2)or die('Query error: ' . \pg_last_error());
-                                            $row2 = pg_fetch_assoc($result2); 
-                                            $arr = pg_fetch_all($result);                                            
-                                            while ($row = pg_fetch_row($result)) { 
-                                                echo "<td background-color:#F5D0A9;>".'<a href="reportdetail.php?id_cliente='.$row[3].'&cliente='.$row[2].'">'.$row[3].'</a>'."</td> ";                                                
+								<tbody>
+									<?php   
+										echo "<tr>";
+										
+											$sql = "SELECT  SUM(v.dinero), SUM(v.volumen), c.nombre,c.id_cliente FROM venta v  INNER JOIN cuenta c ON v.id_cliente = c.id_cliente GROUP BY c.nombre,c.id_cliente;";
+											$sql2 = "select vol, moneda from recibo";                                            
+											$result = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
+											$result2 = pg_query($sql2)or die('Query error: ' . \pg_last_error());
+											$row2 = pg_fetch_assoc($result2); 
+											$arr = pg_fetch_all($result);                                            
+											while ($row = pg_fetch_row($result)) { 
+												echo "<td background-color:#F5D0A9;>".'<a href="reportdetail.php?id_cliente='.$row[3].'&cliente='.$row[2].'">'.$row[3].'</a>'."</td> ";                                                
 												echo "<td background-color:#F5D0A9;>".$row[2]." </td>";
-                                                echo "<td background-color:#F5D0A9;>".$row2['moneda']." ".$row[0]." </td>";
-                                                echo "<td background-color:#F5D0A9;>".$row[1]." ".$row2['vol']." </td>";
-                                                echo "</tr>";     
-                                            }
-                                            ?> 									                                                                                                                                                                                                                                                                                                            
-                                                                        
-                                </tbody>
-                            </table>
-			</div>
-		</div>
-                
+												echo "<td background-color:#F5D0A9;>".$row2['moneda']." ".$row[0]." </td>";
+												echo "<td background-color:#F5D0A9;>".$row[1]." ".$row2['vol']." </td>";
+												echo "</tr>";     
+											}
+											?> 									                                                                                                                                                                                                                                                                                                            
+																		
+								</tbody>
+							</table>
+						</div>
+					</div>
+			</form>		
                 <div class="portlet box green">
                     <div class="portlet-title">
 			<div class="caption"><i class="icon-dashboard"></i>Historico de turnos</div>

@@ -136,6 +136,8 @@
     <div class="container min-hight">
         <div class="row-fluid">		        
             <div class="span6">
+			<form class="form-horizontal" action="csvvehicle.php" method="post">					
+				<p><input input type="submit" name="csv" value="Generar CSV"  class="btn black"  /></p>
 		<!-- BEGIN BORDERED TABLE PORTLET-->
 		<div class="portlet box red">
                     <div class="portlet-title">
@@ -186,6 +188,9 @@
                                                                         
                                 </tbody>
                             </table>
+				<p><input input type="hidden" name="placa" value="<?php echo $placa?>" /></p>
+				<p><input input type="hidden" name="idcliente" value="<?php echo $idcliente?>" /></p>
+				</form>
 			</div>
 		</div>
 		<!-- END BORDERED TABLE PORTLET-->
