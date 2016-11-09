@@ -4,7 +4,7 @@ Login page
 
 /* logo page */
 .login {
-  background-color: #666 !important;
+  background-color: #ffffff !important;
 }
 
 .login .logo {
@@ -27,15 +27,15 @@ Login page
 }
 
 .login .content h3 {
-  color: #eee;
+  color: #666;
 }
 .login .content h4  {
-  color: #eee;
+  color: #838383;
 }
 
 .login .content p,
 .login .content label {
-  color: #fff;
+  color: #666;
 }
 
 .login .content .login-form,
@@ -143,7 +143,7 @@ Login page
   width: 270px;
   margin: 0 auto; 
   padding: 10px 10px 0 10px;
-  color: #eee;
+  color: #666;
   font-size: 12px;
 }
 

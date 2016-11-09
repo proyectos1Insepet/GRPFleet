@@ -42,9 +42,11 @@
 		<!-- BEGIN LOGIN FORM -->
 		<form class="form-vertical login-form" action="#" method="post">
 			<h3 class="form-title">Ingrese a su cuenta</h3>
+			<h4 class="form-title"><?php $hoy = date("F j, Y, g:i a"); echo $hoy; ?></h4>
 			<div class="alert alert-error hide">
 				<button class="close" data-dismiss="alert"></button>
 				<span>Ingrese usuario y clave.</span>
+				
 			</div>
 			<div class="control-group">
 				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
