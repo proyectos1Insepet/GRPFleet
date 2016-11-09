@@ -21,6 +21,8 @@
 	      Necesita Hacer Login</a>";
 	exit;
 	}
+	
+	
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -135,7 +137,7 @@
 			<!-- BEGIN FORM-->
                         <div class="margin-bottom-30">
                             <h4>Digite la información solicitada</h4>
-                            <form class="form-horizontal" action="#" method="post">
+                            <form class="form-horizontal" action="update.php" method="post">
 				<div class="control-group">
                     <label class="control-label" for="inputEmail">Cuenta</label>
                     <div class="controls">
@@ -147,7 +149,7 @@
 									$result = pg_query($query) or die('Query error: ' . \pg_last_error());
 									echo "<select name='select1' id='field'>";
 									while($fila=  pg_fetch_array($result)){
-										echo "<option value=".$fila['id_cliente'].">".$fila['nombre']."</option>";
+										echo "<option value=".$fila['id_cliente'].">".$fila['nombre']."</option>";										
 									}
 									echo "</select>";
 							?>
@@ -155,15 +157,21 @@
 				    </div>
 				</div>
 				<div class="control-group">
+					<div class="controls">
+						<p><input input type="submit" name="consultar" value="Estado Actual"  class="btn black"  /> </p>
+					</div>
+				</div>
+				
+				<div class="control-group">
 					<label class="control-label">Nombre de cliente</label>
 					<div class="controls">
-						<p><input name="linea1" type="text"  placeholder="Nombre de cliente" id="field"  /></p>                                            
+						<p><input name="linea1" type="text"  placeholder="Nombre"/></p>                                            
 					</div>
 				</div> 
 				<div class="control-group">
 					<label class="control-label">NIT / CC</label>
 					<div class="controls">
-						<p><input name="id_tax" type="text" placeholder="NIT / CC" id="field" /></p>
+						<p><input name="id_tax" type="text" placeholder="NIT / CC"/></p>
 					</div>
 				</div> 
 				<div class="control-group">
@@ -190,12 +198,7 @@
 						<p><input name="state" type="text" placeholder="Departamento / Provincia" id="field"/></p>
 					</div>
 				</div>
-				<div class="control-group">
-					<label class="control-label">Departamento / Provincia</label>
-					<div class="controls">
-						<p><input name="state" type="text" placeholder="Departamento / Provincia" id="field"/></p>
-					</div>
-				</div>
+				
 				<div class="control-group">
 					<label class="control-label">Tipo de cuenta</label>
 					<div class="controls">
@@ -239,36 +242,62 @@
 			<!-- END FORM-->  								
 				
 			</div>
-                       <p>
-                        <?php 
-                            if (filter_input(INPUT_POST,'enviar')) {   
-                            $dbconn3 = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                            or die('Can not connect: ' . \pg_last_error());
-                            $cliente  = filter_input(INPUT_POST,'select1');
-                            $linea1 = filter_input(INPUT_POST,'linea1');                                    
-                            $id_tax = filter_input(INPUT_POST,'id_tax');
-                            $tel = filter_input(INPUT_POST,'tel');
-                            $dir = filter_input(INPUT_POST,'dir');
-                            $ciudad = filter_input(INPUT_POST,'ciudad');   
-                            $state = filter_input(INPUT_POST,'state');
-                            $saldo = filter_input(INPUT_POST,'saldo');
-                            $tipo  = filter_input(INPUT_POST,'select2');
-                            $estado = filter_input(INPUT_POST,'estado');                                            
-                            if ($estado === "1" ){
-                                $activo = 1;
-                            }else{                                            
-                                $activo = 0;
-                            }
-                            $query3 = "UPDATE cuenta SET estado_cuenta = '$activo',nombre ='$linea1', tax_number = '$id_tax', direccion ='$dir', telefono ='$tel', ciudad ='$ciudad', provincia ='$state',tipo_transaccion ='$tipo', saldo ='$saldo' where id_cliente = '$cliente'";
-                            $result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
-                            // Liberando el conjunto de resultados
-                            pg_free_result($result3);
-                            // Cerrando la conexi�n
-                            pg_close($dbconn3);
-                            echo "Gracias, hemos recibido la información.\n"; 
-                            }
-                                    ?> 
-                                </p>
+				<p>
+					<?php 
+						if (filter_input(INPUT_POST,'enviar')) {   
+						$dbconn3 = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+						or die('Can not connect: ' . \pg_last_error());
+						$cliente  = filter_input(INPUT_POST,'select1');
+						$linea1 = filter_input(INPUT_POST,'linea1');                                    
+						$id_tax = filter_input(INPUT_POST,'id_tax');
+						$tel = filter_input(INPUT_POST,'tel');
+						$dir = filter_input(INPUT_POST,'dir');
+						$ciudad = filter_input(INPUT_POST,'ciudad');   
+						$state = filter_input(INPUT_POST,'state');
+						$saldo = filter_input(INPUT_POST,'saldo');
+						$tipo  = filter_input(INPUT_POST,'select2');
+						$estado = filter_input(INPUT_POST,'estado');                                            
+						if ($estado === "1" ){
+							$activo = 1;
+						}else{                                            
+							$activo = 0;
+						}
+						$query3 = "UPDATE cuenta SET estado_cuenta = '$activo',nombre ='$linea1', tax_number = '$id_tax', direccion ='$dir', telefono ='$tel', ciudad ='$ciudad', provincia ='$state',tipo_transaccion ='$tipo', saldo ='$saldo' where id_cliente = '$cliente'";
+						$result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
+						// Liberando el conjunto de resultados
+						pg_free_result($result3);
+						// Cerrando la conexi�n
+						pg_close($dbconn3);
+						echo "Gracias, hemos recibido la información.\n"; 
+						}
+						if (filter_input(INPUT_POST,'consultar')) {
+							$tomacliente  = filter_input(INPUT_POST,'select1');							
+							$consulta  = "SELECT nombre,tax_number,direccion,telefono,ciudad,provincia from cuenta where id_cliente = $tomacliente ;";
+							$resultado = pg_query($consulta);							
+							$filares   = pg_fetch_row($resultado);
+							$nombre= $filares[0];
+							$id_tax    = $filares[1];
+							$tel       = $filares[3];
+							$dir       = $filares[2];
+							$ciudad    = $filares[4];
+							$state     = $filares[5];
+							echo "<br> ";
+							echo "<br> ";
+							echo "<br> ";
+							echo "<br> ";
+							echo "<br> ";
+							echo "<br> ";
+							echo "<br> ";
+							echo "<br> ";
+							echo "Nombre: "."$nombre"."<br> ";
+							echo "Número Tributario: "."$id_tax"."<br> ";
+							echo "Teléfono: "."$tel"."<br> ";
+							echo "Dirección: "."$dir"."<br> ";
+							echo "Ciudad: "."$ciudad"."<br> ";
+							echo "Estado / Provincia: "."$state"."<br> ";
+						}							
+					?> 
+				</p>
 							                            									
 			</div>
 				

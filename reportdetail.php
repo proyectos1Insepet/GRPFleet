@@ -163,6 +163,7 @@
 							<thead>
 								<tr>
 									<th>Fecha</th>
+									<th>Cuenta</th>
 									<th>Vehiculo</th>
 									<th>Cantidad</th>
 								</tr>
@@ -186,7 +187,8 @@
 										$resconsulta = pg_query($consulta)or die('Query error: ' . \pg_last_error());
 										$fila = pg_fetch_row($resconsulta); 											
 										while ($row2 = pg_fetch_row($result2)) { 
-											echo "<td background-color:#F5D0A9;>".$row2[0]." </td>";
+											echo "<td background-color:#F5D0A9;>".substr($row2[0],0,-10)." </td>";
+											echo "<td background-color:#F5D0A9;>"." ".$row2[4]."</td> ";
 											echo "<td background-color:#F5D0A9;>".'<a href="vehicledetail.php?placa='.$row2[5].'&id='.$idcliente.'">'.$row2[5].'</a>'."</td> ";                                                 
 											echo "<td background-color:#F5D0A9;>".$row2[2]." ".$row3['vol']." </td>";
 											echo "</tr>";     

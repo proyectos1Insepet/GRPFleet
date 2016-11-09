@@ -183,78 +183,7 @@
                             $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                             or die('Can not connect: ' . \pg_last_error());                            
                         ?>
-			<div class="portlet-body">
-				<form action="" method="post">
-					
-						<p>Fecha Inicial: <input type="text" id="datepicker" name="fecha1"></p>
-						<p>Fecha Final  : <input type="text" id="datepicker2" name="fecha2"></p>          
-					
-					<div class="control-group">
-						<div class="controls">                                            
-							<input input type="submit" name="enviar" value="Consultar"  class="btn black"  />
-						</div>
-					</div>
-				</form>
-					<p>
-						<?php 
-						if (filter_input(INPUT_POST,'enviar')) {
-							$fechaini   = filter_input(INPUT_POST,'fecha1');
-							$fechafin   = filter_input(INPUT_POST,'fecha2');
-							echo "<blockquote>"."Fecha inicial: "."$fechaini"."</blockquote>"; 
-							echo "<blockquote>"."Fecha final: "."$fechafin"."</blockquote>";
-							echo '<form action="csvfecha.php" method="post">';
-								echo '<div class="control-group">';									
-									echo '<div class="controls">';										
-										echo '<input input type="hidden" name="inicial" value="'.$fechaini.'" />';
-									echo '</div>';
-									echo '<div class="controls">';										
-										echo '<input input type="hidden" name="final" value="'.$fechafin.'" />';
-									echo '</div>';
-									echo '<div class="controls">';
-										echo '<input input type="submit" name="enviar" value="Exportar"  class="btn black"  />';
-									echo '</div>';
-								echo '</div>';
-							echo '</form>';	
-
-							$query = "SELECT  v.id_cliente,c.nombre from venta v inner join cuenta c  on v.id_cliente=c.id_cliente where fecha between '$fechaini' AND '$fechafin' group by v.id_cliente,c.nombre;";
-							$result = pg_query($query) or die('Query error: ' . \pg_last_error());
-							echo '<div class="control-group">';
-								echo '<label class="control-label" for="inputEmail">Filtro por cliente / sub cuenta</label>';
-								echo '<div class="controls">';
-								echo "<select name='select1' class='small m-wrap'>";
-								while($fila=  pg_fetch_array($result)){								
-									echo "<option value=".$fila['id_cliente'].">".$fila['id_cliente'].". ".$fila['nombre']."</option>";
-								}
-								echo "</select>";
-								echo "</div>";
-							echo "</div>";		
-
-							
-
-							
-						echo '<form action="csvfiltro.php" method="post">';
-								echo '<div class="control-group">';
-									echo '<div class="controls">';
-										echo '<label class="control-label">ID cliente/ sub cuenta</label>';
-										echo '<input input type="text" name="cliente" />';
-									echo '</div>';
-									echo '<div class="controls">';
-										echo '<label class="control-label">Fecha Inicial</label>';
-										echo '<input input type="text" name="inicial" value="'.$fechaini.'" />';
-									echo '</div>';
-									echo '<div class="controls">';
-										echo '<label class="control-label">Fecha final</label>';
-										echo '<input input type="text" name="final" value="'.$fechafin.'" />';
-									echo '</div>';
-									echo '<div class="controls">';
-										echo '<input input type="submit" name="filtrar" value="Filtrar"  class="btn black"  />';
-									echo '</div>';
-								echo '</div>';
-							echo '</form>';	
-						}							
-						?>
-					</p>
-				
+			<div class="portlet-body">				
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -267,22 +196,23 @@
 					<tbody>
 						<?php   
 							echo "<tr>";
-							if (filter_input(INPUT_POST,'enviar')) {
-								$fechaini   = filter_input(INPUT_POST,'fecha1');
-								$fechafin   = filter_input(INPUT_POST,'fecha2');
-								$sql        = "select v.id,v.id_cliente,v.volumen,v.dinero,c.nombre from venta v inner join cuenta c on c.id_cliente = v.id_cliente where fecha between '$fechaini' AND '$fechafin'";								                                         
-								$result     = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
+							if (filter_input(INPUT_POST,'filtrar')) {
+								$cuenta    = filter_input(INPUT_POST,'cliente'); 
+								$fechaini = filter_input(INPUT_POST,'inicial'); 
+								$fechafin  = filter_input(INPUT_POST,'final'); 								
+								$consultar  = "select id,id_cliente,volumen,dinero from venta where (fecha between '$fechaini' AND '$fechafin') AND id_cliente =$cuenta; ";								                                         
+								$resultar   = pg_query($consultar)or die('Query error: ' . \pg_last_error()); 
 								$sql2       = "select vol, moneda from recibo";
 								$result2    = pg_query($sql2)or die('Query error: ' . \pg_last_error());
 								$row2       = pg_fetch_assoc($result2);
-								while ($row = pg_fetch_row($result)) { 
-									echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$row[0].'">'.$row[0].'</a>'."</td> ";
-									echo "<td background-color:#F5D0A9;>".'<a href="reportdetail.php?id_cliente='.$row[1].'">'.$row[4].'</a>'."</td> ";                                                									
-									echo "<td background-color:#F5D0A9;>".$row[2]." ".$row2['vol']." </td>";
-									echo "<td background-color:#F5D0A9;>".$row2['moneda']." ".$row[3]." </td>";									
+								while ($rows = pg_fetch_row($resultar)) { 
+									echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$rows[0].'">'.$rows[0].'</a>'."</td> ";
+									echo "<td background-color:#F5D0A9;>".'<a href="reportdetail.php?id_cliente='.$rows[1].'">'.$rows[1].'</a>'."</td> ";                                                									
+									echo "<td background-color:#F5D0A9;>".$rows[2]." ".$row2['vol']." </td>";
+									echo "<td background-color:#F5D0A9;>".$row2['moneda']." ".$rows[3]." </td>";									
 									echo "</tr>";     
 								}
-							}
+						}
 						?> 									                                                                                                                                                                                                                                                                                                            																																		                                                                                                                                                                                                                                                                                                           														
 					</tbody>
 				</table>

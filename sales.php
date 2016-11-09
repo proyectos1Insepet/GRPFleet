@@ -166,6 +166,7 @@
 					                    <th>Cliente </th>
 										<th>ID Veh. </th>
                                         <th>Fecha </th>
+										<th>Vol. </th>
                                         <th># Venta</th>
                                     </tr>
 								</thead>
@@ -174,7 +175,7 @@
                                         echo "<tr>";
                                         for($i= $ultima; $i>($ultima - 100); $i--){
                                             $sql = "select v.id_cliente,
-											fecha,
+											v.fecha,
 											v.tipo_transaccion,v.volumen, v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion, c.nombre from venta v                                                                                          inner join venta_detalle vd on v.id = vd.fk_id                                                                                                         
 											inner join producto p on vd.fk_id_producto = p.id_producto                                                                                             
 											inner join cuenta c on v.id_cliente = c.id_cliente WHERE v.id = $i;";
@@ -190,9 +191,9 @@
                                                     $row3 = pg_fetch_assoc($result3);                                                                                                                                                                                
                                                     echo "<td background-color:#F5D0A9;>"." ".$row2[9]."</td> ";
 													echo "<td background-color:#F5D0A9;>".$row2[5]." </td>";
-                                                    echo "<td background-color:#F5D0A9;>".$row2[1]." </td>";
-                                                    echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$i.'">'.$i.'</a>'."</td> ";
-													
+                                                    echo "<td background-color:#F5D0A9;>".substr($row2[1],0,-10)." </td>";
+													echo "<td background-color:#F5D0A9;>".$row2[3]." </td>";
+                                                    echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$i.'">'.$i.'</a>'."</td> ";													
                                                     echo "</tr>";  
                                             }else {
                                                 echo '<br>Sin resultados.';                                            

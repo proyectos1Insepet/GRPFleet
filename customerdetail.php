@@ -136,33 +136,35 @@
         <div class="row-fluid margin-bottom-40">					
             <div class="span6">
                 <div class="margin-bottom-30">
-                            <h4>Seleccione el cliente</h4>
-					<form class="form-horizontal" action="#" method="post">
-                                            <div class="control-group">	
-                                                <div class="controls">
-                                                    <?php
-                                                        $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                                        or die('Can not connect: ' . \pg_last_error());
-                                                        $query = "SELECT  id_cliente, nombre FROM cuenta";
-                                                        $result = pg_query($query) or die('Query error: ' . \pg_last_error());
-                                                        echo "<select name='select1' id='field'>";
-                                                        while($fila=  pg_fetch_array($result)){
-                                                            echo "<option value=".$fila['id_cliente'].">".$fila['nombre']."</option>";
-                                                        }
-                                                        echo "</select>";
-                                                    ?>                                                							                                            
-                                                    <input input type="submit" name="enviar" value="Seleccionar"  class="btn black"  />
+                    <h4>Seleccione el cliente</h4>
+					<form class="form-horizontal" action="" method="post">
+						<div class="control-group">	
+							<div class="controls">
+								<?php
+									$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+									or die('Can not connect: ' . \pg_last_error());
+									$query = "SELECT  id_cliente, nombre FROM cuenta";
+									$result = pg_query($query) or die('Query error: ' . \pg_last_error());
+									echo "<select name='select1' id='field'>";
+									while($fila=  pg_fetch_array($result)){
+										echo "<option value=".$fila['id_cliente'].">".$fila['nombre']."</option>";
+									}
+									echo "</select>";
+								?>                                                							                                            
+								<input input type="submit" name="enviar" value="Seleccionar"  class="btn black"  />
+							</div>
 						</div>
-                                            </div>
 					</form>
 						<!-- BEGIN BORDERED TABLE PORTLET-->
 						<div class="portlet box blue">
 							<div class="portlet-title">
-								<div class="caption"><i class="icon-filter"></i>Detalle de cliente: <?php $cliente = filter_input(INPUT_POST,'select1'); 
+								<div class="caption"><i class="icon-filter"></i>
+								Detalle de cliente: <?php $cliente = filter_input(INPUT_POST,'select1'); 
                                                                 $consulta = "SELECT nombre FROM cuenta WHERE id_cliente = $cliente";
                                                                 $resultado = pg_query($consulta) or die();
                                                                 $dato=pg_fetch_array($resultado);
-                                                                echo $dato['nombre'] ?></div>
+                                                                echo $dato['nombre'] ?>
+								</div>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="#portlet-config" data-toggle="modal" class="config"></a>
@@ -200,7 +202,25 @@
                                             }
                                         }    
                                     }
-									?>                                                                            								
+									?> 
+									<?php 									
+                                        echo "<tr>";                                                                                
+                                        $clientes = "SELECT c.estado_cuenta, c.tipo_transaccion, c.saldo,t.descripcion FROM cuenta c INNER JOIN transaccion t ON c.tipo_transaccion = t.tipo ; ";                                                                                                                                                               
+                                        $resultado1 = pg_query($clientes)or die('Query error: ' . \pg_last_error());                                                                                 
+                                        if($resultado1){
+                                            if(pg_field_is_null($resultado1, 0, "id_cliente")==0){
+                                                while($rows = pg_fetch_row($resultado1)){
+													echo "<td background-color:#F5D0A9;>"." ".$rows[0]."</td> ";
+													echo "<td background-color:#F5D0A9;>".$rows[3]." </td>";
+													echo "<td background-color:#F5D0A9;>".$rows[2]." </td>";
+													echo "</tr>";
+												}                                                                                                                                                                                                                                                                                                                            
+                                            }else{
+                                                echo '<br>Sin resultados.';                                            
+                                            }
+                                        }  
+									?>
+									</tbody>
 								</table>
                             </div>
                                                     

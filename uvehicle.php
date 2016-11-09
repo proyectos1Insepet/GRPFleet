@@ -154,11 +154,21 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">Serial</label>
-							<div class="controls">
-								<p><input class="m-wrap" name="serial" type="text" placeholder="Serial" id="field" /></p>
-							</div>
+						<label class="control-label">Serial</label>
+						<div class="controls">
+							<p>
+								<?php									
+									$query = "SELECT  pk_idibutton, ibutton FROM identificadores";
+									$result = pg_query($query) or die('Query error: ' . \pg_last_error());
+									echo "<select name='select2'>";
+									while($fila=  pg_fetch_array($result)){
+										echo "<option value=".$fila['ibutton'].">".$fila['pk_idibutton'].". ".$fila['ibutton']."</option>";
+									}
+									echo "</select>";
+								?>
+							</p>
 						</div>
+					</div>
 						<div class="control-group">
 							<label class="control-label">ID</label>
 							<div class="controls">
@@ -191,7 +201,7 @@
                                     $dbconn2 = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
                                     or die('Can not connect: ' . \pg_last_error());                                                                                
                                     $vehiculo = filter_input(INPUT_POST,'select1');                                                                                
-                                    $serial = filter_input(INPUT_POST,'serial');                                            
+                                    $serial = filter_input(INPUT_POST,'select2');                                            
                                     $estado = filter_input(INPUT_POST,'estado');                                            
                                     if ($estado == "1" ){
                                         $activo = 1;

@@ -144,7 +144,7 @@
 									or die('Can not connect: ' . \pg_last_error());
 									$query = "SELECT  id_cliente, nombre FROM cuenta";
 									$result = pg_query($query) or die('Query error: ' . \pg_last_error());
-									echo "<select name='select1' id='field'>";
+									echo "<select name='select1' >";
 									while($fila=  pg_fetch_array($result)){
 										echo "<option value=".$fila['id_cliente'].">".$fila['nombre']."</option>";
 									}
@@ -162,7 +162,17 @@
 					<div class="control-group">
 						<label class="control-label">Serial</label>
 						<div class="controls">
-							<p><input class="m-wrap" name="serial" type="text" placeholder="Serial" id="field" /></p>
+							<p>
+								<?php									
+									$query = "SELECT  pk_idibutton, ibutton FROM identificadores";
+									$result = pg_query($query) or die('Query error: ' . \pg_last_error());
+									echo "<select name='select2'>";
+									while($fila=  pg_fetch_array($result)){
+										echo "<option value=".$fila['ibutton'].">".$fila['pk_idibutton'].". ".$fila['ibutton']."</option>";
+									}
+									echo "</select>";
+								?>
+							</p>
 						</div>
 					</div>
 					<div class="control-group">
@@ -211,7 +221,7 @@
                                             or die('Can not connect: ' . \pg_last_error());                                                                                
                                             $cliente    = filter_input(INPUT_POST,'select1');                                    
                                             $placa      = filter_input(INPUT_POST,'placa');
-                                            $serial     = filter_input(INPUT_POST,'serial');
+                                            $serial     = filter_input(INPUT_POST,'select2');
 											$idvehiculo = filter_input (INPUT_POST,'idvehiculo');
                                             $tanque     = filter_input(INPUT_POST,'tanque');
                                             $marca      = filter_input(INPUT_POST,'marca');   

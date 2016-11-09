@@ -69,11 +69,6 @@ CREATE TABLE venta(
 	volumen FLOAT	
 	);
 	
-CREATE TABLE mangueras(
-	man1 INT,
-	man2 INT,
-	man3 INT
-	);
 
 CREATE TABLE corte(
 	Pk_id_corte SERIAL PRIMARY KEY ,
@@ -121,4 +116,9 @@ CREATE TABLE configuracion(
 	solkm INT,
 	efectivo INT,
 	pantallas INT
+);
+
+CREATE TABLE identificadores(
+	pk_idibutton SERIAL UNIQUE,
+	ibutton VARCHAR (20) UNIQUE NOT NULL
 );

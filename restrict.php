@@ -134,7 +134,7 @@
 			<h3>Restricciones a vehículos</h3>
 			<!-- BEGIN FORM-->
             <div class="margin-bottom-30">
-                <form class="form-horizontal" action="#" method="post">
+                <form class="form-horizontal" action="" method="post">
 					<div class="control-group">
                         <label class="control-label" for="inputEmail">Vehículo y combustible</label>
                         <div class="controls">
@@ -153,7 +153,7 @@
 									$result2 = pg_query($query2) or die('Query error: ' . \pg_last_error());
 									echo "<select name='select2' id='field' class='small m-wrap'>";
 									while($fila2=  pg_fetch_array($result2)){
-										echo "<option value=".$fila2['id_producto'].">".$fila2['descripcion']."</option>";
+										echo "<option value=".$fila2['id_producto'].">".$fila2['id_producto'].".  ".$fila2['descripcion']."</option>";
 									}
 									echo "</select>";
 									
@@ -246,36 +246,39 @@
 			</div>                        
                        <p>
                         <?php 
-                                        if (filter_input(INPUT_POST,'enviar')) {   
-                                            $dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
-                                            or die('Can not connect: ' . \pg_last_error());                                                                                
-                                            $vehiculo = filter_input(INPUT_POST,'select1');                                    
-                                            $producto = filter_input(INPUT_POST,'select2');
-                                            $vol = filter_input(INPUT_POST,'vol');
-                                            $din = filter_input(INPUT_POST,'din');
-                                            $mes = filter_input(INPUT_POST,'mes');   
-                                            $semana = filter_input(INPUT_POST,'semana');
-                                            $dia = filter_input(INPUT_POST,'dia');
-                                            $precio = filter_input(INPUT_POST,'ppu');
-                                            $ppu = sprintf("%05s",$precio);
-                                            $volmes = round(($vol / $mes),2);
-                                            $volsemana = round(($volmes / $semana),2);
-                                            $voldia = round(($volsemana / $dia),2);
-                                            $dinmes = round(($din/$mes),2);                                                 
-                                            $dinsemana = round(($dinmes/$semana),2);
-                                            $dindia = round(($dinsemana/$dia),2);
-                                            
-                                            
-                                            
-                                            $query3 = "INSERT INTO restricciones  VALUES('$vehiculo','$producto','$dia','$semana','$mes','$voldia','$volsemana','$volmes','$dindia','$dinsemana','$dinmes','$ppu') ";
-                                            $result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
-                                            // Liberando el conjunto de resultados
-                                            pg_free_result($result3);
-                                            // Cerrando la conexi�n
-                                            pg_close($dbconn);
-                                            echo "Gracias, hemos recibido su información.\n"; 
-                                        }
-                                    ?> 
+							if (filter_input(INPUT_POST,'enviar')) {   
+								$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+								or die('Can not connect: ' . \pg_last_error());                                                                                
+								$vehiculo = filter_input(INPUT_POST,'select1');                                    
+								$producto = filter_input(INPUT_POST,'select2');
+								$vol = filter_input(INPUT_POST,'vol');
+								$din = filter_input(INPUT_POST,'din');
+								$mes = filter_input(INPUT_POST,'mes');   
+								$semana = filter_input(INPUT_POST,'semana');
+								$dia = filter_input(INPUT_POST,'dia');
+								$precio = filter_input(INPUT_POST,'ppu');
+								$ppu = sprintf("%05s",$precio);
+								$volmes = round(($vol / $mes),2);
+								$volsemana = round(($volmes / $semana),2);
+								$voldia = round(($volsemana / $dia),2);
+								$dinmes = round(($din/$mes),2);                                                 
+								$dinsemana = round(($dinmes/$semana),2);
+								$dindia = round(($dinsemana/$dia),2);
+								
+								if ($ppu =' '){ $ppu ='01000';}
+								if ($dia =' '){ $dia =1;}
+								if ($semana =' '){ $semana =1;}
+								if ($mes =' '){ $mes =1;}								
+								
+								$query3 = "INSERT INTO restricciones  VALUES('$vehiculo','$producto','$dia','$semana','$mes','$voldia','$volsemana','$volmes','$dindia','$dinsemana','$dinmes','$ppu') ";
+								$result3 = pg_query($query3) or die('Query error: ' . \pg_last_error());
+								// Liberando el conjunto de resultados
+								pg_free_result($result3);
+								// Cerrando la conexi�n
+								pg_close($dbconn);
+								echo "Gracias, hemos recibido su información.\n"; 
+							}
+                        ?> 
                                 </p>
 							                            									
 			</div>

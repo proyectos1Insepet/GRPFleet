@@ -19,10 +19,11 @@ if (filter_input(INPUT_POST,'csv')) {
 	$result3 = pg_query($sql3)or die('Query error: ' . \pg_last_error());
 	$row3 = pg_fetch_assoc($result3);											
 	$consulta = "SELECT id_cliente FROM vehiculo WHERE placa ='$row2[5]';";
-	$resconsulta = pg_query($consulta)or die('Query error: ' . \pg_last_error());
+	$resconsulta = pg_query($consulta)or die('Query error: ' . \pg_last_error());	
 	$fila = pg_fetch_row($resconsulta);
+	fputcsv($output, array('Fecha', 'Cuenta', 'Vehiculo','Vol'));
 	while ($row2 = pg_fetch_row($result2)) { 
-		fputcsv($output, array($row2[0],$row2[5],$row2[2]));
+		fputcsv($output, array(substr($row2[0],0,-10),$row2[4],$row2[5],$row2[2]));
 	}
 
 	fclose($file); 

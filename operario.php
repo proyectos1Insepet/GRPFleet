@@ -135,7 +135,7 @@
 			<!-- BEGIN FORM-->
                         <div class="margin-bottom-30">
                             <h4>Digite la información solicitada</h4>
-                            <form class="form-horizontal" action="operario.php" method="post">
+                            <form class="form-horizontal" action="" method="post">
 								<div class="control-group">
                                     <label class="control-label" for="inputEmail">Nombre:</label>
                                     <div class="controls">
@@ -148,9 +148,24 @@
 									</div>
 									
 									<label class="control-label" for="inputEmail">Ibutton-ID asignado:</label>
-                                    <div class="controls">
-									<p><input name="serial" type="text" placeholder="Serial" id="field" /></p>
-									</div>
+                                    
+						
+								<div class="controls">
+									<p>
+										<?php
+											$dbconn = pg_connect("host=127.0.0.1 dbname=grpfleet user=db_admin password='12345'")
+											or die('Can not connect: ' . \pg_last_error());
+											$query1 = "SELECT  pk_idibutton, ibutton FROM identificadores";
+											$result1 = pg_query($query1) or die('Query error: ' . \pg_last_error());
+											echo "<select name='select2'>";
+											while($fila=  pg_fetch_array($result1)){
+												echo "<option value=".$fila['ibutton'].">".$fila['pk_idibutton'].". ".$fila['ibutton']."</option>";
+											}
+											echo "</select>";
+										?>
+									</p>
+								</div>
+					
 								</div>				
                                     <div class="control-group">
 					<div class="controls">                                            
@@ -171,7 +186,7 @@
                                     or die('Can not connect: ' . \pg_last_error());
                                     $operario = filter_input(INPUT_POST,'operario');
                                     $cedula = filter_input(INPUT_POST,'cedula');
-									$serial = filter_input(INPUT_POST,'serial');                                                                      
+									$serial = filter_input(INPUT_POST,'select2');                                                                      
                                     $query = "INSERT INTO operario (nombre,documento,ibutton) VALUES ('$operario','$cedula','$serial') ";
                                     $result = pg_query($query) or die('La consulta fallo: ' . \pg_last_error());
                                     // Liberando el conjunto de resultados
