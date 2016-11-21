@@ -120,6 +120,7 @@
         <div class="container">
             <div class="span4">
                 <h1>Ventas</h1>
+				<h4 class="form-title"><?php $hoy = date("F j, Y, g:i a"); echo $hoy; ?></h4>
             </div>
             <div class="span8">
                 <ul class="pull-right breadcrumb">

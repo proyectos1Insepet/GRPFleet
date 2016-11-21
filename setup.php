@@ -165,6 +165,14 @@
                                     </div>
 							</div>
 						</form>
+						<form action="hora.php" class="form-horizontal">                              
+                            <div class="control-group">
+                                <label class="control-label"></label>
+                                    <div class="controls">
+                                        <button type="submit" class="btn green"><i class="icon-clock"></i> Cambio de hora</button>                                        
+                                    </div>
+							</div>
+						</form>
 			<!-- END FORM-->  								
 				
 			</div>
