@@ -7,13 +7,18 @@ if (filter_input(INPUT_POST,'enviar')) {
 	or die('Can not connect: ' . \pg_last_error());
 	$fechaini   = filter_input(INPUT_POST,'inicial');
 	$fechafin   = filter_input(INPUT_POST,'final');
-	$sql        = "select id,id_cliente,volumen,dinero from venta where fecha between '$fechaini' AND '$fechafin'";								                                         
+	$sql        = "select v.id_cliente,v.fecha,
+				v.tipo_transaccion,v.volumen, v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion, c.nombre,v.id from venta v                                                                                          inner join venta_detalle vd on v.id = vd.fk_id                                                                                                         
+				inner join producto p on vd.fk_id_producto = p.id_producto                                                                                             
+				inner join cuenta c on v.id_cliente = c.id_cliente
+				where (fecha between '$fechaini' AND '$fechafin')";								                                         
 	$result     = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
 	$sql2       = "select vol, moneda from recibo";
 	$result2    = pg_query($sql2)or die('Query error: ' . \pg_last_error());
 	$row2       = pg_fetch_assoc($result2);
+	fputcsv($output, array('Cuenta', 'Placa / ID', 'Fecha','Volumen'));
 	while ($rows = pg_fetch_row($result)) { 
-		fputcsv($output, array($rows[0],$rows[1],$rows[2],$row2['vol'],$row2['moneda'],$rows[3]));		    
+		fputcsv($output, array($rows[9],$rows[5],substr($rows[1],0,-10),$rows[3],$row2['vol'],));		    
 	}
 	fclose($file);
 }
