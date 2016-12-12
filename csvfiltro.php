@@ -10,7 +10,7 @@ if (filter_input(INPUT_POST,'filtrar')) {
 	$fechafin  = filter_input(INPUT_POST,'final'); 
  	
 	$consultar  = "select v.id_cliente,v.fecha,
-				v.tipo_transaccion,v.volumen, v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion, c.nombre,v.id from venta v                                                                                          inner join venta_detalle vd on v.id = vd.fk_id                                                                                                         
+				v.tipo_transaccion,v.volumen, v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion, c.nombre,v.id,vd.km,vd.idvehiculo from venta v                                                                                          inner join venta_detalle vd on v.id = vd.fk_id                                                                                                         
 				inner join producto p on vd.fk_id_producto = p.id_producto                                                                                             
 				inner join cuenta c on v.id_cliente = c.id_cliente
 				where (fecha between '$fechaini' AND '$fechafin') AND c.id_cliente =$cuenta; ";								                                         
@@ -18,9 +18,9 @@ if (filter_input(INPUT_POST,'filtrar')) {
 	$sql2       = "select vol, moneda from recibo";
 	$result2    = pg_query($sql2)or die('Query error: ' . \pg_last_error());
 	$row2       = pg_fetch_assoc($result2);
-	fputcsv($output, array('Cuenta', 'Placa / ID', 'Fecha','Volumen'));
+	fputcsv($output, array('Fecha','Cuenta', 'Placa','ID', 'Fecha y hora','Combustible','Volumen','','Odómetro'));
 	while ($rows = pg_fetch_row($resultar)) { 
-		fputcsv($output, array($rows[9],$rows[5],substr($rows[1],0,-10),$rows[3],$row2['vol'],));										   
+		fputcsv($output, array(substr($rows[1],0,-15),$rows[9],$rows[5],$rows[12],substr($rows[1],0,-10),$rows[8],$rows[3],$row2['vol'],$rows[11]));		    
 	}
 	fclose($file); 
 }

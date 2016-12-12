@@ -9,11 +9,11 @@
 			$result = pg_query($query) or die('Query error: ' . \pg_last_error()); 
 			$row = pg_fetch_row($result);
 			$ultima = $row[0];	
-			fputcsv($output, array('Cliente', 'ID Vehiculo', 'Fecha','Vol', '# Venta'));
+			fputcsv($output, array( 'Número de Venta','Fecha','Cliente', 'Placa','ID', 'Fecha y hora','Combustible','Volumen','Odómetro'));
 			for($i= $ultima; $i>($ultima - 100); $i--){
 				$sql = "select v.id_cliente,
 				v.fecha,
-				v.tipo_transaccion,v.volumen, v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion, c.nombre from venta v                                                                                          inner join venta_detalle vd on v.id = vd.fk_id                                                                                                         
+				v.tipo_transaccion,v.volumen, v.dinero, vd.placa, vd.cara, vd.manguera, p.descripcion, c.nombre,vd.km,vd.idvehiculo from venta v                                                                                          inner join venta_detalle vd on v.id = vd.fk_id                                                                                                         
 				inner join producto p on vd.fk_id_producto = p.id_producto                                                                                             
 				inner join cuenta c on v.id_cliente = c.id_cliente WHERE v.id = $i;";
 				$sql2  = "select vol, moneda from recibo";											
@@ -26,16 +26,12 @@
 					if(pg_field_is_null($result2, 0, "id_cliente")==0){
 						$row2 = pg_fetch_row($result2);   
 						$row3 = pg_fetch_assoc($result3);  
-						fputcsv($output, array($row2[9],$row2[5],substr($row2[1],0,-10),$row2[3],$i));
-						// echo $row2[9];
-						// echo $row2[5];
-						// echo $row2[1];	
-						// echo $i;
+						fputcsv($output, array($i,substr($row2[1],0,-15),$row2[9],$row2[5],$row2[11],substr($row2[1],0,-10),$row2[8],$row2[3],$row2[10]));
+						
 				}else {
 					echo '<br>Sin resultados.';                                            
 				}
-				}
-				//fputcsv($output, $row);
+				}				
 			}       
 			
 
