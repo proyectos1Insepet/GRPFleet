@@ -288,6 +288,10 @@
 										<p><input class="m-wrap" type="checkbox" name="kilometraje" value="1"></input></p>
 									</div>
 									
+									<label class="control-label">Modo flota</label>
+									<div class="controls">
+										<p><input class="m-wrap" type="checkbox" name="flota" value="1"></input></p>
+									</div>																
 									
                                     <div class="control-group">
 									<div class="controls">                                            
@@ -321,7 +325,8 @@
 							$ppux10      = filter_input(INPUT_POST,'ppux10'); 	
 							$pantallas    = filter_input(INPUT_POST,'pantallas');	
 							$kil         = filter_input(INPUT_POST,'kilometraje');
-							$efectivo    = filter_input(INPUT_POST,'efectivo');	
+							$efectivo    = filter_input(INPUT_POST,'efectivo');
+							$flota    = filter_input(INPUT_POST,'flota');														
 							if ($ppux10 == "1" ){
 								$x10 = 1;
 							}else{
@@ -338,7 +343,7 @@
 								$efec = 0;
 							}
 							
-							$query = "UPDATE configuracion SET mangueras = $mang1, mangueras2= $mang2, p1=$producto1, p2=$producto2, p3=$producto3, p1b=$producto1b, p2b=$producto2b, p3b=$producto3b, versions=$version, ddinero=$ddinero, dvolumen=$dvolumen, ppux10 =$x10, pantallas =$pantallas, solkm =$kilometraje, efectivo =$efec;";
+							$query = "UPDATE configuracion SET mangueras = $mang1, mangueras2= $mang2, p1=$producto1, p2=$producto2, p3=$producto3, p1b=$producto1b, p2b=$producto2b, p3b=$producto3b, versions=$version, ddinero=$ddinero, dvolumen=$dvolumen, ppux10 =$x10, pantallas =$pantallas, solkm =$kilometraje, efectivo =$efec, flota =$flota;";
 							$result = pg_query($query) or die('La consulta fallo: ' . \pg_last_error());
 							// Liberando el conjunto de resultados
 							pg_free_result($result);

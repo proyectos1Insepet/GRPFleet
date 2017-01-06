@@ -187,18 +187,26 @@
                                             $result2 = pg_query($sql)or die('Query error: ' . \pg_last_error()); 
                                             $result3 = pg_query($sql2)or die('Query error: ' . \pg_last_error());
                                             if($result2){
-                                                if(pg_field_is_null($result2, 0, "id_cliente")==0){
-                                                    $row2 = pg_fetch_row($result2);   
-                                                    $row3 = pg_fetch_assoc($result3);                                                                                                                                                                                
-                                                    echo "<td background-color:#F5D0A9;>"." ".$row2[9]."</td> ";
-													echo "<td background-color:#F5D0A9;>".$row2[5]." </td>";
-                                                    echo "<td background-color:#F5D0A9;>".substr($row2[1],0,-10)." </td>";
+												while ($row2 = pg_fetch_row($result2)) { 
+													echo "<td background-color:#F5D0A9;>".$row2[9]."</td> ";
+													echo "<td background-color:#F5D0A9;>".$row2[5]."</td> ";                                                									
+													echo "<td background-color:#F5D0A9;>".substr($row2[1],0,-10)." </td>";
 													echo "<td background-color:#F5D0A9;>".$row2[3]." </td>";
-                                                    echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$i.'">'.$i.'</a>'."</td> ";													
-                                                    echo "</tr>";  
-                                            }else {
-                                                echo '<br>Sin resultados.';                                            
-                                            }
+													echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$i.'">'.$i.'</a>'."</td> ";
+													echo "</tr>";     
+												}
+                                                // if(pg_field_is_null($result2, $i,"volumen")==0){
+                                                    // $row2 = pg_fetch_row($result2);   
+                                                    // $row3 = pg_fetch_assoc($result3);                                                                                                                                                                                
+                                                    // echo "<td background-color:#F5D0A9;>"." ".$row2[9]."</td> ";
+													// echo "<td background-color:#F5D0A9;>".$row2[5]." </td>";
+                                                    // echo "<td background-color:#F5D0A9;>".substr($row2[1],0,-10)." </td>";
+													// echo "<td background-color:#F5D0A9;>".$row2[3]." </td>";
+                                                    // echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$i.'">'.$i.'</a>'."</td> ";													
+                                                    // echo "</tr>";  
+												// }else {
+													// echo '<br>Sin resultados.';                                            
+												// }
                                             }
                                         }                                                
                                             ?> 									                                                                                                                                                                                                                                                                                                            
