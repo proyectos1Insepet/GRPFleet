@@ -203,19 +203,19 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Vol 1</th>
-                                        <th>Din 1</th>
+                                        <th>Tot 1</th>
                                         <th>Vol 2</th>
-                                        <th>Din 2</th>
+                                        <th>Tot 2</th>
                                         <th>Vol 3</th>
-                                        <th>Din 3</th>
-                                        
+                                        <th>Tot 3</th>
+                                        <th>Cara</th>
                                     </tr>
 				</thead>
                                 <tbody>
                                     <?php   
                                         echo "<tr>";
                                         
-                                            $query = "SELECT pk_id_corte,volventat,t_electronico,volventat2,t_electronico2,volventat3,t_electronico3 FROM corte;";
+                                            $query = "SELECT pk_id_corte,volventat,t_electronico,volventat2,t_electronico2,volventat3,t_electronico3,cara FROM corte order by pk_id_corte desc;";
                                             $query2 = "select vol, moneda from recibo";                                            
                                             $res = pg_query($query)or die('Query error: ' . \pg_last_error()); 
                                             $res2 = pg_query($query2)or die('Query error: ' . \pg_last_error());
@@ -223,12 +223,13 @@
                                             $array = pg_fetch_all($res);                                            
                                             while ($row = pg_fetch_row($res)) { 
                                                 echo "<td background-color:#F5D0A9;>".$row[0]."</td> ";                                                
-                                                echo "<td background-color:#F5D0A9;>".$row[1]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".round($row[1],3)."</td> ";
                                                 echo "<td background-color:#F5D0A9;>".$row[2]."</td> ";
-                                                echo "<td background-color:#F5D0A9;>".$row[3]."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".round($row[3],3)."</td> ";
                                                 echo "<td background-color:#F5D0A9;>".$row[4]."</td> ";
-                                                echo "<td background-color:#F5D0A9;>".$row[5]."</td> ";
-                                                echo "<td background-color:#F5D0A9;>".$row[6]."</td> ";                                                
+                                                echo "<td background-color:#F5D0A9;>".round($row[5],3)."</td> ";
+                                                echo "<td background-color:#F5D0A9;>".$row[6]."</td> ";
+												echo "<td background-color:#F5D0A9;>".$row[7]."</td> ";                                                
                                                 echo "</tr>";     
                                             }
                                             ?> 									                                                                                                                                                                                                                                                                                                            

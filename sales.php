@@ -194,19 +194,7 @@
 													echo "<td background-color:#F5D0A9;>".$row2[3]." </td>";
 													echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$i.'">'.$i.'</a>'."</td> ";
 													echo "</tr>";     
-												}
-                                                // if(pg_field_is_null($result2, $i,"volumen")==0){
-                                                    // $row2 = pg_fetch_row($result2);   
-                                                    // $row3 = pg_fetch_assoc($result3);                                                                                                                                                                                
-                                                    // echo "<td background-color:#F5D0A9;>"." ".$row2[9]."</td> ";
-													// echo "<td background-color:#F5D0A9;>".$row2[5]." </td>";
-                                                    // echo "<td background-color:#F5D0A9;>".substr($row2[1],0,-10)." </td>";
-													// echo "<td background-color:#F5D0A9;>".$row2[3]." </td>";
-                                                    // echo "<td background-color:#F5D0A9;>".'<a href="salesdetail.php?num_venta='.$i.'">'.$i.'</a>'."</td> ";													
-                                                    // echo "</tr>";  
-												// }else {
-													// echo '<br>Sin resultados.';                                            
-												// }
+												}                                                
                                             }
                                         }                                                
                                             ?> 									                                                                                                                                                                                                                                                                                                            
