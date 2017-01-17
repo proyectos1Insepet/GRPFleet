@@ -27,6 +27,11 @@
 	<link href="assets/css/pages/login-soft.css" rel="stylesheet" type="text/css"/>
 	<!-- END PAGE LEVEL STYLES -->
 	<link rel="shortcut icon" href="favicon.ico" />
+	<script>
+		function enviar_formulario(){
+		   document.formulario1.submit()
+		}
+	</script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -40,7 +45,7 @@
 	<!-- BEGIN LOGIN -->
 	<div class="content">
 		<!-- BEGIN LOGIN FORM -->
-		<form class="form-vertical login-form" action="#" method="post">
+		<form class="form-vertical login-form" action="" method="post" name="formulario1">
 			<h3 class="form-title">Ingrese a su cuenta</h3>
 			<h4 class="form-title"><?php $hoy = date("F j, Y, g:i a"); echo $hoy; ?></h4>
 			<div class="alert alert-error hide">
@@ -68,7 +73,7 @@
 				</div>
 			</div>
 			<div class="form-actions">								  
-                                <input input type="submit" name="enviar" value="Ingresar"  class="btn blue pull-right"  />
+                                <input input type="submit" name="enviar" value="Ingresar"  class="btn blue pull-right" onkeypress="if (event.keyCode == 13) enviar_formulario()" />
 			</div>
 			
 			<div class="create-account">
